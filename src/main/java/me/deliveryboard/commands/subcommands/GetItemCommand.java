@@ -49,7 +49,6 @@ public class GetItemCommand extends SubCommand {
 
         } else if (args[1].equalsIgnoreCase("verifye")) {
             ExtEcoItems extEcoItems = new ExtEcoItems();
-            //TODO: Create & Test with other items too (No support for fueled items as they probably track fuel via lore)
             ItemStack genItem = extEcoItems.generateItem("grappling_hook", "");
             System.out.println("Gen Item Type: " + genItem.getType());
 
