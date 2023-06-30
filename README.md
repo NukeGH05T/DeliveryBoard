@@ -7,4 +7,7 @@ DeliveryBoard generates delivery quests procedurally after timed intervals witho
 For instructions visit the [Wiki](https://nukegh05t.gitbook.io/deliveryboard/).  
 You can view the [Default Config](../master/src/main/resources/config.yml) here.
 
+## Build Jar
+Use `mvn clean install` in the root directory to build.
+
 ### You can support me on [Patreon](https://www.patreon.com/nukegh05t)
