@@ -1,0 +1,29 @@
+name: DeliveryBoard
+version: 1.2
+main: me.deliveryboard.DeliveryBoard
+api-version: 1.13
+prefix: DB
+authors: [NukeGH05T]
+description: Give your players delivery tasks on a timely basis.
+softdepend:
+  - EcoItems
+  - MMOItems
+  - ItemsAdder
+  - ExecutableItems
+  - SCore
+commands:
+  deliveryboard:
+    aliases: [db]
+permissions:
+  deliveryboard:
+    delivery:
+      hourly:
+        default: false
+      threehourly:
+        default: false
+      sixhourly:
+        default: false
+    setboard:
+      default: op
+    reload:
+      default: op

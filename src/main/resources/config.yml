@@ -1,0 +1,117 @@
+############################################################################
+##     ______     _ _                       ______                     _   ##
+##    |  _  \   | (_)                      | ___ \                   | |   ##
+##    | | | |___| |___   _____ _ __ _   _  | |_/ / ___   __ _ _ __ __| |   ##
+##    | | | / _ \ | \ \ / / _ \ '__| | | | | ___ \/ _ \ / _` | '__/ _` |   ##
+##    | |/ /  __/ | |\ V /  __/ |  | |_| | | |_/ / (_) | (_| | | | (_| |   ##
+##    |___/ \___|_|_| \_/ \___|_|   \__, | \____/ \___/ \__,_|_|  \__,_|   ##
+##                                   __/ |                                 ##
+##                                  |___/                                  ##
+#############################################################################
+
+board-location: ''
+delivery:
+  hourly:
+    #These materials will be used when generating the delivery task
+    #These can be either vanilla materials denoted by "van" or custom item from
+    # these supported plugins: MMOItems("mmo"), ItemsAdder("iad"), ExecutableItems("exi"), EcoItems("eco").
+    #The item strings will be plugin/vanilla @ item ID @ item type(mmo) or amount(van).
+    #Type & Amount only apply to MMOItems and Vanilla items respectively.
+    #More details on using it can be found on the wiki: https://nukegh05t.gitbook.io/deliveryboard/
+    allowed-materials:
+      - 'van@NETHERITE_SCRAP@2'
+      - 'van@LEATHER@32'
+      - 'van@WHEAT@64'
+      - 'van@HOPPER@5'
+      - 'van@DIAMOND@5'
+      - 'van@LEATHER_BOOTS@1'
+      - 'van@ENDER_PEARL@16'
+      #- 'mmo@CUTLASS@SWORD' #Example using a default MMOItems item   [REMOVE FIRST # IN THIS LINE TO ENABLE]
+      #- 'iad@iageneric:coin@1' #Example using an item from the Default pack of ItemsAdder (Isn't provided in the ItemsAdder.jar)
+      #- 'exi@Free_Heal@1' #Example using a default ExecutableItem (Available on both free & premium version of EI)
+      #- 'eco@grappling_hook@1' #Example using a default EcoItems item
+    #You can setup everything related to rewards here
+    reward-setup:
+      #Random type gives a specific amount of reward randomly selected from the rewards list below
+      mixed:
+        #Maximum amount of rewards to give from the reward pool
+        max-reward: 1
+        #This is the list from which rewards for random type will be choosen from
+        #Reward syntax consists 2 or 3 parts , each part is separated by '@' character.
+        #The first part defines the type of reward. Can be 'item' or 'comm'.
+        # ====================== Item Type =========================
+        #   'item' type is used when rewarding a Minecraft item directly. It has 3 parts
+        #   The second part is the item's material name.
+        #   It must match the name defined in https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html
+        #   The third part is the amount of item to be rewarded.
+        #   So, the reward string for giving a player 10 Apples would be 'item@APPLE@10'
+        # ==========================================================
+        # ===================== Command Type =======================
+        #   'comm' type is used to run a command when that reward is selected. It has 2 parts
+        #   The second part is the command that needs to be run without slash('/')
+        #   The command type can use built in placeholders. (Discussed in the placeholder section)
+        # ==========================================================
+        # ===================== Placeholders =======================
+        #   {PLAYER_NAME} -> Returns the display name of the player who completed the delivery.
+        #   {PLAYER_X}    -> Return X of players current position
+        #   {PLAYER_Y}    -> Return Y of players current position
+        #   {PLAYER_Z}    -> Return Z of players current position
+        # ==========================================================
+        #Rewards defined in the 'confirmed-rewards' section are always given
+        confirmed-rewards:
+          - 'item@EMERALD@1'
+          - 'comm@effect give {PLAYER_NAME} minecraft:absorption 10 3'
+        #Rewards from the 'random-rewards-pool' are given randomly with maximum amount of rewards being defined in 'max-reward'
+        random-rewards-pool:
+          - 'item@DIAMOND@5'
+          - 'item@REDSTONE_BLOCK@2'
+          - 'item@BLACK_SHULKER_BOX@1'
+          - 'comm@xp add {PLAYER_NAME} 3 levels'
+
+  #Three hourly delivery
+  three-hourly:
+    allowed-materials:
+      - 'van@NETHERITE_INGOT@1'
+      - 'van@IRON_BLOCK@10'
+      - 'van@BREAD@16'
+      - 'van@REDSTONE_LAMP@10'
+      - 'van@SLIME_BALL@5'
+      - 'van@ZOMBIE_FLESH@16'
+      - 'van@INK_SAC@16'
+    reward-setup:
+      mixed:
+        max-reward: 1
+        confirmed-rewards:
+          - 'item@EMERALD@4'
+          - 'comm@effect give {PLAYER_NAME} minecraft:absorption 30 4'
+        random-rewards-pool:
+          - 'item@DIAMOND@10'
+          - 'item@APPLE@32'
+          - 'item@GOLDEN_APPLE@2'
+          - 'item@SHULKER_SHELL@4'
+          - 'comm@xp add {PLAYER_NAME} 10 levels'
+  #Three hourly delivery
+
+  #Six hourly delivery
+  six-hourly:
+    allowed-materials:
+      - 'van@NETHERITE_SCRAP@8'
+      - 'van@LEATHER@64'
+      - 'van@IRON_INGOT@32'
+      - 'van@HOPPER@10'
+      - 'van@DIAMOND@5'
+      - 'van@EMERALD@16'
+      - 'van@BLAZE_ROD@10'
+    reward-setup:
+      mixed:
+        max-reward: 1
+        confirmed-rewards:
+          - 'item@EMERALD@10'
+          - 'comm@effect give {PLAYER_NAME} minecraft:absorption 60 4'
+        random-rewards-pool:
+          - 'item@DIAMOND@15'
+          - 'item@GOLDEN_APPLE@3'
+          - 'item@ENCHANTED_GOLDEN_APPLE@1'
+          - 'item@SHULKER_SHELL@8'
+          - 'comm@xp add {PLAYER_NAME} 25 levels'
+  #Six hourly delivery
