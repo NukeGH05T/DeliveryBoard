@@ -6,10 +6,10 @@ import me.deliveryboard.menusystem.PlayerMenuUtility;
 import me.deliveryboard.menusystem.menu.deliverymenu.HourlyDeliveryMenu;
 import me.deliveryboard.menusystem.menu.deliverymenu.SixHourlyDeliveryMenu;
 import me.deliveryboard.menusystem.menu.deliverymenu.ThreeHourlyDeliveryMenu;
+import me.deliveryboard.utils.ColorUtils;
 import me.deliveryboard.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -23,7 +23,7 @@ public class ShowDeliveryBoardMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.BLUE + "" + ChatColor.BOLD + "Delivery" + ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "Board";
+        return ColorUtils.translateHexColorCodes( "<#", ">", ChatColor.translateAlternateColorCodes('&', DeliveryBoard.plugin.getConfig().getString("gui.titles.boardTitle")));
     }
 
     @Override
@@ -34,7 +34,9 @@ public class ShowDeliveryBoardMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
         e.setCancelled(true);
-        if (e.getCurrentItem().getType() == Material.REDSTONE) {
+        if (e.getCurrentItem() == super.FILLER_GLASS) return;
+        if (e.getCurrentItem() == null) return;
+        if (e.getSlot() == 11) { //11
             // Open hourly delivery menu
             if (DeliveryBoard.hourlyCompletedPlayerList.contains(e.getWhoClicked())) {
                 e.getWhoClicked().sendMessage(ChatColor.RED + "You have already completed the delivery!");
@@ -45,7 +47,7 @@ public class ShowDeliveryBoardMenu extends Menu {
             }
 
 
-        } else if (e.getCurrentItem().getType() == Material.QUARTZ) {
+        } else if (e.getSlot() == 13) { //13
             if (DeliveryBoard.threeHourlyCompletedPlayerList.contains(e.getWhoClicked())) {
                 e.getWhoClicked().sendMessage(ChatColor.RED + "You have already completed the delivery!");
             } else {
@@ -55,7 +57,7 @@ public class ShowDeliveryBoardMenu extends Menu {
             }
 
 
-        } else if (e.getCurrentItem().getType() == Material.EMERALD) {
+        } else if (e.getSlot() == 15) { //15
             if (DeliveryBoard.sixHourlyCompletedPlayerList.contains(e.getWhoClicked())) {
                 e.getWhoClicked().sendMessage(ChatColor.RED + "You have already completed the delivery!");
             } else {

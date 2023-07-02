@@ -10,6 +10,21 @@
 #############################################################################
 
 board-location: ''
+gui:
+  static:
+    fillerMaterial: BLACK_STAINED_GLASS_PANE
+    acceptMaterial: LIGHT_BLUE_STAINED_GLASS_PANE
+    cancelMaterial: RED_STAINED_GLASS_PANE
+  titles:
+    boardTitle: "<#22ff20>&lDelivery Board"
+    hourlyTitle: "&9&lHourly Delivery"
+    threeHourlyTitle: "&b&lThree Hourly Delivery"
+    sixHourlyTitle: "&a&lSix Hourly Delivery"
+  icons:
+    hourlyIcon: "van@NETHERITE_SCRAP@1"
+    threeHourlyIcon: van@NETHERITE_SCRAP@3
+    sixHourlyIcon: van@NETHERITE_SCRAP@6
+
 delivery:
   hourly:
     #These materials will be used when generating the delivery task
@@ -76,7 +91,7 @@ delivery:
       - 'van@BREAD@16'
       - 'van@REDSTONE_LAMP@10'
       - 'van@SLIME_BALL@5'
-      - 'van@ZOMBIE_FLESH@16'
+      - 'van@ROTTEN_FLESH@16'
       - 'van@INK_SAC@16'
     reward-setup:
       mixed:

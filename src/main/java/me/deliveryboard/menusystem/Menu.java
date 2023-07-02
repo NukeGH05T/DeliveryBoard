@@ -1,8 +1,8 @@
 package me.deliveryboard.menusystem;
 
+import me.deliveryboard.DeliveryBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
@@ -11,9 +11,9 @@ import org.bukkit.inventory.ItemStack;
 
 public abstract class Menu implements InventoryHolder {
     protected Inventory inventory;
-    protected ItemStack FILLER_GLASS = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
-    protected ItemStack ACCEPT = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
-    protected ItemStack CANCEL = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+    protected ItemStack FILLER_GLASS = new ItemStack(Material.getMaterial(DeliveryBoard.plugin.getConfig().getString("gui.static.fillerMaterial")));
+    protected ItemStack ACCEPT = new ItemStack(Material.getMaterial(DeliveryBoard.plugin.getConfig().getString("gui.static.acceptMaterial")));
+    protected ItemStack CANCEL = new ItemStack(Material.getMaterial(DeliveryBoard.plugin.getConfig().getString("gui.static.cancelMaterial")));
     protected PlayerMenuUtility playerMenuUtility;
 
     public Menu(PlayerMenuUtility playerMenuUtility) {

@@ -1,6 +1,7 @@
 package me.deliveryboard.utils;
 
 import me.deliveryboard.DeliveryBoard;
+import me.deliveryboard.handlers.GenerationHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+import static me.deliveryboard.handlers.GenerationHandler.generateIconItem;
 import static me.deliveryboard.utils.ColorUtils.translateColorCodes;
 
 public class MenuUtils {
@@ -21,9 +23,13 @@ public class MenuUtils {
         if (owner.hasPermission("deliveryboard.delivery.hourly")) {
             long nextHourlyStartTime = DeliveryBoard.cooldown.get("hourly");
 
-            ItemStack hourlyItem = new ItemStack(Material.REDSTONE);
+            //ItemStack hourlyItem = generateIconItem(DeliveryBoard.plugin.getConfig().getString("hourlyIcon"));
+            ItemStack hourlyItem = generateIconItem("hourlyIcon");
             ItemMeta hourlyMeta = hourlyItem.getItemMeta();
-            hourlyMeta.setDisplayName(ChatColor.DARK_AQUA + "Hourly Delivery");
+            hourlyMeta.setDisplayName(ColorUtils.translateHexColorCodes( "<#", ">",
+                    ChatColor.translateAlternateColorCodes('&',
+                            DeliveryBoard.plugin.getConfig().getString("gui.titles.hourlyTitle"))));
+
 
             List<String> hourlyLore = new ArrayList<>();
             hourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
@@ -48,9 +54,11 @@ public class MenuUtils {
         if (owner.hasPermission("deliveryboard.delivery.threehourly")) {
             long nextThreeHourlyStartTime = DeliveryBoard.cooldown.get("three-hourly");
 
-            ItemStack threeHourlyItem = new ItemStack(Material.QUARTZ);
+            ItemStack threeHourlyItem = generateIconItem("threeHourlyIcon");
             ItemMeta threeHourlyMeta = threeHourlyItem.getItemMeta();
-            threeHourlyMeta.setDisplayName(ChatColor.DARK_AQUA + "Three Hourly Delivery");
+            threeHourlyMeta.setDisplayName(ColorUtils.translateHexColorCodes( "<#", ">",
+                    ChatColor.translateAlternateColorCodes('&',
+                            DeliveryBoard.plugin.getConfig().getString("gui.titles.threeHourlyTitle"))));
 
             List<String> threeHourlyLore = new ArrayList<>();
             threeHourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
@@ -74,9 +82,11 @@ public class MenuUtils {
         if (owner.hasPermission("deliveryboard.delivery.sixhourly")) {
             long nextSixHourlyStartTime = DeliveryBoard.cooldown.get("six-hourly");
 
-            ItemStack sixHourlyItem = new ItemStack(Material.EMERALD);
+            ItemStack sixHourlyItem = generateIconItem("sixHourlyIcon");
             ItemMeta sixHourlyMeta = sixHourlyItem.getItemMeta();
-            sixHourlyMeta.setDisplayName(ChatColor.DARK_AQUA + "Six Hourly Delivery");
+            sixHourlyMeta.setDisplayName(ColorUtils.translateHexColorCodes( "<#", ">",
+                    ChatColor.translateAlternateColorCodes('&',
+                            DeliveryBoard.plugin.getConfig().getString("gui.titles.sixHourlyTitle"))));
 
             List<String> sixHourlyLore = new ArrayList<>();
             sixHourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
@@ -101,7 +111,7 @@ public class MenuUtils {
     /**
      * @param cooldownKey Cooldown timer key from Main class
      * @param iconMaterial  Material used for the representative item
-     * @param deliveryIconTitle Supports traditional Bukkit coloring and Hex (&#2b3aef6)
+     * @param deliveryIconTitle Supports traditional Bukkit coloring and Hex (<#2b3aef6>)
      * @return
      */
     public ItemStack createDeliveryIconItem(String cooldownKey, Material iconMaterial, String deliveryIconTitle) {

@@ -15,8 +15,11 @@ public class VerificationHandler {
 
     public boolean checkItem(ItemStack submittedItem) {
         for (String plugin : DeliveryBoard.enabledItemPlugins) {
-            if (itemPlugin.getName().equalsIgnoreCase(plugin)) {
+            if (itemPlugin != null && itemPlugin.getName().equalsIgnoreCase(plugin)) {
                 return itemPlugin.isMatching(generatedItemStack, submittedItem);
+            } else {
+                //Vanilla item
+                return generatedItemStack.equals(submittedItem);
             }
         }
         return false;
