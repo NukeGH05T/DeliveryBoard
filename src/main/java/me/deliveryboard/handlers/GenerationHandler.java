@@ -101,7 +101,6 @@ public class GenerationHandler {
     }
 
     public static ItemStack generateIconItem(String iconID) { //iconID is from config.yml
-        System.out.println("gui.icons." + iconID + " > " + plugin.getConfig().getString("gui.icons." + iconID));
         String[] allowedItemString = parseMaterialAndAmount(plugin.getConfig().getString("gui.icons." + iconID));
 
         if (allowedItemString[0].equalsIgnoreCase("van")){
@@ -154,6 +153,68 @@ public class GenerationHandler {
                     }
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + iconID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
+            }
+        }
+
+        return null;
+    }
+
+    public static ItemStack generateStaticItem(String staticID) { //iconID is from config.yml
+        String[] allowedItemString = parseMaterialAndAmount(plugin.getConfig().getString("gui.static." + staticID));
+
+        if (allowedItemString[0].equalsIgnoreCase("van")){
+
+            ItemStack deliveryItem = new ItemStack(Material.getMaterial(allowedItemString[1]), Integer.parseInt(allowedItemString[2]));
+            return deliveryItem;
+        } else {
+            String itemID = allowedItemString[1];
+            String itemType = allowedItemString.length > 2 ? allowedItemString[2] : "";
+
+            if (allowedItemString[0].equalsIgnoreCase("mmo")) {
+                //MMOItems - 'mmo@CUTLASS@SWORD'
+                if (enabledItemPlugins.contains("MMOItems")) {
+                    return new ExtMMOItems().generateItem(itemID, itemType);
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
+            } else if (allowedItemString[0].equalsIgnoreCase("iad")) {
+                //ItemsAdder - 'iad@iageneric:coin@1'
+                if (enabledItemPlugins.contains("ItemsAdder")) {
+                    if (CustomStack.isInRegistry(itemID)) {
+                        return new ExtItemsAdder().generateItem(itemID, itemType);
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + staticID);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
+            } else if (allowedItemString[0].equalsIgnoreCase("eco")) {
+                //EcoItems - 'eco@grappling_hook'
+                //Might malfunction at any time
+                if (enabledItemPlugins.contains("EcoItems")) {
+                    return new ExtEcoItems().generateItem(itemID, itemType);
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+            } else if (allowedItemString[0].equalsIgnoreCase("exi")) {
+                //ExecutableItem - 'exi@iageneric:coin@1'
+                if (enabledItemPlugins.contains("ExecutableItems")) {
+                    ExecutableItemsManagerInterface executableItemsManager = getExecutableItemsManager();
+                    if (executableItemsManager.isValidID(itemID)) {
+                        return new ExtExecutableItems().generateItem(itemID, itemType);
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + staticID);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
 

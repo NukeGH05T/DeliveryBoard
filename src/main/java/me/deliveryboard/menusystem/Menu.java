@@ -1,6 +1,8 @@
 package me.deliveryboard.menusystem;
 
 import me.deliveryboard.DeliveryBoard;
+import me.deliveryboard.handlers.GenerationHandler;
+import me.deliveryboard.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -9,11 +11,17 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
+import static me.deliveryboard.handlers.GenerationHandler.generateStaticItem;
+
 public abstract class Menu implements InventoryHolder {
     protected Inventory inventory;
-    protected ItemStack FILLER_GLASS = new ItemStack(Material.getMaterial(DeliveryBoard.plugin.getConfig().getString("gui.static.fillerMaterial")));
-    protected ItemStack ACCEPT = new ItemStack(Material.getMaterial(DeliveryBoard.plugin.getConfig().getString("gui.static.acceptMaterial")));
-    protected ItemStack CANCEL = new ItemStack(Material.getMaterial(DeliveryBoard.plugin.getConfig().getString("gui.static.cancelMaterial")));
+
+    //Use custom item generator XD who wants only vanilla items lol
+    protected ItemStack FILLER_GLASS = generateStaticItem("fillerMaterial");
+    protected ItemStack ACCEPT = generateStaticItem("acceptMaterial");
+    protected ItemStack CANCEL = generateStaticItem("cancelMaterial");
+    protected ItemStack INFO = generateStaticItem("infoMaterial");
+
     protected PlayerMenuUtility playerMenuUtility;
 
     public Menu(PlayerMenuUtility playerMenuUtility) {

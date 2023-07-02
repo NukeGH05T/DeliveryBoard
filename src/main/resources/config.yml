@@ -12,16 +12,18 @@
 board-location: ''
 gui:
   static:
-    fillerMaterial: BLACK_STAINED_GLASS_PANE
-    acceptMaterial: LIGHT_BLUE_STAINED_GLASS_PANE
-    cancelMaterial: RED_STAINED_GLASS_PANE
+    fillerMaterial: van@BLACK_STAINED_GLASS_PANE@1
+    acceptMaterial: van@LIGHT_BLUE_STAINED_GLASS_PANE@1
+    cancelMaterial: van@RED_STAINED_GLASS_PANE@1
+    infoMaterial: van@BOOK@1
+
   titles:
     boardTitle: "<#22ff20>&lDelivery Board"
     hourlyTitle: "&9&lHourly Delivery"
     threeHourlyTitle: "&b&lThree Hourly Delivery"
     sixHourlyTitle: "&a&lSix Hourly Delivery"
   icons:
-    hourlyIcon: "van@NETHERITE_SCRAP@1"
+    hourlyIcon: van@NETHERITE_SCRAP@1
     threeHourlyIcon: van@NETHERITE_SCRAP@3
     sixHourlyIcon: van@NETHERITE_SCRAP@6
 

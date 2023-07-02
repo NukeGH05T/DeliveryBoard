@@ -26,6 +26,7 @@ public class RemoveItemConfirmMenu extends Menu {
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
+        //Won't work as the items are customizable. Do proper checks from super item
         switch (e.getCurrentItem().getType()) {
             case LIGHT_BLUE_STAINED_GLASS_PANE:
                 e.getWhoClicked().closeInventory();

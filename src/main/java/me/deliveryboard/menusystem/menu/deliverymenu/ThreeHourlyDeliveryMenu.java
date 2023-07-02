@@ -74,7 +74,7 @@ public class ThreeHourlyDeliveryMenu extends Menu {
 
     @Override
     public void setMenuItems() {
-        ItemStack detailsItem = new ItemStack(Material.BOOK);
+        ItemStack detailsItem = super.INFO;
         ItemMeta detailsMeta = detailsItem.getItemMeta();
 
         List<String> detailsLore = new ArrayList<>();
