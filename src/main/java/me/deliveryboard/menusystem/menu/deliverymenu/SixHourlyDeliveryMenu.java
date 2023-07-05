@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SixHourlyDeliveryMenu extends Menu {
     public SixHourlyDeliveryMenu(PlayerMenuUtility playerMenuUtility) {
@@ -52,9 +53,9 @@ public class SixHourlyDeliveryMenu extends Menu {
 
             VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.usedItemPluginsHashMap.get("six-hourly"), DeliveryBoard.getSixHourlyItem());
 
-            if (!verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
+            if (!verificationHandler.checkItem(Objects.requireNonNull(e.getInventory().getItem(inputSlotIndex)))) {
                 p.sendMessage(ChatColor.RED + "The item is the not the one that needs to be delivered!");
-            } else if (verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
+            } else if (verificationHandler.checkItem(Objects.requireNonNull(e.getInventory().getItem(inputSlotIndex)))) {
 
                 //Give proper reward
                 RewardHandler rewardHandler = new RewardHandler(DeliveryBoard.plugin);

@@ -32,7 +32,7 @@ public class HelpCommand extends SubCommand {
         p.sendMessage(ChatColor.YELLOW + "=================="+ChatColor.AQUA + ChatColor.BOLD +"Delivery" +
                 ChatColor.DARK_AQUA + "Board" + ChatColor.YELLOW + "=================");
         for (int i = 0; i < commandManager.getSubCommands().size(); i++){
-            if (p.hasPermission(commandManager.getSubCommands().get(i).getPermissionNode())) {
+            if (commandManager.getSubCommands().get(i).getPermissionNode() == null || p.hasPermission(commandManager.getSubCommands().get(i).getPermissionNode())) {
                 p.sendMessage(ChatColor.GREEN + commandManager.getSubCommands().get(i).getSyntax() + ChatColor.GRAY + " - " + ChatColor.WHITE + ChatColor.ITALIC + commandManager.getSubCommands().get(i).getDescription());
             }
         }
