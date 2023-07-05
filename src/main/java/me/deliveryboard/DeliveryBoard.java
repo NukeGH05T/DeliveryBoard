@@ -103,7 +103,10 @@ public final class DeliveryBoard extends JavaPlugin {
     void registerListeners() {
         getServer().getPluginManager().registerEvents(new MenuListener(), plugin);
         getServer().getPluginManager().registerEvents(new BoardInteractionListener(plugin), plugin);
-        getServer().getPluginManager().registerEvents(new FirstItemsAdderLoadListener(), plugin);
+
+        if (enabledItemPlugins.contains("ItemsAdder")) {
+            getServer().getPluginManager().registerEvents(new FirstItemsAdderLoadListener(), plugin);
+        }
     }
 
     void startTasks() {
