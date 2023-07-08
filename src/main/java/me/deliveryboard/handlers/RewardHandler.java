@@ -1,6 +1,7 @@
 package me.deliveryboard.handlers;
 
 import me.deliveryboard.DeliveryBoard;
+import me.deliveryboard.utils.PlaceholderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,8 +11,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class RewardHandler {
     DeliveryBoard plugin;
@@ -78,7 +77,7 @@ public class RewardHandler {
         String[] parts = rewardString.split("@");
 
         // Run the command
-        boolean success = runCommand(parsePlaceholders(parts[1], p));
+        boolean success = runCommand(PlaceholderUtils.parsePlaceholders(parts[1], p));
 
         if (!success) {
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to run reward command: " + ChatColor.YELLOW + parts[1] + ChatColor.RED + " for " + ChatColor.YELLOW + p.getDisplayName());
@@ -118,38 +117,4 @@ public class RewardHandler {
         return Bukkit.getServer().dispatchCommand(console, command);
     }
 
-    private static String parsePlaceholders(String input, Player p) {
-        Pattern pattern = Pattern.compile("\\{([A-Z_]+)\\}");
-        Matcher matcher = pattern.matcher(input);
-
-        while (matcher.find()) {
-            String placeholder = matcher.group(0); // e.g., {PLAYER_NAME}, {PLAYER_X}, etc.
-            String placeholderKey = matcher.group(1); // e.g., PLAYER_NAME, PLAYER_X, etc.
-
-            // Perform actions based on the placeholder key
-            switch (placeholderKey) {
-                case "PLAYER_NAME":
-                    // Get the player's display name
-                    String playerName = p.getDisplayName(); // Replace with your logic to retrieve the player's name
-                    input = input.replace(placeholder, playerName);
-                    break;
-                case "PLAYER_X":
-                    // Get the player's X position
-                    double playerX = p.getLocation().getX(); // Replace with your logic to retrieve the player's X position
-                    input = input.replace(placeholder, String.valueOf(playerX));
-                    break;
-                case "PLAYER_Y":
-                    // Get the player's Y position
-                    double playerY = p.getLocation().getY(); // Replace with your logic to retrieve the player's Y position
-                    input = input.replace(placeholder, String.valueOf(playerY));
-                    break;
-                case "PLAYER_Z":
-                    // Get the player's Z position
-                    double playerZ = p.getLocation().getZ(); // Replace with your logic to retrieve the player's Z position
-                    input = input.replace(placeholder, String.valueOf(playerZ));
-                    break;
-            }
-        }
-        return input;
-    }
 }

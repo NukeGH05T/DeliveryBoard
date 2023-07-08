@@ -1,6 +1,7 @@
 package me.deliveryboard.commands;
 
 import me.deliveryboard.commands.subcommands.*;
+import me.deliveryboard.language.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,8 +19,8 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new BoardCommand());
         subcommands.add(new ReloadCommand());
         subcommands.add(new SetBoardCommand());
-        subcommands.add(new SaveItemCommand());
-        subcommands.add(new GetItemCommand());
+        //subcommands.add(new SaveItemCommand());
+        //subcommands.add(new GetItemCommand());
     }
 
     @Override
@@ -41,15 +42,15 @@ public class CommandManager implements CommandExecutor {
                             this.getSubCommands().get(i).perform(p, args);
 
                         } else {
-                            p.sendMessage(ChatColor.RED + "You do not have permission to run that command!");
+                            p.sendMessage(Message.CMDM_NO_PERM_DEFAULT);//
                         }
 
                         break;
                     }
                 }
                 if (!isValidSubcommand) {
-                    p.sendMessage(ChatColor.RED + "That is not a valid command.");
-                    p.sendMessage(ChatColor.WHITE + "Do " + ChatColor.GREEN + "/db help" + ChatColor.WHITE + " for more info.");
+                    p.sendMessage(Message.CMDM_INVALID_COMMAND);
+                    p.sendMessage(Message.CMDM_HELP_SUGGEST);
                 }
                 return true;
             }

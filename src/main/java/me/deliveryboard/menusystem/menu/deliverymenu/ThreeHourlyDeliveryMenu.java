@@ -3,6 +3,7 @@ package me.deliveryboard.menusystem.menu.deliverymenu;
 import me.deliveryboard.DeliveryBoard;
 import me.deliveryboard.handlers.RewardHandler;
 import me.deliveryboard.handlers.VerificationHandler;
+import me.deliveryboard.language.Message;
 import me.deliveryboard.menusystem.Menu;
 import me.deliveryboard.menusystem.PlayerMenuUtility;
 import me.deliveryboard.menusystem.menu.ShowDeliveryBoardMenu;
@@ -46,14 +47,14 @@ public class ThreeHourlyDeliveryMenu extends Menu {
 
         if (e.getCurrentItem().getType() == super.ACCEPT.getType() && e.getSlot() == 26) {
             if (e.getInventory().getItem(inputSlotIndex) == null) {
-                p.sendMessage(ChatColor.RED + "Cannot submit with empty delivery!");
+                p.sendMessage(Message.THD_EMPTY_SUBMISSION);//
                 return;
             }
 
             VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.usedItemPluginsHashMap.get("three-hourly"), DeliveryBoard.getThreeHourlyItem());
 
             if (!verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
-                p.sendMessage(ChatColor.RED + "The item is the not the one that needs to be delivered!");
+                p.sendMessage(Message.THD_WRONG_SUBMISSION);//
             } else if (verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
 
                 //Give proper reward
@@ -63,7 +64,7 @@ public class ThreeHourlyDeliveryMenu extends Menu {
                 //Preventing player from redoing the same delivery before it's restarted
                 DeliveryBoard.threeHourlyCompletedPlayerList.add(p);
 
-                p.sendMessage(ChatColor.GREEN + "Delivery Successful!");
+                p.sendMessage(Message.THD_SUCCESSFUL_SUBMISSION);//
                 inventory.setItem(22, null);
                 p.closeInventory();
             }
@@ -77,9 +78,8 @@ public class ThreeHourlyDeliveryMenu extends Menu {
         ItemStack detailsItem = super.INFO;
         ItemMeta detailsMeta = detailsItem.getItemMeta();
 
-        List<String> detailsLore = new ArrayList<>();
-        detailsLore.add(ChatColor.GRAY + "Deliver the required item");
-        detailsLore.add(ChatColor.GRAY + "to claim your reward.");
+        //List<String> detailsLore = new ArrayList<>();//
+        List<String> detailsLore = Message.THD_ICON_ITEM_LORE;
         detailsMeta.setLore(detailsLore);
         detailsItem.setItemMeta(detailsMeta);
 
@@ -96,18 +96,15 @@ public class ThreeHourlyDeliveryMenu extends Menu {
 
         ItemStack confirmDeliveryItem = super.ACCEPT;
         ItemMeta confirmDeliveryMeta = confirmDeliveryItem.getItemMeta();
-        confirmDeliveryMeta.setDisplayName(ChatColor.GREEN + "Confirm Delivery");
-        List<String> confirmDeliveryLore = new ArrayList<>();
-        confirmDeliveryLore.add(ChatColor.YELLOW + "========= WARNING =========");
-        confirmDeliveryLore.add(ChatColor.GRAY + "The item will be deducted");
-        confirmDeliveryLore.add(ChatColor.GRAY + "from your inventory.");
-        confirmDeliveryLore.add(ChatColor.YELLOW + "==========================");
+        confirmDeliveryMeta.setDisplayName(Message.THD_SUBMIT_ITEM_DISPLAY);//
+        //List<String> confirmDeliveryLore = new ArrayList<>();//
+        List<String> confirmDeliveryLore = Message.THD_SUBMIT_ITEM_LORE;
         confirmDeliveryMeta.setLore(confirmDeliveryLore);
         confirmDeliveryItem.setItemMeta(confirmDeliveryMeta);
 
         ItemStack backToDeliveryBoardMenu = super.CANCEL;
         ItemMeta backToDeliveryBoardMenuMeta = backToDeliveryBoardMenu.getItemMeta();
-        backToDeliveryBoardMenuMeta.setDisplayName(ChatColor.RED + "⇦ Back");
+        backToDeliveryBoardMenuMeta.setDisplayName(Message.THD_BACK_ITEM_DISPLAY);//
         backToDeliveryBoardMenu.setItemMeta(backToDeliveryBoardMenuMeta);
 
         inventory.setItem(26, confirmDeliveryItem);

@@ -1,7 +1,7 @@
 package me.deliveryboard.utils;
 
 import me.deliveryboard.DeliveryBoard;
-import me.deliveryboard.handlers.GenerationHandler;
+import me.deliveryboard.language.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -31,17 +31,22 @@ public class MenuUtils {
                             DeliveryBoard.plugin.getConfig().getString("gui.titles.hourlyTitle"))));
 
 
-            List<String> hourlyLore = new ArrayList<>();
-            hourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
-            hourlyLore.add(ChatColor.GRAY + "The town needs new deliveries");
-            hourlyLore.add(ChatColor.GRAY + "all the time. Provide what the");
-            hourlyLore.add(ChatColor.GRAY + "townsfolk needs and get rewarded.");
-            hourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
+            String timeHourly = TimeUtils.formatEpochTime(nextHourlyStartTime - System.currentTimeMillis());
+
+            List<String> hourlyLore = PlaceholderUtils.parsePlaceholders(Message.DB_HOURLY_ITEM_LORE, owner, timeHourly);
+
+
             if (DeliveryBoard.hourlyCompletedPlayerList.contains(owner)) {
-                hourlyLore.add(ChatColor.GREEN + "COMPLETED");
-                hourlyLore.add(ChatColor.GRAY + "Refreshes In: " + ChatColor.GREEN + TimeUtils.formatEpochTime(nextHourlyStartTime - System.currentTimeMillis()));
+                //hourlyLore.add(ChatColor.GREEN + "COMPLETED");//take from complete list & use special parser, paass timeHourly
+                //hourlyLore.add(ChatColor.GRAY + "Refreshes In: " + ChatColor.GREEN + timeHourly);//
+                for (String footer : Message.DB_HOURLY_ITEM_LORE_FOOTER_COMPLETE) {
+                    hourlyLore.add(PlaceholderUtils.parsePlaceholders(footer, owner, timeHourly));
+                }
             } else {
-                hourlyLore.add(ChatColor.GRAY + "Time Left: " + ChatColor.YELLOW + TimeUtils.formatEpochTime(nextHourlyStartTime - System.currentTimeMillis()));
+                //hourlyLore.add(ChatColor.GRAY + "Time Left: " + ChatColor.YELLOW + timeHourly);//from incomplete list
+                for (String footer : Message.DB_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE) {
+                    hourlyLore.add(PlaceholderUtils.parsePlaceholders(footer, owner, timeHourly));
+                }
             }
 
             hourlyMeta.setLore(hourlyLore);
@@ -60,17 +65,21 @@ public class MenuUtils {
                     ChatColor.translateAlternateColorCodes('&',
                             DeliveryBoard.plugin.getConfig().getString("gui.titles.threeHourlyTitle"))));
 
-            List<String> threeHourlyLore = new ArrayList<>();
-            threeHourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
-            threeHourlyLore.add(ChatColor.GRAY + "The town needs new deliveries");
-            threeHourlyLore.add(ChatColor.GRAY + "all the time. Provide what the");
-            threeHourlyLore.add(ChatColor.GRAY + "townsfolk needs and get rewarded.");
-            threeHourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
+            String timeThreeHourly = TimeUtils.formatEpochTime(nextThreeHourlyStartTime - System.currentTimeMillis());
+
+            List<String> threeHourlyLore = PlaceholderUtils.parsePlaceholders(Message.DB_THREE_HOURLY_ITEM_LORE, owner, timeThreeHourly);
+
             if (DeliveryBoard.threeHourlyCompletedPlayerList.contains(owner)) {
-                threeHourlyLore.add(ChatColor.GREEN + "COMPLETED");
-                threeHourlyLore.add(ChatColor.GRAY + "Refreshes In: " + ChatColor.GREEN + TimeUtils.formatEpochTime(nextThreeHourlyStartTime - System.currentTimeMillis()));
+                //threeHourlyLore.add(ChatColor.GREEN + "COMPLETED");//
+                //threeHourlyLore.add(ChatColor.GRAY + "Refreshes In: " + ChatColor.GREEN + timeThreeHourly);//
+                for (String footer : Message.DB_THREE_HOURLY_ITEM_LORE_FOOTER_COMPLETE) {
+                    threeHourlyLore.add(PlaceholderUtils.parsePlaceholders(footer, owner, timeThreeHourly));
+                }
             } else {
-                threeHourlyLore.add(ChatColor.GRAY + "Time Left: " + ChatColor.YELLOW + TimeUtils.formatEpochTime(nextThreeHourlyStartTime - System.currentTimeMillis()));
+                //threeHourlyLore.add(ChatColor.GRAY + "Time Left: " + ChatColor.YELLOW + timeThreeHourly);//
+                for (String footer : Message.DB_THREE_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE) {
+                    threeHourlyLore.add(PlaceholderUtils.parsePlaceholders(footer, owner, timeThreeHourly));
+                }
             }
             threeHourlyMeta.setLore(threeHourlyLore);
             threeHourlyItem.setItemMeta(threeHourlyMeta);
@@ -88,17 +97,22 @@ public class MenuUtils {
                     ChatColor.translateAlternateColorCodes('&',
                             DeliveryBoard.plugin.getConfig().getString("gui.titles.sixHourlyTitle"))));
 
-            List<String> sixHourlyLore = new ArrayList<>();
-            sixHourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
-            sixHourlyLore.add(ChatColor.GRAY + "The town needs new deliveries");
-            sixHourlyLore.add(ChatColor.GRAY + "all the time. Provide what the");
-            sixHourlyLore.add(ChatColor.GRAY + "townsfolk needs and get rewarded.");
-            sixHourlyLore.add(ChatColor.DARK_GRAY + "---------------------------");
+            String timeSix = TimeUtils.formatEpochTime(nextSixHourlyStartTime - System.currentTimeMillis());
+
+            List<String> sixHourlyLore = PlaceholderUtils.parsePlaceholders(Message.DB_SIX_HOURLY_ITEM_LORE, owner, timeSix);
+
+
             if (DeliveryBoard.sixHourlyCompletedPlayerList.contains(owner)) {
-                sixHourlyLore.add(ChatColor.GREEN + "COMPLETED");
-                sixHourlyLore.add(ChatColor.GRAY + "Refreshes In: " + ChatColor.GREEN + TimeUtils.formatEpochTime(nextSixHourlyStartTime - System.currentTimeMillis()));
+                //sixHourlyLore.add(ChatColor.GREEN + "COMPLETED");//
+                //sixHourlyLore.add(ChatColor.GRAY + "Refreshes In: " + ChatColor.GREEN + timeSix);//
+                for (String footer : Message.DB_SIX_HOURLY_ITEM_LORE_FOOTER_COMPLETE) {
+                    sixHourlyLore.add(PlaceholderUtils.parsePlaceholders(footer, owner, timeSix));
+                }
             } else {
-                sixHourlyLore.add(ChatColor.GRAY + "Time Left: " + ChatColor.YELLOW + TimeUtils.formatEpochTime(nextSixHourlyStartTime - System.currentTimeMillis()));
+                //sixHourlyLore.add(ChatColor.GRAY + "Time Left: " + ChatColor.YELLOW + timeSix);//
+                for (String footer : Message.DB_SIX_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE) {
+                    sixHourlyLore.add(PlaceholderUtils.parsePlaceholders(footer, owner, timeSix));
+                }
             }
             sixHourlyMeta.setLore(sixHourlyLore);
             sixHourlyItem.setItemMeta(sixHourlyMeta);
@@ -112,6 +126,7 @@ public class MenuUtils {
      * @param cooldownKey Cooldown timer key from Main class
      * @param iconMaterial  Material used for the representative item
      * @param deliveryIconTitle Supports traditional Bukkit coloring and Hex (<#2b3aef6>)
+     * @apiNote Not LOCALIZED! Localize before usage!
      * @return
      */
     public ItemStack createDeliveryIconItem(String cooldownKey, Material iconMaterial, String deliveryIconTitle) {
@@ -135,6 +150,9 @@ public class MenuUtils {
         return deliveryItem;
     }
 
+    /**
+    *@apinote Not LOCALIZED!
+     */
     public ItemStack createDeliveryIconItem(String cooldownKey) {
         long nextStartTime = DeliveryBoard.cooldown.get(cooldownKey); //"six-hourly"
 

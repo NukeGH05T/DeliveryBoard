@@ -2,6 +2,7 @@ package me.deliveryboard.commands.subcommands;
 
 import me.deliveryboard.commands.CommandManager;
 import me.deliveryboard.commands.SubCommand;
+import me.deliveryboard.language.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -12,7 +13,8 @@ public class HelpCommand extends SubCommand {
 
     @Override
     public String getDescription(){
-        return "Show all of the commands for DeliveryBoard";
+        return Message.HELP_COMMAND_DESCRIPTION;
+        //return "Show all of the commands for DeliveryBoard";
     }
 
     @Override

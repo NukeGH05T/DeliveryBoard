@@ -1,6 +1,7 @@
 package me.deliveryboard.commands.subcommands;
 
 import me.deliveryboard.commands.SubCommand;
+import me.deliveryboard.language.Message;
 import me.deliveryboard.menusystem.PlayerMenuUtility;
 import me.deliveryboard.menusystem.menu.ShowDeliveryBoardMenu;
 import org.bukkit.entity.Player;
@@ -13,7 +14,8 @@ public class BoardCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "View the delivery board and submit required items.";
+        return Message.BOARD_COMMAND_DESCRIPTION;
+        //return "View the delivery board and submit required items.";
     }
 
     @Override

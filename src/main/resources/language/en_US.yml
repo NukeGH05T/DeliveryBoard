@@ -1,0 +1,106 @@
+#Commands
+#Board
+BOARD_COMMAND_DESCRIPTION: 'Shows the delivery board GUI'
+#Help
+HELP_COMMAND_DESCRIPTION: 'Lists all available commands.'
+#Reload
+RELOAD_COMMAND_DESCRIPTION: 'Reloads the plugin config file. It does not reload the language files. Please restart instead to update language files.'
+RELOAD_SUCCESSFULL: 'Config Reloaded! Please restart instead to update language files.'
+RELOAD_FAILED: 'Reload failed. Please check console for details.'
+RELOAD_NO_PERM: 'You do not have permission to reload.'
+#Setboard
+SETBOARD_COMMAND_DESCRIPTION: 'Sets the target block as a board that shows the delivery board on right click.'
+BOARD_SETUP_SUCCESSFULL: 'Board has been successfully setup.'
+BOARD_OVERRIDE_PREVIOUS: 'Overriding previous board location at {BOARD_LOC}' #{BOARD_LOC} returns board's previous location.
+
+#Command Manager
+CMDM_NO_PERM_DEFAULT: 'You do not have permission to run that command!'
+CMDM_INVALID_COMMAND: 'That is not a valid command.'
+CMDM_HELP_SUGGEST: 'Do /db help for more info.'
+
+#Hourly Delivery Menu
+HRD_EMPTY_SUBMISSION: 'Cannot submit with empty delivery!'
+HRD_WRONG_SUBMISSION: 'The item is the not the one that needs to be delivered!'
+HRD_SUCCESSFUL_SUBMISSION: 'The item is the not the one that needs to be delivered!'
+HRD_ICON_ITEM_LORE:
+  - 'Deliver the required item'
+  - 'to claim your reward.'
+HRD_SUBMIT_ITEM_DISPLAY: 'Confirm Delivery'
+HRD_SUBMIT_ITEM_LORE:
+  - '========= WARNING ========='
+  - 'The item will be deducted'
+  - 'from your inventory.'
+  - '=========================='
+HRD_BACK_ITEM_DISPLAY: '⇦ Back'
+
+#Three hourly Delivery Menu
+THD_EMPTY_SUBMISSION: 'Cannot submit with empty delivery!'
+THD_WRONG_SUBMISSION: 'The item is the not the one that needs to be delivered!'
+THD_SUCCESSFUL_SUBMISSION: 'The item is the not the one that needs to be delivered!'
+THD_ICON_ITEM_LORE:
+  - 'Deliver the required item'
+  - 'to claim your reward.'
+THD_SUBMIT_ITEM_DISPLAY: 'Confirm Delivery'
+THD_SUBMIT_ITEM_LORE:
+  - '========= WARNING ========='
+  - 'The item will be deducted'
+  - 'from your inventory.'
+  - '=========================='
+THD_BACK_ITEM_DISPLAY: '⇦ Back'
+
+#Six hourly Delivery Menu
+SHD_EMPTY_SUBMISSION: 'Cannot submit with empty delivery!'
+SHD_WRONG_SUBMISSION: 'The item is the not the one that needs to be delivered!'
+SHD_SUCCESSFUL_SUBMISSION: 'The item is the not the one that needs to be delivered!'
+SHD_ICON_ITEM_LORE:
+  - 'Deliver the required item'
+  - 'to claim your reward.'
+SHD_SUBMIT_ITEM_DISPLAY: 'Confirm Delivery'
+SHD_SUBMIT_ITEM_LORE:
+  - '========= WARNING ========='
+  - 'The item will be deducted'
+  - 'from your inventory.'
+  - '=========================='
+SHD_BACK_ITEM_DISPLAY: '⇦ Back'
+
+#Delivery Board Menu
+DB_DELIVERY_ALREADY_COMPLETE: 'You have already completed the delivery!'
+
+#Hourly Item
+DB_HOURLY_ITEM_LORE:
+  - '---------------------------'
+  - 'The town needs new deliveries'
+  - 'all the time. Provide what the'
+  - 'townsfolk needs and get rewarded.'
+  - '---------------------------'
+DB_HOURLY_ITEM_LORE_FOOTER_COMPLETE:
+  - 'COMPLETED'
+  - 'Refreshes In: {DURATION}' #{DURATION} returns the time remaining
+DB_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE:
+  - 'Time Left: {DURATION}' #{DURATION} returns the time remaining
+
+  #Three hourly Item
+DB_THREE_HOURLY_ITEM_LORE:
+  - '---------------------------'
+  - 'The town needs new deliveries'
+  - 'all the time. Provide what the'
+  - 'townsfolk needs and get rewarded.'
+  - '---------------------------'
+DB_THREE_HOURLY_ITEM_LORE_FOOTER_COMPLETE:
+  - 'COMPLETED'
+  - 'Refreshes In: {DURATION}' #{DURATION} returns the time remaining
+DB_THREE_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE:
+  - 'Time Left: {DURATION}' #{DURATION} returns the time remaining
+
+  #Six hourly Item
+DB_SIX_HOURLY_ITEM_LORE:
+  - '---------------------------'
+  - 'The town needs new deliveries'
+  - 'all the time. Provide what the'
+  - 'townsfolk needs and get rewarded.'
+  - '---------------------------'
+DB_SIX_HOURLY_ITEM_LORE_FOOTER_COMPLETE:
+  - 'COMPLETED'
+  - 'Refreshes In: {DURATION}' # {DURATION} returns the time remaining
+DB_SIX_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE:
+  - 'Time Left: {DURATION}' # {DURATION} returns the time remaining

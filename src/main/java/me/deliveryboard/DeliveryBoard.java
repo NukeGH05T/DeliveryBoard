@@ -7,6 +7,10 @@ import me.deliveryboard.external.plugins.ExtEcoItems;
 import me.deliveryboard.external.plugins.ExtItemsAdder;
 import me.deliveryboard.external.plugins.ExtMMOItems;
 import me.deliveryboard.handlers.GenerationHandler;
+import me.deliveryboard.language.DefaultWriter;
+import me.deliveryboard.language.LanguageConfig;
+import me.deliveryboard.language.Locale;
+import me.deliveryboard.language.Message;
 import me.deliveryboard.listeners.BoardInteractionListener;
 import me.deliveryboard.listeners.FirstItemsAdderLoadListener;
 import me.deliveryboard.listeners.MenuListener;
@@ -51,6 +55,7 @@ public final class DeliveryBoard extends JavaPlugin {
         plugin = this;
 
         initializeConfig();
+        initializeLang();
         registerCommands();
         registerListeners();
         initializeItemPlugins();
@@ -93,6 +98,15 @@ public final class DeliveryBoard extends JavaPlugin {
     private void initializeConfig() {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+    }
+
+    private void initializeLang() {
+        LanguageConfig.setupLang();
+
+        //LanguageConfig.getLangConfig().options().copyDefaults(true);
+        //LanguageConfig.saveLangConfig();
+
+        Message.loadMessages();
     }
 
     void registerCommands() {

@@ -1,6 +1,7 @@
 package me.deliveryboard.commands.subcommands;
 
 import me.deliveryboard.commands.SubCommand;
+import me.deliveryboard.language.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -17,7 +18,7 @@ public class SetBoardCommand extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Sets the target block as a board that shows the delivery board on right click.";
+        return "Sets the target block as a board that shows the delivery board on right click.";//
     }
 
     @Override
@@ -44,12 +45,12 @@ public class SetBoardCommand extends SubCommand {
         if (configBoardLocation.isEmpty()) {
             plugin.getConfig().set("board-location", locationString);
             plugin.saveConfig();
-            p.sendMessage(ChatColor.AQUA + "Board has been successfully setup.");
+            p.sendMessage(Message.BOARD_SETUP_SUCCESSFULL);//Same as this one
         } else {
-            p.sendMessage(ChatColor.YELLOW + "Overriding previous board location at" + ChatColor.GRAY + "(" + configBoardLocation + ")");
+            p.sendMessage(Message.BOARD_OVERRIDE_PREVIOUS);//
             plugin.getConfig().set("board-location", locationString);
             plugin.saveConfig();
-            p.sendMessage(ChatColor.AQUA + "Board has been successfully setup.");
+            p.sendMessage(Message.BOARD_SETUP_SUCCESSFULL);//Same as the one above
         }
     }
 }

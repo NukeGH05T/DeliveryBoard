@@ -1,6 +1,7 @@
 package me.deliveryboard.menusystem.menu;
 
 import me.deliveryboard.DeliveryBoard;
+import me.deliveryboard.language.Message;
 import me.deliveryboard.menusystem.Menu;
 import me.deliveryboard.menusystem.PlayerMenuUtility;
 import me.deliveryboard.menusystem.menu.deliverymenu.HourlyDeliveryMenu;
@@ -39,7 +40,7 @@ public class ShowDeliveryBoardMenu extends Menu {
         if (e.getSlot() == 11) { //11
             // Open hourly delivery menu
             if (DeliveryBoard.hourlyCompletedPlayerList.contains(e.getWhoClicked())) {
-                e.getWhoClicked().sendMessage(ChatColor.RED + "You have already completed the delivery!");
+                e.getWhoClicked().sendMessage(Message.DB_DELIVERY_ALREADY_COMPLETE);//
             } else {
                 playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
                 HourlyDeliveryMenu hourlyDeliveryMenu = new HourlyDeliveryMenu(playerMenuUtility);
@@ -49,7 +50,7 @@ public class ShowDeliveryBoardMenu extends Menu {
 
         } else if (e.getSlot() == 13) { //13
             if (DeliveryBoard.threeHourlyCompletedPlayerList.contains(e.getWhoClicked())) {
-                e.getWhoClicked().sendMessage(ChatColor.RED + "You have already completed the delivery!");
+                e.getWhoClicked().sendMessage(Message.DB_DELIVERY_ALREADY_COMPLETE);//
             } else {
                 playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
                 ThreeHourlyDeliveryMenu deliveryMenu = new ThreeHourlyDeliveryMenu(playerMenuUtility);
@@ -59,7 +60,7 @@ public class ShowDeliveryBoardMenu extends Menu {
 
         } else if (e.getSlot() == 15) { //15
             if (DeliveryBoard.sixHourlyCompletedPlayerList.contains(e.getWhoClicked())) {
-                e.getWhoClicked().sendMessage(ChatColor.RED + "You have already completed the delivery!");
+                e.getWhoClicked().sendMessage(Message.DB_DELIVERY_ALREADY_COMPLETE);//
             } else {
                 playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
                 SixHourlyDeliveryMenu deliveryMenu = new SixHourlyDeliveryMenu(playerMenuUtility);
