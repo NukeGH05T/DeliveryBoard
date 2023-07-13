@@ -25,7 +25,7 @@ gui:
     sixHourlyTitle: "&a&lSix Hourly Delivery"
   icons:
     hourlyIcon: van@IRON_INGOT@1
-    threeHourlyIcon: van@DIAMOND_INGOT@3
+    threeHourlyIcon: van@DIAMOND@3
     sixHourlyIcon: van@EMERALD@6
 
 delivery:

@@ -85,7 +85,16 @@ public class SixHourlyDeliveryMenu extends Menu {
         detailsItem.setItemMeta(detailsMeta);
 
         inventory.setItem(11, detailsItem);
-        inventory.setItem(15, DeliveryBoard.getSixHourlyItem());
+
+        //Dupe fix
+        ItemStack iconItem = DeliveryBoard.getSixHourlyItem().clone();
+        ItemMeta meta = iconItem.getItemMeta();
+        List<String> lore = new ArrayList<>();
+        if (meta.hasLore()) lore = meta.getLore();
+        lore.add(ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + "ID: " + System.currentTimeMillis());
+        meta.setLore(lore);
+        iconItem.setItemMeta(meta);
+        inventory.setItem(15, iconItem);
 
         //Item delivery slot 22
         //Decorating around it

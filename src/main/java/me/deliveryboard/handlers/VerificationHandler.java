@@ -4,8 +4,6 @@ import me.deliveryboard.DeliveryBoard;
 import me.deliveryboard.external.ItemPlugin;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Objects;
-
 public class VerificationHandler {
     private final ItemPlugin itemPlugin;
     private final ItemStack generatedItemStack;
