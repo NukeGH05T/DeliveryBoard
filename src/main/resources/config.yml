@@ -24,9 +24,9 @@ gui:
     threeHourlyTitle: "&b&lThree Hourly Delivery"
     sixHourlyTitle: "&a&lSix Hourly Delivery"
   icons:
-    hourlyIcon: van@NETHERITE_SCRAP@1
-    threeHourlyIcon: van@NETHERITE_SCRAP@3
-    sixHourlyIcon: van@NETHERITE_SCRAP@6
+    hourlyIcon: van@IRON_INGOT@1
+    threeHourlyIcon: van@DIAMOND_INGOT@3
+    sixHourlyIcon: van@EMERALD@6
 
 delivery:
   hourly:
