@@ -8,7 +8,6 @@ import me.deliveryboard.menusystem.Menu;
 import me.deliveryboard.menusystem.PlayerMenuUtility;
 import me.deliveryboard.menusystem.menu.ShowDeliveryBoardMenu;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -51,7 +50,7 @@ public class HourlyDeliveryMenu extends Menu {
                 return;
             }
 
-            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.usedItemPluginsHashMap.get("hourly"), DeliveryBoard.getHourlyItem());
+            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.getHourlyItem());
 
             if (!verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
                 p.sendMessage(Message.HRD_WRONG_SUBMISSION);//

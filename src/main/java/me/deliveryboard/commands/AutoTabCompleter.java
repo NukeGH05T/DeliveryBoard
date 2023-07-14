@@ -13,6 +13,7 @@ public class AutoTabCompleter implements TabCompleter {
         List<String> commands = new ArrayList<>();
         if (args.length == 1) {
             List<String> completions = new ArrayList<>();
+            //completions.add("show");
             completions.add("board");
             completions.add("reload");
             completions.add("setboard");

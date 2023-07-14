@@ -41,6 +41,20 @@ public class ExtMMOItems extends ItemPlugin {
         return null;
     }
 
+    @Override
+    public String generateItemString(ItemStack itemStack) {
+        if (NBTItem.get(itemStack).hasType()) {
+            //MMOItems item
+            NBTItem nbtItem = NBTItem.get(itemStack);
+            String itemType = nbtItem.getType();
+            String itemID = nbtItem.getString("MMOITEMS_ITEM_ID");
+
+            String itemString = "mmo@" + itemID + "@" + itemType;
+            return itemString;
+        }
+        return null;
+    }
+
     /**
      * @param generatedItem
      * @param submittedItem

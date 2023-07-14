@@ -1,15 +1,10 @@
 package me.deliveryboard;
 
-import me.deliveryboard.commands.CommandManager;
 import me.deliveryboard.commands.AutoTabCompleter;
+import me.deliveryboard.commands.CommandManager;
 import me.deliveryboard.external.ItemPlugin;
-import me.deliveryboard.external.plugins.ExtEcoItems;
-import me.deliveryboard.external.plugins.ExtItemsAdder;
-import me.deliveryboard.external.plugins.ExtMMOItems;
 import me.deliveryboard.handlers.GenerationHandler;
-import me.deliveryboard.language.DefaultWriter;
 import me.deliveryboard.language.LanguageConfig;
-import me.deliveryboard.language.Locale;
 import me.deliveryboard.language.Message;
 import me.deliveryboard.listeners.BoardInteractionListener;
 import me.deliveryboard.listeners.FirstItemsAdderLoadListener;
@@ -57,8 +52,8 @@ public final class DeliveryBoard extends JavaPlugin {
         initializeConfig();
         initializeLang();
         registerCommands();
-        registerListeners();
         initializeItemPlugins();
+        registerListeners(); // Let IA be added as an ItemPlugin before doing this
         //Not initing if ItemsAdder is present. ItemsAdder takes time to load item data. Moved to FirstItemsAdderLoadListener
         if (!enabledItemPlugins.contains("ItemsAdder")) {
             initializeDefaultDeliveries();

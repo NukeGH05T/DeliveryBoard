@@ -70,6 +70,7 @@ delivery:
         #   The command type can use built in placeholders. (Discussed in the placeholder section)
         # ==========================================================
         # ===================== Placeholders =======================
+        # Placeholders -> https://nukegh05t.gitbook.io/deliveryboard/placeholders
         #   {PLAYER_NAME} -> Returns the display name of the player who completed the delivery.
         #   {PLAYER_X}    -> Return X of players current position
         #   {PLAYER_Y}    -> Return Y of players current position

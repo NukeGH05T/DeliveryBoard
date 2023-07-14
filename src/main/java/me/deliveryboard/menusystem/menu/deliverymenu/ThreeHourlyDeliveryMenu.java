@@ -51,7 +51,7 @@ public class ThreeHourlyDeliveryMenu extends Menu {
                 return;
             }
 
-            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.usedItemPluginsHashMap.get("three-hourly"), DeliveryBoard.getThreeHourlyItem());
+            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.getThreeHourlyItem());
 
             if (!verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
                 p.sendMessage(Message.THD_WRONG_SUBMISSION);//

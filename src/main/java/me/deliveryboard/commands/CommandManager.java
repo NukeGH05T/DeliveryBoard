@@ -2,7 +2,6 @@ package me.deliveryboard.commands;
 
 import me.deliveryboard.commands.subcommands.*;
 import me.deliveryboard.language.Message;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,6 +18,7 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new BoardCommand());
         subcommands.add(new ReloadCommand());
         subcommands.add(new SetBoardCommand());
+        //subcommands.add(new ShowItemString());
         //subcommands.add(new SaveItemCommand());
         //subcommands.add(new GetItemCommand());
     }

@@ -52,7 +52,7 @@ public class SixHourlyDeliveryMenu extends Menu {
                 return;
             }
 
-            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.usedItemPluginsHashMap.get("six-hourly"), DeliveryBoard.getSixHourlyItem());
+            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.getSixHourlyItem());
 
             if (!verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
                 p.sendMessage(Message.SHD_WRONG_SUBMISSION);//

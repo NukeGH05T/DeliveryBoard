@@ -22,6 +22,18 @@ public class ExtItemsAdder extends ItemPlugin {
     }
 
     @Override
+    public String generateItemString(ItemStack itemStack) {
+        CustomStack stack = CustomStack.byItemStack(itemStack);
+
+        if(stack != null) {
+            //IA Custom Item
+            String itemString = "iad@" + stack.getNamespacedID() + "@1";
+            return itemString;
+        }
+        return null;
+    }
+
+    @Override
     public boolean isMatching(ItemStack generatedItem, ItemStack submittedItem) {
 
         CustomStack subStack = CustomStack.byItemStack(submittedItem);

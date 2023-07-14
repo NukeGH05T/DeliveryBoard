@@ -29,6 +29,23 @@ public class ExtEcoItems extends ItemPlugin {
         return null;
     }
 
+    @Override
+    public String generateItemString(ItemStack itemStack) {
+        for (EcoItem ecoItem : EcoItems.INSTANCE.values()) {
+            if (ecoItem.getItemStack().equals(itemStack)) {
+                String itemID = String.valueOf(ecoItem.getId());
+                String id = ecoItem.getID();
+                System.out.println("nid: " + itemID);
+                System.out.println("id: " + id);
+
+                String itemString = "eco@" + id + "@1";
+                return itemString;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @param generatedItem Used first to hardmatch with all ecoitems
      * @param submittedItem Hard matched to the generated item
