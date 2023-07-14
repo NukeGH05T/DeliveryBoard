@@ -2,7 +2,7 @@ This project is owned and maintained by NukeGH05T and is distributed with "All R
 NukeGH05T reserves the right to change these terms at any time, you have to comply with the most recent version.
 
 Things you CANNOT do:
-- Issue a refund on PayPal without our explicit permission, as this is a digital good.
+- Issue a refund on PayPal without explicit permission from NukeGH05T, as this is a digital good.
 - Redistribute, sell or give an official/modified version of the plugin (with or without any type of counterpart) to anyone else.
 - Modify and compile the project source code to bypass anti-piracy checks and protections.
 
