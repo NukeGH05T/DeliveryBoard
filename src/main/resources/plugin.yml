@@ -1,6 +1,6 @@
 name: DeliveryBoard
-version: 1.4.3
-main: me.deliveryboard.DeliveryBoard
+version: 1.4.3-hotfix
+main: me.nukeghost.DeliveryBoard
 api-version: 1.13
 prefix: DB
 authors: [NukeGH05T]
