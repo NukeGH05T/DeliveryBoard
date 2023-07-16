@@ -1,7 +1,8 @@
 # DeliveryBoard
 ![DeliveryBoard Cover Image](https://media.discordapp.net/attachments/599160797486252032/1119724112999350332/DeliveryBoardCover_nukeghost.png?width=768&height=428)
 ## Description
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/NukeGH05T/DeliveryBoard/maven.yml?style=for-the-badge&logo=apachemaven&color=%23#10B981)
+![Spiget Stars](https://img.shields.io/spiget/stars/110579?style=for-the-badge&color=%23FF9E0F)
+ ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/NukeGH05T/DeliveryBoard/maven.yml?style=for-the-badge&logo=apachemaven&color=%23#10B981)
  ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/NukeGH05T/DeliveryBoard?style=for-the-badge&logo=github&color=%2300BC8E)  ![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/NukeGH05T/DeliveryBoard/latest/master?style=for-the-badge&logo=clockify&logoColor=ffffff&color=%23FF9E0F)
 
 
