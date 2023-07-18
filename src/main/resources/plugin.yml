@@ -1,5 +1,5 @@
 name: DeliveryBoard
-version: 1.4.3-hotfix
+version: 1.4.4
 main: me.nukeghost.DeliveryBoard
 api-version: 1.13
 prefix: DB
@@ -16,6 +16,10 @@ commands:
     aliases: [db]
 permissions:
   deliveryboard:
+    add:
+      default: op
+    edit:
+      default: op
     delivery:
       hourly:
         default: false

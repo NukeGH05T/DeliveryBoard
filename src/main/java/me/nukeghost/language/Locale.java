@@ -1,8 +1,8 @@
 package me.nukeghost.language;
 
 public enum Locale {
-    //Put in here, LanguageConfig & add it in main or somewhere else
     //Now I don't remember why I put it here. I haven't needed or used it anywhere. It's kinda scary tbh
+    //I'll keep it here for now. Even though I still have no clue what this is made for
     //Commands
     //Board
     BOARD_COMMAND_DESCRIPTION,

@@ -12,6 +12,11 @@ public class Message {
 
     //From YML
     //Commands
+    //Add
+    public static String ADD_COMMAND_DESCRIPTION;
+    public static String ADD_INVALID_ITEM;
+    //Edit
+    public static String EDIT_COMMAND_DESCRIPTION;
     //Board
     public static String BOARD_COMMAND_DESCRIPTION;
     //Help
@@ -30,6 +35,15 @@ public class Message {
     public static String CMDM_NO_PERM_DEFAULT;
     public static String CMDM_INVALID_COMMAND;
     public static String CMDM_HELP_SUGGEST;
+
+    //Paginated Menu
+    public static String ON_FIRST_PAGE;
+    public static String ON_LAST_PAGE;
+    public static String PGN_NEXT_PAGE;
+    public static String PGN_PREVIOUS_PAGE;
+    public static String PGN_CLOSE_PAGE;
+    public static String PGN_INFO_ITEM;
+    public static List<String> PGN_INFO_DETAILS;
 
     //Hourly Delivery Menu
     public static String HRD_EMPTY_SUBMISSION;
@@ -81,7 +95,12 @@ public class Message {
         //BOARD_COMMAND_DESCRIPTION = lang.getString("BOARD_COMMAND_DESCRIPTION", "Default board desc loaded");
 
         //YML
-//Commands
+        //Commands
+        //Add
+        ADD_COMMAND_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("ADD_COMMAND_DESCRIPTION")));
+        ADD_INVALID_ITEM = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("ADD_INVALID_ITEM")));
+        //Edit
+        EDIT_COMMAND_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("EDIT_COMMAND_DESCRIPTION")));
         //Board
         BOARD_COMMAND_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("BOARD_COMMAND_DESCRIPTION")));
         //Help
@@ -96,10 +115,18 @@ public class Message {
         BOARD_SETUP_SUCCESSFULL = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("BOARD_SETUP_SUCCESSFULL")));
         BOARD_OVERRIDE_PREVIOUS = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("BOARD_OVERRIDE_PREVIOUS")));
 
-//Command Manager
+        //Command Manager
         CMDM_NO_PERM_DEFAULT = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("CMDM_NO_PERM_DEFAULT")));
         CMDM_INVALID_COMMAND = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("CMDM_INVALID_COMMAND")));
         CMDM_HELP_SUGGEST = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("CMDM_HELP_SUGGEST")));
+        //Paginated Menu
+        ON_FIRST_PAGE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("ON_FIRST_PAGE")));
+        ON_LAST_PAGE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("ON_LAST_PAGE")));
+        PGN_NEXT_PAGE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("PGN_NEXT_PAGE")));
+        PGN_PREVIOUS_PAGE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("PGN_PREVIOUS_PAGE")));
+        PGN_CLOSE_PAGE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("PGN_CLOSE_PAGE")));
+        PGN_INFO_ITEM = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("PGN_INFO_ITEM")));
+        PGN_INFO_DETAILS = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getStringList("PGN_INFO_DETAILS")));
 
 //Hourly Delivery Menu
         HRD_EMPTY_SUBMISSION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("HRD_EMPTY_SUBMISSION")));

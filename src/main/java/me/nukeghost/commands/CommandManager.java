@@ -18,7 +18,8 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new BoardCommand());
         subcommands.add(new ReloadCommand());
         subcommands.add(new SetBoardCommand());
-        //subcommands.add(new ShowItemString());
+        subcommands.add(new AddRequiredItemCommand());
+        subcommands.add(new EditRequiredItemCommand());
         //subcommands.add(new SaveItemCommand());
         //subcommands.add(new GetItemCommand());
     }

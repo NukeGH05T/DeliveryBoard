@@ -50,7 +50,6 @@ public class GetItemCommand extends SubCommand {
         } else if (args[1].equalsIgnoreCase("verifye")) {
             ExtEcoItems extEcoItems = new ExtEcoItems();
             ItemStack genItem = extEcoItems.generateItem("grappling_hook", "");
-            System.out.println("Gen Item Type: " + genItem.getType());
 
             if (extEcoItems.isMatching(genItem, p.getInventory().getItemInMainHand())) {
                 p.sendMessage("Matched EcoItem");

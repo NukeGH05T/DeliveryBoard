@@ -34,6 +34,11 @@ public class DefaultWriter {
         Bukkit.getLogger().info("Writing default lang");
         try {
             bw.write("#Commands\n" +
+                    "#>Add\n" +
+                    "ADD_COMMAND_DESCRIPTION: 'Store the item currently held item as a requirement for delivery.'\n" +
+                    "ADD_INVALID_ITEM: 'Invalid Item or Plugin!'\n" +
+                    "#>Edit\n" +
+                    "EDIT_COMMAND_DESCRIPTION: 'Edit requirements of an active board'\n" +
                     "#>Board\n" +
                     "BOARD_COMMAND_DESCRIPTION: 'Shows the delivery board GUI'\n" +
                     "#>Help\n" +
@@ -52,6 +57,20 @@ public class DefaultWriter {
                     "CMDM_NO_PERM_DEFAULT: '&cYou do not have permission to run that command!'\n" +
                     "CMDM_INVALID_COMMAND: '&cThat is not a valid command.'\n" +
                     "CMDM_HELP_SUGGEST: '&eDo &a/db help&e for more info.'\n" +
+                    "\n" +
+                    "#Paginated Menu\n" +
+                    "ON_FIRST_PAGE: \"&cYou are already on the first page!\"\n" +
+                    "ON_LAST_PAGE: \"&cYou are already on the last page!\"\n" +
+                    "PGN_NEXT_PAGE: \"&aNext Page >\"\n" +
+                    "PGN_PREVIOUS_PAGE: \"&a< Previous Page\"\n" +
+                    "PGN_CLOSE_PAGE: \"&4Close\"\n" +
+                    "PGN_INFO_ITEM: '&fInstructions'\n" +
+                    "PGN_INFO_DETAILS:\n" +
+                    "  - '&f[&b&lRight Click&f] &7 to add item.'\n" +
+                    "  - '&f[&c&lRight Click&f] &7 to remove item.'\n" +
+                    "  - ''\n" +
+                    "  - '&7Having multiple instances of the same item'\n" +
+                    "  - '&7will make them appear as one in the edit GUI'\n" +
                     "\n" +
                     "#Hourly Delivery Menu\n" +
                     "HRD_EMPTY_SUBMISSION: '&cCannot submit with empty delivery!'\n" +

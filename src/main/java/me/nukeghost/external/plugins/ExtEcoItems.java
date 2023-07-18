@@ -35,8 +35,6 @@ public class ExtEcoItems extends ItemPlugin {
             if (ecoItem.getItemStack().equals(itemStack)) {
                 String itemID = String.valueOf(ecoItem.getId());
                 String id = ecoItem.getID();
-                System.out.println("nid: " + itemID);
-                System.out.println("id: " + id);
 
                 String itemString = "eco@" + id + "@1";
                 return itemString;
@@ -54,7 +52,6 @@ public class ExtEcoItems extends ItemPlugin {
     @Override
     public boolean isMatching(ItemStack generatedItem, ItemStack submittedItem) {
         if (generatedItem.equals(submittedItem)) {
-            System.out.println("ITEM MATCHED");
             return true;
         }
         return false;

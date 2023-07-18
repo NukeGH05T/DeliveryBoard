@@ -11,7 +11,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.io.BukkitObjectInputStream;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 
@@ -37,6 +41,22 @@ public class GenerationHandler {
 
             ItemStack deliveryItem = new ItemStack(Material.getMaterial(allowedItemString[1]), Integer.parseInt(allowedItemString[2]));
             return deliveryItem;
+        } else if (allowedItemString[0].equalsIgnoreCase("ser")){
+
+            String encodedString = allowedItemString[1];
+            byte[] serializedObject = Base64.getDecoder().decode(encodedString);
+
+            try {
+                ByteArrayInputStream in = new ByteArrayInputStream(serializedObject);
+                BukkitObjectInputStream is = new BukkitObjectInputStream(in);
+                ItemStack deliveryItem = (ItemStack) is.readObject();
+
+                return deliveryItem;
+
+            } catch (IOException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+
         } else {
             String itemID = allowedItemString[1];
             String itemType = allowedItemString.length > 2 ? allowedItemString[2] : "";
@@ -107,6 +127,22 @@ public class GenerationHandler {
 
             ItemStack deliveryItem = new ItemStack(Material.getMaterial(allowedItemString[1]), Integer.parseInt(allowedItemString[2]));
             return deliveryItem;
+        } else if (allowedItemString[0].equalsIgnoreCase("ser")){
+
+            String encodedString = allowedItemString[1];
+            byte[] serializedObject = Base64.getDecoder().decode(encodedString);
+
+            try {
+                ByteArrayInputStream in = new ByteArrayInputStream(serializedObject);
+                BukkitObjectInputStream is = new BukkitObjectInputStream(in);
+                ItemStack deliveryItem = (ItemStack) is.readObject();
+
+                return deliveryItem;
+
+            } catch (IOException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+
         } else {
             String itemID = allowedItemString[1];
             String itemType = allowedItemString.length > 2 ? allowedItemString[2] : "";
@@ -153,6 +189,84 @@ public class GenerationHandler {
                     }
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + iconID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
+            }
+        }
+
+        return null;
+    }
+
+    public static ItemStack generateItemFromString(String itemString) { //iconID is from config.yml
+        String[] allowedItemString = parseMaterialAndAmount(itemString);
+
+        if (allowedItemString[0].equalsIgnoreCase("van")){
+
+            ItemStack deliveryItem = new ItemStack(Material.getMaterial(allowedItemString[1]), Integer.parseInt(allowedItemString[2]));
+            return deliveryItem;
+        } else if (allowedItemString[0].equalsIgnoreCase("ser")){
+
+            String encodedString = allowedItemString[1];
+            byte[] serializedObject = Base64.getDecoder().decode(encodedString);
+
+            try {
+                ByteArrayInputStream in = new ByteArrayInputStream(serializedObject);
+                BukkitObjectInputStream is = new BukkitObjectInputStream(in);
+                ItemStack deliveryItem = (ItemStack) is.readObject();
+
+                return deliveryItem;
+
+            } catch (IOException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+
+        } else {
+            String itemID = allowedItemString[1];
+            String itemType = allowedItemString.length > 2 ? allowedItemString[2] : "";
+
+            if (allowedItemString[0].equalsIgnoreCase("mmo")) {
+                //MMOItems - 'mmo@CUTLASS@SWORD'
+                if (enabledItemPlugins.contains("MMOItems")) {
+                    return new ExtMMOItems().generateItem(itemID, itemType);
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
+            } else if (allowedItemString[0].equalsIgnoreCase("iad")) {
+                //ItemsAdder - 'iad@iageneric:coin@1'
+                if (enabledItemPlugins.contains("ItemsAdder")) {
+                    if (CustomStack.isInRegistry(itemID)) {
+                        return new ExtItemsAdder().generateItem(itemID, itemType);
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
+            } else if (allowedItemString[0].equalsIgnoreCase("eco")) {
+                //EcoItems - 'eco@grappling_hook'
+                //Might malfunction at any time
+                if (enabledItemPlugins.contains("EcoItems")) {
+                    return new ExtEcoItems().generateItem(itemID, itemType);
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+            } else if (allowedItemString[0].equalsIgnoreCase("exi")) {
+                //ExecutableItem - 'exi@iageneric:coin@1'
+                if (enabledItemPlugins.contains("ExecutableItems")) {
+                    ExecutableItemsManagerInterface executableItemsManager = getExecutableItemsManager();
+                    if (executableItemsManager.isValidID(itemID)) {
+                        return new ExtExecutableItems().generateItem(itemID, itemType);
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
 

@@ -1,4 +1,9 @@
 #Commands
+#>Add
+ADD_COMMAND_DESCRIPTION: 'Store the item currently held item as a requirement for delivery.'
+ADD_INVALID_ITEM: 'Invalid Item or Plugin!'
+#>Edit
+EDIT_COMMAND_DESCRIPTION: 'Edit requirements of an active board'
 #>Board
 BOARD_COMMAND_DESCRIPTION: 'Shows the delivery board GUI'
 #>Help
@@ -17,6 +22,20 @@ BOARD_OVERRIDE_PREVIOUS: '&eOverriding previous board location at {BOARD_LOC}' #
 CMDM_NO_PERM_DEFAULT: '&cYou do not have permission to run that command!'
 CMDM_INVALID_COMMAND: '&cThat is not a valid command.'
 CMDM_HELP_SUGGEST: '&eDo &a/db help&e for more info.'
+
+#Paginated Menu
+ON_FIRST_PAGE: "&cYou are already on the first page!"
+ON_LAST_PAGE: "&cYou are already on the last page!"
+PGN_NEXT_PAGE: "&aNext Page >"
+PGN_PREVIOUS_PAGE: "&a< Previous Page"
+PGN_CLOSE_PAGE: "&4Close"
+PGN_INFO_ITEM: '&fInstructions'
+PGN_INFO_DETAILS:
+  - '&f[&b&lRight Click&f] &7 to add item.'
+  - '&f[&c&lRight Click&f] &7 to remove item.'
+  - ''
+  - '&7Having multiple instances of the same item'
+  - '&7will make them appear as one in the edit GUI'
 
 #Hourly Delivery Menu
 HRD_EMPTY_SUBMISSION: '&cCannot submit with empty delivery!'
