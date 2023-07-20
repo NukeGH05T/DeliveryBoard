@@ -29,10 +29,10 @@ ON_LAST_PAGE: "&cYou are already on the last page!"
 PGN_NEXT_PAGE: "&aNext Page >"
 PGN_PREVIOUS_PAGE: "&a< Previous Page"
 PGN_CLOSE_PAGE: "&4Close"
-PGN_INFO_ITEM: '&fInstructions'
-PGN_INFO_DETAILS:
-  - '&f[&b&lRight Click&f] &7 to add item.'
-  - '&f[&c&lRight Click&f] &7 to remove item.'
+PGN_INFO_ITEM: '&fInstructions' #Players will not see this
+PGN_INFO_DETAILS: #Players will not see this
+  - '&f[&b&lLeft Click&f] &7inventory to add item.'
+  - '&f[&c&lRight Click&f] &7GUI reward to remove item.'
   - ''
   - '&7Having multiple instances of the same item'
   - '&7will make them appear as one in the edit GUI'

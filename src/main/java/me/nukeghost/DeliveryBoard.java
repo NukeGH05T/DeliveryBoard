@@ -6,9 +6,8 @@ import me.nukeghost.external.ItemPlugin;
 import me.nukeghost.handlers.GenerationHandler;
 import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
-import me.nukeghost.listeners.BoardInteractionListener;
-import me.nukeghost.listeners.FirstItemsAdderLoadListener;
-import me.nukeghost.listeners.MenuListener;
+import me.nukeghost.listeners.*;
+import me.nukeghost.menusystem.PaginatedMenu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.tasks.HourlyDeliveryUpdateTask;
 import me.nukeghost.tasks.SixHourlyDeliveryUpdateTask;
@@ -42,6 +41,7 @@ public final class DeliveryBoard extends JavaPlugin {
     private static ItemStack threeHourlyItem;
     private static ItemStack sixHourlyItem;
     public static HashMap<String, ItemPlugin> usedItemPluginsHashMap = new HashMap<>();
+    public static HashMap<Player, HashMap<PaginatedMenu, PlayerMenuUtility>> adminAddCommandRewardHashMap = new HashMap<>();
     public static List<String> enabledItemPlugins = new ArrayList<>();
 
 
@@ -112,6 +112,8 @@ public final class DeliveryBoard extends JavaPlugin {
     void registerListeners() {
         getServer().getPluginManager().registerEvents(new MenuListener(), plugin);
         getServer().getPluginManager().registerEvents(new BoardInteractionListener(plugin), plugin);
+        getServer().getPluginManager().registerEvents(new AdminCommandAddListener(), plugin);
+        getServer().getPluginManager().registerEvents(new AdminMaxRandomRewardListener(), plugin);
 
         if (enabledItemPlugins.contains("ItemsAdder")) {
             getServer().getPluginManager().registerEvents(new FirstItemsAdderLoadListener(), plugin);

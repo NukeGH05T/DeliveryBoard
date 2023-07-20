@@ -1,4 +1,4 @@
-package me.nukeghost.menusystem.menu;
+package me.nukeghost.menusystem.menu.boardconfig;
 
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.external.plugins.ExtEcoItems;
@@ -83,6 +83,8 @@ public class EditRequiredItemsMenu extends PaginatedMenu {
         } else if (e.getSlot() == 49) {
             //Closing inventory
             p.closeInventory();
+            new EditBoardMainMenu(playerMenuUtility).open();
+
         } else if (!e.getCurrentItem().equals(super.FILLER_GLASS) && e.getClickedInventory().getType() != InventoryType.PLAYER) {
             List<String> configItemlList = plugin.getConfig().getStringList("delivery." + playerMenuUtility.getDeliveryID() + ".allowed-materials");
 

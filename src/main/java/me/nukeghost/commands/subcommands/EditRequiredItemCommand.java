@@ -3,7 +3,8 @@ package me.nukeghost.commands.subcommands;
 import me.nukeghost.commands.SubCommand;
 import me.nukeghost.language.Message;
 import me.nukeghost.menusystem.PlayerMenuUtility;
-import me.nukeghost.menusystem.menu.EditRequiredItemsMenu;
+import me.nukeghost.menusystem.menu.boardconfig.EditBoardMainMenu;
+import me.nukeghost.menusystem.menu.boardconfig.EditRequiredItemsMenu;
 import org.bukkit.entity.Player;
 
 public class EditRequiredItemCommand extends SubCommand {
@@ -32,7 +33,7 @@ public class EditRequiredItemCommand extends SubCommand {
         if (args.length < 2) return;
         PlayerMenuUtility pmu = new PlayerMenuUtility(p);
         pmu.setDeliveryID(args[1]);
-        EditRequiredItemsMenu menu = new EditRequiredItemsMenu(pmu);
+        EditBoardMainMenu menu = new EditBoardMainMenu(pmu);
         menu.open();
     }
 }

@@ -64,10 +64,10 @@ public class DefaultWriter {
                     "PGN_NEXT_PAGE: \"&aNext Page >\"\n" +
                     "PGN_PREVIOUS_PAGE: \"&a< Previous Page\"\n" +
                     "PGN_CLOSE_PAGE: \"&4Close\"\n" +
-                    "PGN_INFO_ITEM: '&fInstructions'\n" +
-                    "PGN_INFO_DETAILS:\n" +
-                    "  - '&f[&b&lRight Click&f] &7 to add item.'\n" +
-                    "  - '&f[&c&lRight Click&f] &7 to remove item.'\n" +
+                    "PGN_INFO_ITEM: '&fInstructions' #Players will not see this\n" +
+                    "PGN_INFO_DETAILS: #Players will not see this\n" +
+                    "  - '&f[&b&lLeft Click&f] &7inventory to add item.'\n" +
+                    "  - '&f[&c&lRight Click&f] &7GUI reward to remove item.'\n" +
                     "  - ''\n" +
                     "  - '&7Having multiple instances of the same item'\n" +
                     "  - '&7will make them appear as one in the edit GUI'\n" +
