@@ -1,5 +1,5 @@
 name: DeliveryBoard
-version: 1.4.4
+version: 1.4.4-hotfix
 main: me.nukeghost.DeliveryBoard
 api-version: 1.13
 prefix: DB

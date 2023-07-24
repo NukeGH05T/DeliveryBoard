@@ -15,16 +15,7 @@ public class RewardUtils {
     public static ItemStack getRewardFromString(String rewardString) {
         String[] parsed = rewardString.split("@");
 
-        if (rewardString.contains("item")) {
-            //item@EMERALD@1
-            ItemStack itemToGive = new ItemStack(Material.getMaterial(parsed[1]), Integer.parseInt(parsed[2]));
-            ItemMeta meta = itemToGive.getItemMeta();
-            meta.setLore(Collections.singletonList(ChatColor.DARK_GRAY + "Item"));
-            itemToGive.setItemMeta(meta);
-
-            return itemToGive;
-
-        } else if (rewardString.contains("comm")) {
+        if (rewardString.contains("comm") && rewardString.matches("^comm")) {
             //comm@effect give {PLAYER_NAME} minecraft:absorption 10 3
             String command = rewardString.replace("comm@", "");
 
@@ -35,6 +26,15 @@ public class RewardUtils {
             commandNamedItem.setItemMeta(commandMeta);
 
             return commandNamedItem;
+        } else if (rewardString.contains("item") && rewardString.matches("^item")) {
+            //item@EMERALD@1
+            ItemStack itemToGive = new ItemStack(Material.getMaterial(parsed[1]), Integer.parseInt(parsed[2]));
+            ItemMeta meta = itemToGive.getItemMeta();
+            meta.setLore(Collections.singletonList(ChatColor.DARK_GRAY + "Item"));
+            itemToGive.setItemMeta(meta);
+
+            return itemToGive;
+
         }
 
         Bukkit.getLogger().severe("Something went wrong while showing \"" + rewardString + "\" in rewards");

@@ -141,6 +141,21 @@ delivery:
           - 'item@SHULKER_SHELL@8'
           - 'comm@xp add {PLAYER_NAME} 25 levels'
   #Six hourly delivery
+  demoDelivery:
+    allowed-materials:
+      - 'van@NETHERITE_SCRAP@8'
+      - 'van@BLAZE_ROD@10'
+    reward-setup:
+      mixed:
+        max-reward: 1
+        confirmed-rewards:
+          - 'item@EMERALD@19'
+        random-rewards-pool:
+          - 'item@DIAMOND@15'
+          - 'item@GOLDEN_APPLE@3'
+          - 'item@ENCHANTED_GOLDEN_APPLE@1'
+          - 'item@SHULKER_SHELL@8'
+          - 'comm@xp add {PLAYER_NAME} 25 levels'
 
 #Please do NOT edit this section
 #-----DO NOT EDIT-----#
@@ -148,4 +163,5 @@ active-deliveries:
   - hourly
   - three-hourly
   - six-hourly
+  - demoDelivery
 #-----DO NOT EDIT-----#

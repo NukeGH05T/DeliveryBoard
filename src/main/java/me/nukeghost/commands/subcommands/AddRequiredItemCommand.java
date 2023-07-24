@@ -33,7 +33,7 @@ public class AddRequiredItemCommand extends SubCommand {
 
     @Override
     public String getSyntax() {
-        return "/db add <delivery> [plugin]";
+        return "/db add <delivery> <plugin>";
     }
 
     @Override

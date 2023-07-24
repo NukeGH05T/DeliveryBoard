@@ -27,17 +27,17 @@ import java.util.List;
 
 public final class DeliveryBoard extends JavaPlugin {
 
-    public static final HashMap<String, Long> cooldown = new HashMap<>();
+    public static final HashMap<String, Long> cooldown = new HashMap<>();//
     private static final HashMap<Player, PlayerMenuUtility> PLAYER_MENU_UTILITY_MAP = new HashMap<>();
 
-    public static List<Player> hourlyCompletedPlayerList = new ArrayList<>();
+    public static List<Player> hourlyCompletedPlayerList = new ArrayList<>();//
     public static List<Player> threeHourlyCompletedPlayerList = new ArrayList<>();
     public static List<Player> sixHourlyCompletedPlayerList = new ArrayList<>();
 
 
     public static DeliveryBoard plugin;
 
-    private static ItemStack hourlyItem;
+    private static ItemStack hourlyItem;//
     private static ItemStack threeHourlyItem;
     private static ItemStack sixHourlyItem;
     public static HashMap<String, ItemPlugin> usedItemPluginsHashMap = new HashMap<>();
