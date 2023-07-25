@@ -1,5 +1,6 @@
 package me.nukeghost.utils;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class PlaceholderUtils {
             switch (placeholderKey) {
                 case "PLAYER_NAME":
                     // Get the player's display name
-                    String playerName = p.getDisplayName(); // Replace with your logic to retrieve the player's name
+                    String playerName = ChatColor.stripColor(p.getDisplayName()); // Replace with your logic to retrieve the player's name
                     input = input.replace(placeholder, playerName);
                     break;
                 case "PLAYER_X":
