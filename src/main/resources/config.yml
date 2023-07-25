@@ -142,6 +142,8 @@ delivery:
           - 'comm@xp add {PLAYER_NAME} 25 levels'
   #Six hourly delivery
   demoDelivery:
+    icon-item: van@IRON_INGOT@1
+    title: "&2&lDemo Delivery"
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
       - 'van@BLAZE_ROD@10'

@@ -14,8 +14,9 @@ import static me.nukeghost.DeliveryBoard.plugin;
 public class RewardUtils {
     public static ItemStack getRewardFromString(String rewardString) {
         String[] parsed = rewardString.split("@");
+        System.out.println("Starts with check: " + rewardString.matches("^comm"));
 
-        if (rewardString.contains("comm") && rewardString.matches("^comm")) {
+        if (rewardString.contains("comm@")) {
             //comm@effect give {PLAYER_NAME} minecraft:absorption 10 3
             String command = rewardString.replace("comm@", "");
 
@@ -26,7 +27,7 @@ public class RewardUtils {
             commandNamedItem.setItemMeta(commandMeta);
 
             return commandNamedItem;
-        } else if (rewardString.contains("item") && rewardString.matches("^item")) {
+        } else if (rewardString.contains("item@")) {
             //item@EMERALD@1
             ItemStack itemToGive = new ItemStack(Material.getMaterial(parsed[1]), Integer.parseInt(parsed[2]));
             ItemMeta meta = itemToGive.getItemMeta();
@@ -38,6 +39,7 @@ public class RewardUtils {
         }
 
         Bukkit.getLogger().severe("Something went wrong while showing \"" + rewardString + "\" in rewards");
+
         return null;
     }
 
