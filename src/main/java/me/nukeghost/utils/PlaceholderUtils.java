@@ -40,7 +40,7 @@ public class PlaceholderUtils {
             switch (placeholderKey) {
                 case "PLAYER_NAME":
                     // Get the player's display name
-                    String playerName = ChatColor.stripColor(p.getDisplayName()); // Replace with your logic to retrieve the player's name
+                    String playerName = ChatColor.stripColor(p.getName()); // Replace with your logic to retrieve the player's name
                     input = input.replace(placeholder, playerName);
                     break;
                 case "PLAYER_X":

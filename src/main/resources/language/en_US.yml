@@ -13,6 +13,8 @@ RELOAD_COMMAND_DESCRIPTION: 'Reloads the plugin config file. It does not reload 
 RELOAD_SUCCESSFULL: '&bConfig Reloaded! Please restart instead to update language files.'
 RELOAD_FAILED: '&4Reload failed. Please check console for details.'
 RELOAD_NO_PERM: '&cYou do not have permission to reload.'
+#>Refresh
+REFRESH_COMMAND_DESCRIPTION: 'Refresh a specific delivery.'
 #>Setboard
 SETBOARD_COMMAND_DESCRIPTION: 'Sets the target block as a board that shows the delivery board on right click.'
 BOARD_SETUP_SUCCESSFULL: '&bBoard has been successfully setup.'
@@ -38,88 +40,32 @@ PGN_INFO_DETAILS: #Players will not see this
   - '&7will make them appear as one in the edit GUI'
 
 #Hourly Delivery Menu
-HRD_EMPTY_SUBMISSION: '&cCannot submit with empty delivery!'
-HRD_WRONG_SUBMISSION: '&cThe item is the not the one that needs to be delivered!'
-HRD_SUCCESSFUL_SUBMISSION: '<#40FB85>Delivery Successful!'
-HRD_ICON_ITEM_LORE:
+EMPTY_SUBMISSION: '&cCannot submit with empty delivery!'
+WRONG_SUBMISSION: '&cThe item is the not the one that needs to be delivered!'
+SUCCESSFUL_SUBMISSION: '<#40FB85>Delivery Successful!'
+ICON_ITEM_LORE:
   - '&7Deliver the required item'
   - '&7to claim your reward.'
-HRD_SUBMIT_ITEM_DISPLAY: '<#40FB85>&lConfirm Delivery'
-HRD_SUBMIT_ITEM_LORE:
+SUBMIT_ITEM_DISPLAY: '<#40FB85>&lConfirm Delivery'
+SUBMIT_ITEM_LORE:
   - '&e========= WARNING ========='
   - '&fThe item will be deducted'
   - '&ffrom your inventory.'
   - '&e=========================='
-HRD_BACK_ITEM_DISPLAY: '&c⇦ Back'
-
-#Three hourly Delivery Menu
-THD_EMPTY_SUBMISSION: '&cCannot submit with empty delivery!'
-THD_WRONG_SUBMISSION: '&cThe item is the not the one that needs to be delivered!'
-THD_SUCCESSFUL_SUBMISSION: '<#40FB85>Delivery Successful!'
-THD_ICON_ITEM_LORE:
-  - '&7Deliver the required item'
-  - '&7to claim your reward.'
-THD_SUBMIT_ITEM_DISPLAY: '<#40FB85>&lConfirm Delivery'
-THD_SUBMIT_ITEM_LORE:
-  - '&e========= WARNING ========='
-  - '&fThe item will be deducted'
-  - '&ffrom your inventory.'
-  - '&e=========================='
-THD_BACK_ITEM_DISPLAY: '⇦ Back'
-
-#Six hourly Delivery Menu
-SHD_EMPTY_SUBMISSION: '&cCannot submit with empty delivery!'
-SHD_WRONG_SUBMISSION: '&cThe item is the not the one that needs to be delivered!'
-SHD_SUCCESSFUL_SUBMISSION: '<#40FB85>Delivery Successful!'
-SHD_ICON_ITEM_LORE:
-  - '&7Deliver the required item'
-  - '&7to claim your reward.'
-SHD_SUBMIT_ITEM_DISPLAY: '<#40FB85>&lConfirm Delivery'
-SHD_SUBMIT_ITEM_LORE:
-  - '&e========= WARNING ========='
-  - '&fThe item will be deducted'
-  - '&ffrom your inventory.'
-  - '&e=========================='
-SHD_BACK_ITEM_DISPLAY: '&c⇦ Back'
+BACK_ITEM_DISPLAY: '&c⇦ Back'
 
 #Delivery Board Menu
 DB_DELIVERY_ALREADY_COMPLETE: '&cYou have already completed the delivery!'
 
 #>Hourly Item
-DB_HOURLY_ITEM_LORE:
+DB_ITEM_LORE:
   - '&e---------------------------'
   - '&7The town needs new deliveries'
   - '&7all the time. Provide what the'
   - '&7townsfolk needs and get rewarded.'
   - '&e---------------------------'
-DB_HOURLY_ITEM_LORE_FOOTER_COMPLETE:
+DB_ITEM_LORE_FOOTER_COMPLETE:
   - '<#40FB85>COMPLETED'
   - '&7Refreshes In: &a{DURATION}'      #{DURATION} returns the time remaining
-DB_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE:
-  - '&7Time Left: &e{DURATION}'         #{DURATION} returns the time remaining
-
-#>Three hourly Item
-DB_THREE_HOURLY_ITEM_LORE:
-  - '&e---------------------------'
-  - '&7The town needs new deliveries'
-  - '&7all the time. Provide what the'
-  - '&7townsfolk needs and get rewarded.'
-  - '&e---------------------------'
-DB_THREE_HOURLY_ITEM_LORE_FOOTER_COMPLETE:
-  - '<#40FB85>COMPLETED'
-  - '&7Refreshes In: &a{DURATION}'      #{DURATION} returns the time remaining
-DB_THREE_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE:
-  - '&7Time Left: &e{DURATION}'         #{DURATION} returns the time remaining
-
-#>Six hourly Item
-DB_SIX_HOURLY_ITEM_LORE:
-  - '&e---------------------------'
-  - '&7The town needs new deliveries'
-  - '&7all the time. Provide what the'
-  - '&7townsfolk needs and get rewarded.'
-  - '&e---------------------------'
-DB_SIX_HOURLY_ITEM_LORE_FOOTER_COMPLETE:
-  - '<#40FB85>COMPLETED'
-  - '&7Refreshes In: &a{DURATION}'      #{DURATION} returns the time remaining
-DB_SIX_HOURLY_ITEM_LORE_FOOTER_INCOMPLETE:
+DB_ITEM_LORE_FOOTER_INCOMPLETE:
   - '&7Time Left: &e{DURATION}'         #{DURATION} returns the time remaining

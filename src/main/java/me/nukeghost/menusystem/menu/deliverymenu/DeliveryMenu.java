@@ -17,9 +17,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HourlyDeliveryMenu extends Menu {
-    public HourlyDeliveryMenu(PlayerMenuUtility playerMenuUtility) {
+public class DeliveryMenu extends Menu {
+    public DeliveryMenu(PlayerMenuUtility playerMenuUtility, int index) {
         super(playerMenuUtility);
+        deliveryIndexInList = index;
     }
 
     @Override
@@ -33,6 +34,7 @@ public class HourlyDeliveryMenu extends Menu {
     }
 
     int inputSlotIndex = 22;
+    int deliveryIndexInList = 0;
 
     @Override
     public void handleMenu(InventoryClickEvent e) {
@@ -46,24 +48,24 @@ public class HourlyDeliveryMenu extends Menu {
 
         if (e.getCurrentItem().getType() == super.ACCEPT.getType() && e.getSlot() == 26) {
             if (e.getInventory().getItem(inputSlotIndex) == null) {
-                p.sendMessage(Message.HRD_EMPTY_SUBMISSION);//
+                p.sendMessage(Message.EMPTY_SUBMISSION);//
                 return;
             }
 
-            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.getHourlyItem());
+            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.deliveries.get(deliveryIndexInList).getDeliveryItem());
 
             if (!verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
-                p.sendMessage(Message.HRD_WRONG_SUBMISSION);//
+                p.sendMessage(Message.WRONG_SUBMISSION);//
             } else if (verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
 
                 //Give proper reward
                 RewardHandler rewardHandler = new RewardHandler(DeliveryBoard.plugin);
-                rewardHandler.giveRewards(p, "hourly");
+                rewardHandler.giveRewards(p, playerMenuUtility.getDeliveryID());
 
                 //Put the player in an hourly tracking hashmap so, player can't redo the same delivery!
-                DeliveryBoard.hourlyCompletedPlayerList.add(p);
+                DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p);
 
-                p.sendMessage(Message.HRD_SUCCESSFUL_SUBMISSION);//
+                p.sendMessage(Message.SUCCESSFUL_SUBMISSION);//
                 inventory.setItem(22, null);
                 p.closeInventory();
             }
@@ -78,20 +80,21 @@ public class HourlyDeliveryMenu extends Menu {
         ItemMeta detailsMeta = detailsItem.getItemMeta();
 
         //List<String> detailsLore = new ArrayList<>(); //instead of creating, get it from lang lol
-        List<String> detailsLore = Message.HRD_ICON_ITEM_LORE;
+        List<String> detailsLore = Message.ICON_ITEM_LORE;
         detailsMeta.setLore(detailsLore);
         detailsItem.setItemMeta(detailsMeta);
 
         inventory.setItem(11, detailsItem);
 
         //Dupe fix
-        ItemStack iconItem = DeliveryBoard.getHourlyItem().clone();
+        ItemStack iconItem = DeliveryBoard.deliveries.get(deliveryIndexInList).getDeliveryItem().clone();
         ItemMeta meta = iconItem.getItemMeta();
         List<String> lore = new ArrayList<>();
         if (meta.hasLore()) lore = meta.getLore();
         lore.add(ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + "ID: " + System.currentTimeMillis());
         meta.setLore(lore);
         iconItem.setItemMeta(meta);
+        System.out.println("DELIVERYMENU: " + iconItem);
         inventory.setItem(15, iconItem);
 
         //Item delivery slot 22
@@ -104,15 +107,15 @@ public class HourlyDeliveryMenu extends Menu {
 
         ItemStack confirmDeliveryItem = super.ACCEPT;
         ItemMeta confirmDeliveryMeta = confirmDeliveryItem.getItemMeta();
-        confirmDeliveryMeta.setDisplayName(Message.HRD_SUBMIT_ITEM_DISPLAY);//
+        confirmDeliveryMeta.setDisplayName(Message.SUBMIT_ITEM_DISPLAY);//
         //List<String> confirmDeliveryLore = new ArrayList<>();//well another list. time to directly yeet
-        List<String> confirmDeliveryLore = Message.HRD_SUBMIT_ITEM_LORE;
+        List<String> confirmDeliveryLore = Message.SUBMIT_ITEM_LORE;
         confirmDeliveryMeta.setLore(confirmDeliveryLore);
         confirmDeliveryItem.setItemMeta(confirmDeliveryMeta);
 
         ItemStack backToDeliveryBoardMenu = super.CANCEL;
         ItemMeta backToDeliveryBoardMenuMeta = backToDeliveryBoardMenu.getItemMeta();
-        backToDeliveryBoardMenuMeta.setDisplayName(Message.HRD_BACK_ITEM_DISPLAY);//
+        backToDeliveryBoardMenuMeta.setDisplayName(Message.BACK_ITEM_DISPLAY);//
         backToDeliveryBoardMenu.setItemMeta(backToDeliveryBoardMenuMeta);
 
         inventory.setItem(26, confirmDeliveryItem);

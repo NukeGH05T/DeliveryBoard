@@ -1,22 +1,18 @@
 package me.nukeghost.listeners;
 
 import dev.lone.itemsadder.api.Events.ItemsAdderLoadDataEvent;
-import me.nukeghost.DeliveryBoard;
-import me.nukeghost.handlers.GenerationHandler;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+
+import static me.nukeghost.DeliveryBoard.deliveries;
+import static me.nukeghost.DeliveryBoard.plugin;
 
 public class FirstItemsAdderLoadListener implements Listener {
     @EventHandler
     public void onItemsAdderItemLoad(ItemsAdderLoadDataEvent e) {
         //Initializes all deliveries for the first time after ItemsAdder loads it's items if IA is present
-        if (DeliveryBoard.getHourlyItem() == null && DeliveryBoard.getThreeHourlyItem() == null && DeliveryBoard.getSixHourlyItem() == null) {
-            DeliveryBoard.setHourlyItem(GenerationHandler.generateDeliveryItem("hourly"));
-            DeliveryBoard.setThreeHourlyItem(GenerationHandler.generateDeliveryItem("three-hourly"));
-            DeliveryBoard.setSixHourlyItem(GenerationHandler.generateDeliveryItem("six-hourly"));
-            Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "Initialized Deliveries");
+        if (deliveries.isEmpty()) {
+            plugin.startTasks();
         }
     }
 }

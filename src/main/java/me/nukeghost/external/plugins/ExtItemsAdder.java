@@ -11,12 +11,15 @@ public class ExtItemsAdder extends ItemPlugin {
     }
 
     @Override
-    public ItemStack generateItem(String itemID, String itemType) {
+    public ItemStack generateItem(String itemID, String itemType, Integer amount) {
         CustomStack stack = CustomStack.getInstance(itemID);
         if(stack != null)
         {
-            ItemStack itemStack = stack.getItemStack();
-            return itemStack;
+            ItemStack item = stack.getItemStack();
+            int finalAmount = Math.max(1, amount);
+            finalAmount = Math.min(amount, item.getType().getMaxStackSize());
+            item.setAmount(amount);
+            return item;
         }
         return null;
     }
@@ -27,7 +30,7 @@ public class ExtItemsAdder extends ItemPlugin {
 
         if(stack != null) {
             //IA Custom Item
-            String itemString = "iad@" + stack.getNamespacedID() + "@1";
+            String itemString = "iad@" + stack.getNamespacedID() + "@" + itemStack.getAmount();
             return itemString;
         }
         return null;

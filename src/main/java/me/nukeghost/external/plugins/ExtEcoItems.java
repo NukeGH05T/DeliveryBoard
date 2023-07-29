@@ -18,10 +18,14 @@ public class ExtEcoItems extends ItemPlugin {
      * @return ItemStack/null
      */
     @Override
-    public ItemStack generateItem(String itemID, String itemType) {
+    public ItemStack generateItem(String itemID, String itemType, Integer amount) {
         for (EcoItem ecoItem : EcoItems.INSTANCE.values()) {
             if (ecoItem.getId().getKey().equalsIgnoreCase(itemID)) {
-                return ecoItem.getItemStack();
+                ItemStack item = ecoItem.getItemStack();
+                int finalAmount = Math.max(1, amount);
+                finalAmount = Math.min(amount, item.getType().getMaxStackSize());
+                item.setAmount(amount);
+                return item;
             }
         }
 
@@ -36,7 +40,7 @@ public class ExtEcoItems extends ItemPlugin {
                 String itemID = String.valueOf(ecoItem.getId());
                 String id = ecoItem.getID();
 
-                String itemString = "eco@" + id + "@1";
+                String itemString = "eco@" + id + "@" + itemStack.getAmount();
                 return itemString;
             }
         }

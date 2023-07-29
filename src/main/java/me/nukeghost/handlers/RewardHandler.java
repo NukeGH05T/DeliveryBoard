@@ -20,6 +20,7 @@ public class RewardHandler {
     }
 
     public void giveRewards(Player p, String deliveryID) {
+        System.out.println("REWARDS: " + deliveryID);
         int maxRewardAmount = plugin.getConfig().getInt("delivery." + deliveryID +".reward-setup.mixed.max-reward");
         List<String> confirmedRewardsList = plugin.getConfig().getStringList("delivery." + deliveryID +".reward-setup.mixed.confirmed-rewards");
         List<String> randomRewardsList = plugin.getConfig().getStringList("delivery." + deliveryID +".reward-setup.mixed.random-rewards-pool");

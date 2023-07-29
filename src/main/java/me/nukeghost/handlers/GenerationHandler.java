@@ -15,6 +15,7 @@ import org.bukkit.util.io.BukkitObjectInputStream;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Random;
@@ -66,7 +67,8 @@ public class GenerationHandler {
                 if (enabledItemPlugins.contains("MMOItems")) {
                     ExtMMOItems mmoItems = new ExtMMOItems();
                     DeliveryBoard.usedItemPluginsHashMap.put(deliveryID, new ExtMMOItems());
-                    return mmoItems.generateItem(itemID, itemType);
+                    System.out.println(Arrays.toString(allowedItemString));
+                    return mmoItems.generateItem(itemID, itemType, Integer.valueOf(allowedItemString[3])); //index out of bounds 3
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in allowed material for " + ChatColor.YELLOW + deliveryID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
@@ -78,7 +80,7 @@ public class GenerationHandler {
                     if (CustomStack.isInRegistry(itemID)) {
                         ExtItemsAdder itemsAdder = new ExtItemsAdder();
                         DeliveryBoard.usedItemPluginsHashMap.put(deliveryID, new ExtItemsAdder());
-                        return itemsAdder.generateItem(itemID, itemType);
+                        return itemsAdder.generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
                         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + deliveryID);
                     }
@@ -93,7 +95,7 @@ public class GenerationHandler {
                 if (enabledItemPlugins.contains("EcoItems")) {
                     ExtEcoItems ecoItems = new ExtEcoItems();
                     DeliveryBoard.usedItemPluginsHashMap.put(deliveryID, new ExtEcoItems());
-                    return ecoItems.generateItem(itemID, itemType);
+                    return ecoItems.generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in allowed material for " + ChatColor.YELLOW + deliveryID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
@@ -105,7 +107,7 @@ public class GenerationHandler {
                     if (executableItemsManager.isValidID(itemID)) {
                         ExtExecutableItems executableItems = new ExtExecutableItems();
                         DeliveryBoard.usedItemPluginsHashMap.put(deliveryID, new ExtExecutableItems());
-                        return executableItems.generateItem(itemID, itemType);
+                        return executableItems.generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
                         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + deliveryID);
                     }
@@ -120,8 +122,8 @@ public class GenerationHandler {
         return null;
     }
 
-    public static ItemStack generateIconItem(String iconID) { //iconID is from config.yml
-        String[] allowedItemString = parseMaterialAndAmount(plugin.getConfig().getString("gui.icons." + iconID));
+    public static ItemStack generateIconItem(String deliveryID) { //iconID is from config.yml
+        String[] allowedItemString = parseMaterialAndAmount(plugin.getConfig().getString("delivery." + deliveryID + ".icon-item"));
 
         if (allowedItemString[0].equalsIgnoreCase("van")){
 
@@ -150,9 +152,9 @@ public class GenerationHandler {
             if (allowedItemString[0].equalsIgnoreCase("mmo")) {
                 //MMOItems - 'mmo@CUTLASS@SWORD'
                 if (enabledItemPlugins.contains("MMOItems")) {
-                    return new ExtMMOItems().generateItem(itemID, itemType);
+                    return new ExtMMOItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[3]));
                 } else {
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + iconID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + deliveryID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
 
@@ -160,12 +162,12 @@ public class GenerationHandler {
                 //ItemsAdder - 'iad@iageneric:coin@1'
                 if (enabledItemPlugins.contains("ItemsAdder")) {
                     if (CustomStack.isInRegistry(itemID)) {
-                        return new ExtItemsAdder().generateItem(itemID, itemType);
+                        return new ExtItemsAdder().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
-                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + iconID);
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + deliveryID);
                     }
                 } else {
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + iconID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + deliveryID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
 
@@ -173,9 +175,9 @@ public class GenerationHandler {
                 //EcoItems - 'eco@grappling_hook'
                 //Might malfunction at any time
                 if (enabledItemPlugins.contains("EcoItems")) {
-                    return new ExtEcoItems().generateItem(itemID, itemType);
+                    return new ExtEcoItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                 } else {
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + iconID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + deliveryID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
             } else if (allowedItemString[0].equalsIgnoreCase("exi")) {
@@ -183,12 +185,12 @@ public class GenerationHandler {
                 if (enabledItemPlugins.contains("ExecutableItems")) {
                     ExecutableItemsManagerInterface executableItemsManager = getExecutableItemsManager();
                     if (executableItemsManager.isValidID(itemID)) {
-                        return new ExtExecutableItems().generateItem(itemID, itemType);
+                        return new ExtExecutableItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
-                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + iconID);
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + deliveryID);
                     }
                 } else {
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + iconID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + deliveryID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
 
@@ -228,7 +230,7 @@ public class GenerationHandler {
             if (allowedItemString[0].equalsIgnoreCase("mmo")) {
                 //MMOItems - 'mmo@CUTLASS@SWORD'
                 if (enabledItemPlugins.contains("MMOItems")) {
-                    return new ExtMMOItems().generateItem(itemID, itemType);
+                    return new ExtMMOItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[3]));
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
@@ -238,7 +240,7 @@ public class GenerationHandler {
                 //ItemsAdder - 'iad@iageneric:coin@1'
                 if (enabledItemPlugins.contains("ItemsAdder")) {
                     if (CustomStack.isInRegistry(itemID)) {
-                        return new ExtItemsAdder().generateItem(itemID, itemType);
+                        return new ExtItemsAdder().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
                         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID);
                     }
@@ -251,7 +253,7 @@ public class GenerationHandler {
                 //EcoItems - 'eco@grappling_hook'
                 //Might malfunction at any time
                 if (enabledItemPlugins.contains("EcoItems")) {
-                    return new ExtEcoItems().generateItem(itemID, itemType);
+                    return new ExtEcoItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
@@ -261,7 +263,7 @@ public class GenerationHandler {
                 if (enabledItemPlugins.contains("ExecutableItems")) {
                     ExecutableItemsManagerInterface executableItemsManager = getExecutableItemsManager();
                     if (executableItemsManager.isValidID(itemID)) {
-                        return new ExtExecutableItems().generateItem(itemID, itemType);
+                        return new ExtExecutableItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
                         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID);
                     }
@@ -290,7 +292,7 @@ public class GenerationHandler {
             if (allowedItemString[0].equalsIgnoreCase("mmo")) {
                 //MMOItems - 'mmo@CUTLASS@SWORD'
                 if (enabledItemPlugins.contains("MMOItems")) {
-                    return new ExtMMOItems().generateItem(itemID, itemType);
+                    return new ExtMMOItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[3]));
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
@@ -300,7 +302,7 @@ public class GenerationHandler {
                 //ItemsAdder - 'iad@iageneric:coin@1'
                 if (enabledItemPlugins.contains("ItemsAdder")) {
                     if (CustomStack.isInRegistry(itemID)) {
-                        return new ExtItemsAdder().generateItem(itemID, itemType);
+                        return new ExtItemsAdder().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
                         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + staticID);
                     }
@@ -313,7 +315,7 @@ public class GenerationHandler {
                 //EcoItems - 'eco@grappling_hook'
                 //Might malfunction at any time
                 if (enabledItemPlugins.contains("EcoItems")) {
-                    return new ExtEcoItems().generateItem(itemID, itemType);
+                    return new ExtEcoItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
@@ -323,7 +325,7 @@ public class GenerationHandler {
                 if (enabledItemPlugins.contains("ExecutableItems")) {
                     ExecutableItemsManagerInterface executableItemsManager = getExecutableItemsManager();
                     if (executableItemsManager.isValidID(itemID)) {
-                        return new ExtExecutableItems().generateItem(itemID, itemType);
+                        return new ExtExecutableItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
                         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + staticID);
                     }
@@ -362,7 +364,11 @@ public class GenerationHandler {
             String itemID = parts[1];
             String itemType = parts[2];
 
-            return new String[]{itemPlugin, itemID, itemType};
+            if (parts.length == 3) {
+                return new String[]{itemPlugin, itemID, itemType};
+            } else {
+                return new String[]{itemPlugin, itemID, itemType, parts[3]};
+            }
         }
 
 

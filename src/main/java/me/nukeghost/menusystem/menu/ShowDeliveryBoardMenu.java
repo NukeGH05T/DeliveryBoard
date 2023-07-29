@@ -1,12 +1,9 @@
 package me.nukeghost.menusystem.menu;
 
 import me.nukeghost.DeliveryBoard;
-import me.nukeghost.language.Message;
 import me.nukeghost.menusystem.Menu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
-import me.nukeghost.menusystem.menu.deliverymenu.HourlyDeliveryMenu;
-import me.nukeghost.menusystem.menu.deliverymenu.SixHourlyDeliveryMenu;
-import me.nukeghost.menusystem.menu.deliverymenu.ThreeHourlyDeliveryMenu;
+import me.nukeghost.menusystem.menu.deliverymenu.DeliveryMenu;
 import me.nukeghost.utils.ColorUtils;
 import me.nukeghost.utils.MenuUtils;
 import org.bukkit.Bukkit;
@@ -14,6 +11,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.List;
+
+import static me.nukeghost.DeliveryBoard.deliveries;
+import static me.nukeghost.DeliveryBoard.plugin;
 
 public class ShowDeliveryBoardMenu extends Menu {
     private int taskId; // Variable to store the task ID for cancellation
@@ -37,37 +39,18 @@ public class ShowDeliveryBoardMenu extends Menu {
         e.setCancelled(true);
         if (e.getCurrentItem() == super.FILLER_GLASS) return;
         if (e.getCurrentItem() == null) return;
-        if (e.getSlot() == 11) { //11
-            // Open hourly delivery menu
-            if (DeliveryBoard.hourlyCompletedPlayerList.contains(e.getWhoClicked())) {
-                e.getWhoClicked().sendMessage(Message.DB_DELIVERY_ALREADY_COMPLETE);//
-            } else {
-                playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
-                HourlyDeliveryMenu hourlyDeliveryMenu = new HourlyDeliveryMenu(playerMenuUtility);
-                hourlyDeliveryMenu.open();
+
+        List<String> activeDeliveries = plugin.getConfig().getStringList("active-deliveries");
+        if (e.getSlot() <= activeDeliveries.size()) {
+            playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
+            playerMenuUtility.setDeliveryID(deliveries.get(e.getSlot()).getDeliveryID());
+            //Set it to open a generic DeliveryMenu with custom settings
+            //Use the delivery class to initialize probably
+            if (DeliveryBoard.deliveryCompletedPlayerList.get(e.getSlot()).contains(e.getWhoClicked())) {
+                return;
             }
-
-
-        } else if (e.getSlot() == 13) { //13
-            if (DeliveryBoard.threeHourlyCompletedPlayerList.contains(e.getWhoClicked())) {
-                e.getWhoClicked().sendMessage(Message.DB_DELIVERY_ALREADY_COMPLETE);//
-            } else {
-                playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
-                ThreeHourlyDeliveryMenu deliveryMenu = new ThreeHourlyDeliveryMenu(playerMenuUtility);
-                deliveryMenu.open();
-            }
-
-
-        } else if (e.getSlot() == 15) { //15
-            if (DeliveryBoard.sixHourlyCompletedPlayerList.contains(e.getWhoClicked())) {
-                e.getWhoClicked().sendMessage(Message.DB_DELIVERY_ALREADY_COMPLETE);//
-            } else {
-                playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
-                SixHourlyDeliveryMenu deliveryMenu = new SixHourlyDeliveryMenu(playerMenuUtility);
-                deliveryMenu.open();
-            }
-
-
+            DeliveryMenu deliveryMenu = new DeliveryMenu(playerMenuUtility, e.getSlot());
+            deliveryMenu.open();
         }
     }
 

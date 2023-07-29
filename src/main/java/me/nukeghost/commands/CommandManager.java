@@ -20,6 +20,7 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new SetBoardCommand());
         subcommands.add(new AddRequiredItemCommand());
         subcommands.add(new EditRequiredItemCommand());
+        subcommands.add(new RefreshDeliveryCommand());
         //subcommands.add(new SaveItemCommand());
         //subcommands.add(new GetItemCommand());
     }

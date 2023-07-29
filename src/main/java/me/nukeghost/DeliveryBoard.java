@@ -3,20 +3,16 @@ package me.nukeghost;
 import me.nukeghost.commands.AutoTabCompleter;
 import me.nukeghost.commands.CommandManager;
 import me.nukeghost.external.ItemPlugin;
-import me.nukeghost.handlers.GenerationHandler;
 import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
 import me.nukeghost.listeners.*;
 import me.nukeghost.menusystem.PaginatedMenu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
-import me.nukeghost.tasks.HourlyDeliveryUpdateTask;
-import me.nukeghost.tasks.SixHourlyDeliveryUpdateTask;
-import me.nukeghost.tasks.ThreeHourlyDeliveryUpdateTask;
-import me.nukeghost.utils.TimeUtils;
+import me.nukeghost.tasks.DeliveryUpdateTask;
+import me.nukeghost.template.Delivery;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -30,20 +26,14 @@ public final class DeliveryBoard extends JavaPlugin {
     public static final HashMap<String, Long> cooldown = new HashMap<>();//
     private static final HashMap<Player, PlayerMenuUtility> PLAYER_MENU_UTILITY_MAP = new HashMap<>();
 
-    public static List<Player> hourlyCompletedPlayerList = new ArrayList<>();//
-    public static List<Player> threeHourlyCompletedPlayerList = new ArrayList<>();
-    public static List<Player> sixHourlyCompletedPlayerList = new ArrayList<>();
-
-
     public static DeliveryBoard plugin;
 
-    private static ItemStack hourlyItem;//
-    private static ItemStack threeHourlyItem;
-    private static ItemStack sixHourlyItem;
     public static HashMap<String, ItemPlugin> usedItemPluginsHashMap = new HashMap<>();
     public static HashMap<Player, HashMap<PaginatedMenu, PlayerMenuUtility>> adminAddCommandRewardHashMap = new HashMap<>();
     public static List<String> enabledItemPlugins = new ArrayList<>();
 
+    public static List<Delivery> deliveries = new ArrayList<>();
+    public static List<List<Player>> deliveryCompletedPlayerList = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -56,9 +46,8 @@ public final class DeliveryBoard extends JavaPlugin {
         registerListeners(); // Let IA be added as an ItemPlugin before doing this
         //Not initing if ItemsAdder is present. ItemsAdder takes time to load item data. Moved to FirstItemsAdderLoadListener
         if (!enabledItemPlugins.contains("ItemsAdder")) {
-            initializeDefaultDeliveries();
+            startTasks();
         }
-        startTasks();
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "This plugin is licensed to " + ChatColor.GREEN + "%%__USERNAME__%%");
     }
@@ -88,7 +77,6 @@ public final class DeliveryBoard extends JavaPlugin {
             }
         }
     }
-    //ItemPlugins present
 
     private void initializeConfig() {
         getConfig().options().copyDefaults();
@@ -97,10 +85,6 @@ public final class DeliveryBoard extends JavaPlugin {
 
     private void initializeLang() {
         LanguageConfig.setupLang();
-
-        //LanguageConfig.getLangConfig().options().copyDefaults(true);
-        //LanguageConfig.saveLangConfig();
-
         Message.loadMessages();
     }
 
@@ -120,15 +104,16 @@ public final class DeliveryBoard extends JavaPlugin {
         }
     }
 
-    void startTasks() {
-        BukkitTask hourlyTask = new HourlyDeliveryUpdateTask(this).runTaskTimer(this,0L, 20L * TimeUtils.convertToSeconds("1m"));
-        cooldown.put("hourly", System.currentTimeMillis() + 3600000);
+    public void startTasks() {
+        for (String deliveryID : plugin.getConfig().getStringList("active-deliveries")) {
+            Delivery delivery = new Delivery(deliveryID, plugin.getConfig().getString("delivery." + deliveryID + ".title"),
+                    plugin.getConfig().getLong("delivery." + deliveryID + ".cooldown"));
 
-        BukkitTask threeHourlyTask = new ThreeHourlyDeliveryUpdateTask(this).runTaskTimer(this,0L, 20L * TimeUtils.convertToSeconds("1m"));
-        cooldown.put("three-hourly", System.currentTimeMillis() + (3600000 * 3));
+            DeliveryBoard.deliveryCompletedPlayerList.add(new ArrayList<>());
+            deliveries.add(delivery);
+        }
 
-        BukkitTask sixHourlyTask = new SixHourlyDeliveryUpdateTask(this).runTaskTimer(this,0L, 20L * TimeUtils.convertToSeconds("1m"));
-        cooldown.put("six-hourly", System.currentTimeMillis() + (3600000 * 6));
+        BukkitTask deliveryUpdateTask = new DeliveryUpdateTask(plugin).runTaskTimer(this,0L, 20L * 60);
     }
 
     public PlayerMenuUtility getPlayerMenuUtility(Player p) {
@@ -139,35 +124,5 @@ public final class DeliveryBoard extends JavaPlugin {
             PLAYER_MENU_UTILITY_MAP.put(p, playerMenuUtility);
             return playerMenuUtility;
         }
-    }
-
-    private void initializeDefaultDeliveries() {
-        setHourlyItem(GenerationHandler.generateDeliveryItem("hourly"));
-        setThreeHourlyItem(GenerationHandler.generateDeliveryItem("three-hourly"));
-        setSixHourlyItem(GenerationHandler.generateDeliveryItem("six-hourly"));
-    }
-
-    public static ItemStack getHourlyItem() {
-        return hourlyItem;
-    }
-
-    public static void setHourlyItem(ItemStack hourlyItem) {
-        DeliveryBoard.hourlyItem = hourlyItem;
-    }
-
-    public static ItemStack getThreeHourlyItem() {
-        return threeHourlyItem;
-    }
-
-    public static void setThreeHourlyItem(ItemStack threeHourlyItem) {
-        DeliveryBoard.threeHourlyItem = threeHourlyItem;
-    }
-
-    public static ItemStack getSixHourlyItem() {
-        return sixHourlyItem;
-    }
-
-    public static void setSixHourlyItem(ItemStack sixHourlyItem) {
-        DeliveryBoard.sixHourlyItem = sixHourlyItem;
     }
 }

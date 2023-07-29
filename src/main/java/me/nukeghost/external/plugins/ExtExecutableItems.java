@@ -14,8 +14,11 @@ public class ExtExecutableItems extends ItemPlugin {
     }
 
     @Override
-    public ItemStack generateItem(String itemID, String itemType) {
+    public ItemStack generateItem(String itemID, String itemType, Integer amount) {
         ItemStack item = getExecutableItem(itemID);
+        int finalAmount = Math.max(1, amount);
+        finalAmount = Math.min(amount, item.getType().getMaxStackSize());
+        item.setAmount(amount);
         return item;
     }
 
@@ -27,7 +30,7 @@ public class ExtExecutableItems extends ItemPlugin {
             ItemStack itemToCompare = getExecutableItem(exItemID);
             if (itemToCompare.equals(itemStack)) {
 
-                String itemString = "exi@" + exItemID + "@1";
+                String itemString = "exi@" + exItemID + "@" + itemStack.getAmount();
                 return itemString;
             }
         }

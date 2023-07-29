@@ -41,8 +41,17 @@ gui:
   #The item strings will be plugin/vanilla @ item ID @ item type(mmo) or amount(van).
   #Type & Amount only apply to MMOItems and Vanilla items respectively.
   #More details on using it can be found on the wiki: https://nukegh05t.gitbook.io/deliveryboard/
+active-deliveries:
+  - hourly
+  - three-hourly
+  - six-hourly
+  - demoDelivery
+
 delivery:
   hourly:
+    icon-item: van@WHITE_WOOL@1
+    title: "&9&lHOURLY Delivery"
+    cooldown: 350000 #In Milliseconds(ms)
     allowed-materials:
       - 'van@NETHERITE_SCRAP@2'
       - 'van@LEATHER@32'
@@ -96,6 +105,9 @@ delivery:
 
   #Three hourly delivery
   three-hourly:
+    icon-item: van@GRASS_BLOCK@1
+    title: "&2&lTH Delivery"
+    cooldown: 350000
     allowed-materials:
       - 'van@NETHERITE_INGOT@1'
       - 'van@IRON_BLOCK@10'
@@ -120,6 +132,9 @@ delivery:
 
   #Six hourly delivery
   six-hourly:
+    icon-item: van@BIRCH_WOOD@1
+    title: "&2&lSHDelivery"
+    cooldown: 350000
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
       - 'van@LEATHER@64'
@@ -144,6 +159,7 @@ delivery:
   demoDelivery:
     icon-item: van@IRON_INGOT@1
     title: "&2&lDemo Delivery"
+    cooldown: 350000
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
       - 'van@BLAZE_ROD@10'
@@ -158,12 +174,3 @@ delivery:
           - 'item@ENCHANTED_GOLDEN_APPLE@1'
           - 'item@SHULKER_SHELL@8'
           - 'comm@xp add {PLAYER_NAME} 25 levels'
-
-#Please do NOT edit this section
-#-----DO NOT EDIT-----#
-active-deliveries:
-  - hourly
-  - three-hourly
-  - six-hourly
-  - demoDelivery
-#-----DO NOT EDIT-----#

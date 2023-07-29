@@ -17,6 +17,7 @@ public class AutoTabCompleter implements TabCompleter {
             completions.add("add");
             completions.add("board");
             completions.add("edit");
+            completions.add("refresh");
             completions.add("reload");
             completions.add("setboard");
             completions.add("help");
@@ -30,7 +31,9 @@ public class AutoTabCompleter implements TabCompleter {
             return commands;
         }
 
-        if ((args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("edit")) &&
+        if ((args[0].equalsIgnoreCase("add") ||
+                args[0].equalsIgnoreCase("edit") ||
+                args[0].equalsIgnoreCase("refresh")) &&
                 args.length == 2) {
             List<String> completions = DeliveryBoard.plugin.getConfig().getStringList("active-deliveries");
 

@@ -19,7 +19,7 @@ public class ExtMMOItems extends ItemPlugin {
      * @return
      */
     @Override
-    public ItemStack generateItem(String itemID, String itemType) {
+    public ItemStack generateItem(String itemID, String itemType, Integer amount) {
         if (itemID.equalsIgnoreCase("") || itemType.equalsIgnoreCase("") ||
         itemID == null || itemType == null) {
             Bukkit.getLogger().severe("ItemID & ItemType both are required for item generation!");
@@ -29,6 +29,10 @@ public class ExtMMOItems extends ItemPlugin {
             try {
                 MMOItem mmoitem = MMOItems.plugin.getMMOItem(MMOItems.plugin.getTypes().get(itemType), itemID);
                 ItemStack item = mmoitem.newBuilder().build();
+
+                int finalAmount = Math.max(1, amount);
+                finalAmount = Math.min(amount, item.getType().getMaxStackSize());
+                item.setAmount(amount);
                 return item;
             } catch (Exception e) {
                 Bukkit.getLogger().severe("Invalid item ID: " + itemID);
@@ -48,7 +52,7 @@ public class ExtMMOItems extends ItemPlugin {
             String itemType = nbtItem.getType();
             String itemID = nbtItem.getString("MMOITEMS_ITEM_ID");
 
-            String itemString = "mmo@" + itemID + "@" + itemType;
+            String itemString = "mmo@" + itemID + "@" + itemType + "@" + itemStack.getAmount();
             return itemString;
         }
         return null;
