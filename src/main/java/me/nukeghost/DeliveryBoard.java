@@ -10,6 +10,7 @@ import me.nukeghost.menusystem.PaginatedMenu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.tasks.DeliveryUpdateTask;
 import me.nukeghost.template.Delivery;
+import me.nukeghost.utils.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -38,6 +39,10 @@ public final class DeliveryBoard extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+
+        //bStats
+        int pluginId = 19318; // <-- Replace with the id of your plugin!
+        Metrics metrics = new Metrics(this, pluginId);
 
         initializeConfig();
         initializeLang();
