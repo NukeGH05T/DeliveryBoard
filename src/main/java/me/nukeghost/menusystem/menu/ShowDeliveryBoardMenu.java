@@ -4,6 +4,7 @@ import me.nukeghost.DeliveryBoard;
 import me.nukeghost.menusystem.Menu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.menusystem.menu.deliverymenu.DeliveryMenu;
+import me.nukeghost.template.Delivery;
 import me.nukeghost.utils.ColorUtils;
 import me.nukeghost.utils.MenuUtils;
 import org.bukkit.Bukkit;
@@ -41,17 +42,25 @@ public class ShowDeliveryBoardMenu extends Menu {
         if (e.getCurrentItem() == null) return;
 
         List<String> activeDeliveries = plugin.getConfig().getStringList("active-deliveries");
-        if (e.getSlot() <= activeDeliveries.size()) {
-            playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
-            playerMenuUtility.setDeliveryID(deliveries.get(e.getSlot()).getDeliveryID());
-            //Set it to open a generic DeliveryMenu with custom settings
-            //Use the delivery class to initialize probably
-            if (DeliveryBoard.deliveryCompletedPlayerList.get(e.getSlot()).contains(e.getWhoClicked())) {
-                return;
+
+
+        int deliveryIndex = -1;
+        for (int i = 0; i < deliveries.size(); i++) {
+            if (deliveries.get(i).getPositionSlot() == e.getSlot()) {
+                deliveryIndex = i;
             }
-            DeliveryMenu deliveryMenu = new DeliveryMenu(playerMenuUtility, e.getSlot());
-            deliveryMenu.open();
         }
+
+        playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
+        playerMenuUtility.setDeliveryID(deliveries.get(deliveryIndex).getDeliveryID());
+
+        System.out.println("INDEX: " + deliveryIndex);
+        //Do nothing if they have already completed the delivery
+        if (DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndex).contains(e.getWhoClicked())) {
+            return;
+        }
+        DeliveryMenu deliveryMenu = new DeliveryMenu(playerMenuUtility, deliveryIndex);
+        deliveryMenu.open();
     }
 
     @Override

@@ -19,6 +19,8 @@ public class Delivery {
     private int amount;
     private int slotAmount;
 
+    private int positionSlot; //The slot in which to place the delivery icon
+
     private ItemStack iconItem;
 
     private List<Player> deliveryCompletedPlayersList = new ArrayList<>();
@@ -27,6 +29,8 @@ public class Delivery {
         this.deliveryID = deliveryID;
         this.deliveryName = deliveryName;
         this.cooldownTime = cooldown;
+
+        this.positionSlot = plugin.getConfig().getInt("delivery." + deliveryID + ".position-slot");
 
         this.cooldownStart = System.currentTimeMillis();
         this.deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
@@ -92,5 +96,9 @@ public class Delivery {
 
     public void setSlotAmount(int slotAmount) {
         this.slotAmount = slotAmount;
+    }
+
+    public int getPositionSlot() {
+        return positionSlot;
     }
 }

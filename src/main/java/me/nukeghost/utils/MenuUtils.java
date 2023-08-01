@@ -53,7 +53,7 @@ public class MenuUtils {
 
                 hourlyMeta.setLore(lore);
                 hourlyItem.setItemMeta(hourlyMeta);
-                inventory.setItem(i, hourlyItem);
+                inventory.setItem(deliveries.get(i).getPositionSlot(), hourlyItem);
 
             }
         }

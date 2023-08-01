@@ -51,6 +51,7 @@ delivery:
   hourly:
     icon-item: van@WHITE_WOOL@1
     title: "&9&lHOURLY Delivery"
+    position-slot: 11
     cooldown: 350000 #In Milliseconds(ms)
     allowed-materials:
       - 'van@NETHERITE_SCRAP@2'
@@ -107,6 +108,7 @@ delivery:
   three-hourly:
     icon-item: van@GRASS_BLOCK@1
     title: "&2&lTH Delivery"
+    position-slot: 13
     cooldown: 350000
     allowed-materials:
       - 'van@NETHERITE_INGOT@1'
@@ -134,6 +136,7 @@ delivery:
   six-hourly:
     icon-item: van@BIRCH_WOOD@1
     title: "&2&lSHDelivery"
+    position-slot: 15
     cooldown: 350000
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
@@ -159,6 +162,7 @@ delivery:
   demoDelivery:
     icon-item: van@IRON_INGOT@1
     title: "&2&lDemo Delivery"
+    position-slot: 22
     cooldown: 350000
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
