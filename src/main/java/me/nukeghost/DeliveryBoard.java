@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public final class DeliveryBoard extends JavaPlugin {
-
-    public static final HashMap<String, Long> cooldown = new HashMap<>();//
     private static final HashMap<Player, PlayerMenuUtility> PLAYER_MENU_UTILITY_MAP = new HashMap<>();
 
     public static DeliveryBoard plugin;
@@ -41,7 +39,7 @@ public final class DeliveryBoard extends JavaPlugin {
         plugin = this;
 
         //bStats
-        int pluginId = 19318; // <-- Replace with the id of your plugin!
+        int pluginId = 19318;
         Metrics metrics = new Metrics(this, pluginId);
 
         initializeConfig();
@@ -118,7 +116,7 @@ public final class DeliveryBoard extends JavaPlugin {
             deliveries.add(delivery);
         }
 
-        BukkitTask deliveryUpdateTask = new DeliveryUpdateTask(plugin).runTaskTimer(this,0L, 20L * 60);
+        //BukkitTask deliveryUpdateTask = new DeliveryUpdateTask(plugin).runTaskTimer(this,0L, 20L * 60);
     }
 
     public PlayerMenuUtility getPlayerMenuUtility(Player p) {

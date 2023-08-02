@@ -6,10 +6,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.List;
 
 public class Message {
-    ////Commands
-//    public static String BOARD_COMMAND_DESCRIPTION;
-//    public static String HELP_COMMAND_DESCRIPTION;
-
     //From YML
     //Commands
     //Add
@@ -37,6 +33,9 @@ public class Message {
     public static String CMDM_NO_PERM_DEFAULT;
     public static String CMDM_INVALID_COMMAND;
     public static String CMDM_HELP_SUGGEST;
+
+    //Reminder
+    public static String REFRESH_REMINDER;
 
     //Paginated Menu
     public static String ON_FIRST_PAGE;
@@ -95,6 +94,10 @@ public class Message {
         CMDM_NO_PERM_DEFAULT = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("CMDM_NO_PERM_DEFAULT")));
         CMDM_INVALID_COMMAND = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("CMDM_INVALID_COMMAND")));
         CMDM_HELP_SUGGEST = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("CMDM_HELP_SUGGEST")));
+
+        //Reminder
+        REFRESH_REMINDER = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("REFRESH_REMINDER")));
+
         //Paginated Menu
         ON_FIRST_PAGE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("ON_FIRST_PAGE")));
         ON_LAST_PAGE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("ON_LAST_PAGE")));

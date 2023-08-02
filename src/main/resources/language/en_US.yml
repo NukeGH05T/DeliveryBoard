@@ -25,6 +25,9 @@ CMDM_NO_PERM_DEFAULT: '&cYou do not have permission to run that command!'
 CMDM_INVALID_COMMAND: '&cThat is not a valid command.'
 CMDM_HELP_SUGGEST: '&eDo &a/db help&e for more info.'
 
+#Refresh Reminder
+REFRESH_REMINDER: '&b{DELIVERY} has been refreshed'
+
 #Paginated Menu
 ON_FIRST_PAGE: "&cYou are already on the first page!"
 ON_LAST_PAGE: "&cYou are already on the last page!"
@@ -67,5 +70,7 @@ DB_ITEM_LORE:
 DB_ITEM_LORE_FOOTER_COMPLETE:
   - '<#40FB85>COMPLETED'
   - '&7Refreshes In: &a{DURATION}'      #{DURATION} returns the time remaining
+  - '&7Completed: &e{CURRENT_SUBMISSIONS}&7/&e{MAX_SUBMISSIONS}'
 DB_ITEM_LORE_FOOTER_INCOMPLETE:
   - '&7Time Left: &e{DURATION}'         #{DURATION} returns the time remaining
+  - '&7Completed: &e{CURRENT_SUBMISSIONS}&7/&e{MAX_SUBMISSIONS}'

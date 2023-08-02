@@ -1,8 +1,14 @@
 package me.nukeghost.template;
 
 import me.nukeghost.handlers.GenerationHandler;
+import me.nukeghost.language.Message;
+import me.nukeghost.utils.ColorUtils;
+import me.nukeghost.utils.PlaceholderUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +29,9 @@ public class Delivery {
 
     private ItemStack iconItem;
 
+    private int maxSubmission;
+    private boolean hasReachedMaxSubmission = false;
+
     private List<Player> deliveryCompletedPlayersList = new ArrayList<>();
 
     public Delivery(String deliveryID, String deliveryName, long cooldown) {
@@ -31,23 +40,29 @@ public class Delivery {
         this.cooldownTime = cooldown;
 
         this.positionSlot = plugin.getConfig().getInt("delivery." + deliveryID + ".position-slot");
+        this.maxSubmission = plugin.getConfig().getInt("delivery." + deliveryID + ".max-submissions");
 
         this.cooldownStart = System.currentTimeMillis();
         this.deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
         this.iconItem = GenerationHandler.generateItemFromString(plugin.getConfig().getString("delivery." + deliveryID + ".icon-item"));
-    }
 
-    /**
-     * Returns the remaining cooldown time
-     * @return Negative value if the cooldown is finished
-     */
-    public long getRemainingCooldownTime() {
-        return System.currentTimeMillis() - (cooldownStart + cooldownTime);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                System.out.println("TASK WORKED for " + deliveryID);
+                updateDeliveryItem();
+            }
+        }.runTaskTimer(plugin, 20, cooldownTime * 20L);
     }
 
     public void updateDeliveryItem() {
         cooldownStart = System.currentTimeMillis();
         deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
+
+        //Expose the generated item/delivery using an API for others to use
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.sendMessage(ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(PlaceholderUtils.parsePlaceholders(Message.REFRESH_REMINDER, player, deliveryName, -1))));
+        }
     }
 
     public String getDeliveryID() {
@@ -100,5 +115,17 @@ public class Delivery {
 
     public int getPositionSlot() {
         return positionSlot;
+    }
+
+    public int getMaxSubmission() {
+        return maxSubmission;
+    }
+
+    public boolean isHasReachedMaxSubmission() {
+        return hasReachedMaxSubmission;
+    }
+
+    public void setHasReachedMaxSubmission(boolean hasReachedMaxSubmission) {
+        this.hasReachedMaxSubmission = hasReachedMaxSubmission;
     }
 }

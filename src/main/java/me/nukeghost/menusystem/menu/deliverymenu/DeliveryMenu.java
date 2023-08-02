@@ -7,6 +7,7 @@ import me.nukeghost.language.Message;
 import me.nukeghost.menusystem.Menu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.menusystem.menu.ShowDeliveryBoardMenu;
+import me.nukeghost.template.Delivery;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -16,6 +17,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static me.nukeghost.DeliveryBoard.deliveries;
 
 public class DeliveryMenu extends Menu {
     public DeliveryMenu(PlayerMenuUtility playerMenuUtility, int index) {
@@ -52,12 +55,13 @@ public class DeliveryMenu extends Menu {
                 return;
             }
 
-            VerificationHandler verificationHandler = new VerificationHandler(DeliveryBoard.deliveries.get(deliveryIndexInList).getDeliveryItem());
+            VerificationHandler verificationHandler = new VerificationHandler(deliveries.get(deliveryIndexInList).getDeliveryItem());
 
             if (!verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
                 p.sendMessage(Message.WRONG_SUBMISSION);//
             } else if (verificationHandler.checkItem(e.getInventory().getItem(inputSlotIndex))) {
-
+                Delivery delivery = deliveries.get(deliveryIndexInList);
+                if (!p.hasPermission("deliveryboard.delivery.forcesubmit") && delivery.isHasReachedMaxSubmission()) return;
                 //Give proper reward
                 RewardHandler rewardHandler = new RewardHandler(DeliveryBoard.plugin);
                 rewardHandler.giveRewards(p, playerMenuUtility.getDeliveryID());
@@ -68,6 +72,11 @@ public class DeliveryMenu extends Menu {
                 p.sendMessage(Message.SUCCESSFUL_SUBMISSION);//
                 inventory.setItem(22, null);
                 p.closeInventory();
+
+                if (DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).size() >= delivery.getMaxSubmission()) {
+                    deliveries.get(deliveryIndexInList).setHasReachedMaxSubmission(true);
+                    System.out.println("Max submissions reached!");
+                }
             }
         } else if (e.getCurrentItem().getType() == super.CANCEL.getType() && e.getSlot() == 18) {
             new ShowDeliveryBoardMenu(playerMenuUtility).open();
@@ -87,14 +96,13 @@ public class DeliveryMenu extends Menu {
         inventory.setItem(11, detailsItem);
 
         //Dupe fix
-        ItemStack iconItem = DeliveryBoard.deliveries.get(deliveryIndexInList).getDeliveryItem().clone();
+        ItemStack iconItem = deliveries.get(deliveryIndexInList).getDeliveryItem().clone();
         ItemMeta meta = iconItem.getItemMeta();
         List<String> lore = new ArrayList<>();
         if (meta.hasLore()) lore = meta.getLore();
         lore.add(ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + "ID: " + System.currentTimeMillis());
         meta.setLore(lore);
         iconItem.setItemMeta(meta);
-        System.out.println("DELIVERYMENU: " + iconItem);
         inventory.setItem(15, iconItem);
 
         //Item delivery slot 22
@@ -108,7 +116,7 @@ public class DeliveryMenu extends Menu {
         ItemStack confirmDeliveryItem = super.ACCEPT;
         ItemMeta confirmDeliveryMeta = confirmDeliveryItem.getItemMeta();
         confirmDeliveryMeta.setDisplayName(Message.SUBMIT_ITEM_DISPLAY);//
-        //List<String> confirmDeliveryLore = new ArrayList<>();//well another list. time to directly yeet
+
         List<String> confirmDeliveryLore = Message.SUBMIT_ITEM_LORE;
         confirmDeliveryMeta.setLore(confirmDeliveryLore);
         confirmDeliveryItem.setItemMeta(confirmDeliveryMeta);

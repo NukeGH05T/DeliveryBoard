@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static me.nukeghost.DeliveryBoard.plugin;
+import static me.nukeghost.DeliveryBoard.*;
 
 public class PlaceholderUtils {
 
@@ -20,10 +20,10 @@ public class PlaceholderUtils {
         return outputList;
     }
 
-    public static List<String> parsePlaceholders(List<String> inputs, Player p, String timeString) {
+    public static List<String> parsePlaceholders(List<String> inputs, Player p, String timeString, int index) {
         List<String> outputList = new ArrayList<>();
         for (String input : inputs) {
-            outputList.add(parsePlaceholders(input, p, timeString));
+            outputList.add(parsePlaceholders(input, p, timeString, index));
         }
         return outputList;
     }
@@ -67,7 +67,14 @@ public class PlaceholderUtils {
         return input;
     }
 
-    public static String parsePlaceholders(String input, Player p, String timeString) {
+    /**
+     * @param input The string to parse
+     * @param p Player who completed the delivery
+     * @param timeString Applicable for duration calculation in footer OR to get delivery name
+     * @param deliveryIndex Applicable for current/max submission in footer
+     * @return
+     */
+    public static String parsePlaceholders(String input, Player p, String timeString, int deliveryIndex) {
         Pattern pattern = Pattern.compile("\\{([A-Z_]+)\\}");
         Matcher matcher = pattern.matcher(input);
 
@@ -103,6 +110,15 @@ public class PlaceholderUtils {
                     break;
                 case "DURATION":
                     input = input.replace(placeholder, timeString);
+                    break;
+                case "CURRENT_SUBMISSIONS":
+                    input = input.replace(placeholder, String.valueOf(deliveryCompletedPlayerList.get(deliveryIndex).size()));
+                    break;
+                case "MAX_SUBMISSIONS":
+                    input = input.replace(placeholder, String.valueOf(deliveries.get(deliveryIndex).getMaxSubmission()));
+                    break;
+                case "DELIVERY":
+                    input = input.replace(placeholder, ChatColor.stripColor(timeString));
                     break;
             }
         }

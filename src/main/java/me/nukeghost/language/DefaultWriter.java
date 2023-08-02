@@ -60,6 +60,9 @@ public class DefaultWriter {
                     "CMDM_INVALID_COMMAND: '&cThat is not a valid command.'\n" +
                     "CMDM_HELP_SUGGEST: '&eDo &a/db help&e for more info.'\n" +
                     "\n" +
+                    "#Refresh Reminder\n" +
+                    "REFRESH_REMINDER: '&b{DELIVERY} has been refreshed'\n" +
+                    "\n" +
                     "#Paginated Menu\n" +
                     "ON_FIRST_PAGE: \"&cYou are already on the first page!\"\n" +
                     "ON_LAST_PAGE: \"&cYou are already on the last page!\"\n" +
@@ -102,8 +105,10 @@ public class DefaultWriter {
                     "DB_ITEM_LORE_FOOTER_COMPLETE:\n" +
                     "  - '<#40FB85>COMPLETED'\n" +
                     "  - '&7Refreshes In: &a{DURATION}'      #{DURATION} returns the time remaining\n" +
+                    "  - '&7Completed: &e{CURRENT_SUBMISSIONS}&7/&e{MAX_SUBMISSIONS}'\n" +
                     "DB_ITEM_LORE_FOOTER_INCOMPLETE:\n" +
-                    "  - '&7Time Left: &e{DURATION}'         #{DURATION} returns the time remaining");
+                    "  - '&7Time Left: &e{DURATION}'         #{DURATION} returns the time remaining\n" +
+                    "  - '&7Completed: &e{CURRENT_SUBMISSIONS}&7/&e{MAX_SUBMISSIONS}'");
         } catch (IOException e) {
             e.printStackTrace();
         }
