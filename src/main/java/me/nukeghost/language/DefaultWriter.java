@@ -60,6 +60,18 @@ public class DefaultWriter {
                     "CMDM_INVALID_COMMAND: '&cThat is not a valid command.'\n" +
                     "CMDM_HELP_SUGGEST: '&eDo &a/db help&e for more info.'\n" +
                     "\n" +
+                    "#Token Manager\n" +
+                    "TOKEN_GIVE_DESCRIPTION: 'Give Delivery Tokens to a player'\n" +
+                    "TOKEN_RESET_DESCRIPTION: 'Reset Delivery Tokens to default for a player'\n" +
+                    "TOKEN_TAKE_DESCRIPTION: 'Take certain amount of Delivery Tokens from a player'\n" +
+                    "TOKEN_BALANCE_DESCRIPTION: 'Shows the amount of tokens a player has'\n" +
+                    "TOKEN_BALANCE_NO_PERM: '&cYou do not have permission to view balance of another player'\n" +
+                    "TOKEN_BALANCE: '&eDelivery Token Balance: &a'\n" +
+                    "\n" +
+                    "#Skipping\n" +
+                    "SKIP_SUCCESSFUL: '&bSuccessfully skipped the delivery.'\n" +
+                    "INSUFFICIENT_TOKENS: '&cYou do not have enough items/currency to skip!'\n" +
+                    "\n" +
                     "#Refresh Reminder\n" +
                     "REFRESH_REMINDER: '&b{DELIVERY} has been refreshed'\n" +
                     "\n" +
@@ -90,6 +102,10 @@ public class DefaultWriter {
                     "  - '&fThe item will be deducted'\n" +
                     "  - '&ffrom your inventory.'\n" +
                     "  - '&e=========================='\n" +
+                    "SKIP_ITEM_DISPLAY: '<#40FB85>&lSkip Delivery'\n" +
+                    "SKIP_ITEM_LORE:\n" +
+                    "  - '&7Skip this delivery'\n" +
+                    "  - '&7for &e{SKIP_COST}&7 tokens.'\n" +
                     "BACK_ITEM_DISPLAY: '&c⇦ Back'\n" +
                     "\n" +
                     "#Delivery Board Menu\n" +

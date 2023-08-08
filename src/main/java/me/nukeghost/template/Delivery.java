@@ -30,6 +30,8 @@ public class Delivery {
     private ItemStack iconItem;
 
     private int maxSubmission;
+
+    private int skipCost;
     private boolean hasReachedMaxSubmission = false;
 
     private List<Player> deliveryCompletedPlayersList = new ArrayList<>();
@@ -41,6 +43,7 @@ public class Delivery {
 
         this.positionSlot = plugin.getConfig().getInt("delivery." + deliveryID + ".position-slot");
         this.maxSubmission = plugin.getConfig().getInt("delivery." + deliveryID + ".max-submissions");
+        this.skipCost = plugin.getConfig().getInt("delivery." + deliveryID + ".skip-cost");
 
         this.cooldownStart = System.currentTimeMillis();
         this.deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
@@ -49,7 +52,6 @@ public class Delivery {
         new BukkitRunnable() {
             @Override
             public void run() {
-                System.out.println("TASK WORKED for " + deliveryID);
                 updateDeliveryItem();
             }
         }.runTaskTimer(plugin, 20, cooldownTime * 20L);
@@ -119,6 +121,10 @@ public class Delivery {
 
     public int getMaxSubmission() {
         return maxSubmission;
+    }
+
+    public int getSkipCost() {
+        return skipCost;
     }
 
     public boolean isHasReachedMaxSubmission() {

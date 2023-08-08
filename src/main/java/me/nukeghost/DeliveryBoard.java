@@ -2,6 +2,7 @@ package me.nukeghost;
 
 import me.nukeghost.commands.AutoTabCompleter;
 import me.nukeghost.commands.CommandManager;
+import me.nukeghost.database.Database;
 import me.nukeghost.external.ItemPlugin;
 import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
@@ -11,12 +12,13 @@ import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.tasks.DeliveryUpdateTask;
 import me.nukeghost.template.Delivery;
 import me.nukeghost.utils.Metrics;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,9 +36,16 @@ public final class DeliveryBoard extends JavaPlugin {
     public static List<Delivery> deliveries = new ArrayList<>();
     public static List<List<Player>> deliveryCompletedPlayerList = new ArrayList<>();
 
+    public static String connectionURL;
+    public static int defaultTokenAmount;
+
+
+    private static Economy econ = null;
+
     @Override
     public void onEnable() {
         plugin = this;
+        defaultTokenAmount = getConfig().getInt("delivery-tokens.default");
 
         //bStats
         int pluginId = 19318;
@@ -51,6 +60,12 @@ public final class DeliveryBoard extends JavaPlugin {
         if (!enabledItemPlugins.contains("ItemsAdder")) {
             startTasks();
         }
+
+        if (!setupEconomy() ) {
+            getLogger().severe(String.format("[%s] - No Vault dependency found!", getDescription().getName()));
+        }
+
+        setupDatabase();
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "This plugin is licensed to " + ChatColor.GREEN + "%%__USERNAME__%%");
     }
@@ -101,6 +116,7 @@ public final class DeliveryBoard extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BoardInteractionListener(plugin), plugin);
         getServer().getPluginManager().registerEvents(new AdminCommandAddListener(), plugin);
         getServer().getPluginManager().registerEvents(new AdminMaxRandomRewardListener(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerCurrencyInitializeOnJoinListener(), plugin);
 
         if (enabledItemPlugins.contains("ItemsAdder")) {
             getServer().getPluginManager().registerEvents(new FirstItemsAdderLoadListener(), plugin);
@@ -127,5 +143,44 @@ public final class DeliveryBoard extends JavaPlugin {
             PLAYER_MENU_UTILITY_MAP.put(p, playerMenuUtility);
             return playerMenuUtility;
         }
+    }
+
+    private void setupDatabase() {
+        if (plugin.getConfig().getString("database").equalsIgnoreCase("mysql")) {
+            //MySQL String Setup
+            String host = plugin.getConfig().getString("mysql-settings.host");
+            String dbName = plugin.getConfig().getString("mysql-settings.db-name");
+            String port = plugin.getConfig().getString("mysql-settings.port");
+            String username = plugin.getConfig().getString("mysql-settings.username");
+            String password = plugin.getConfig().getString("mysql-settings.password");
+
+            connectionURL = "jdbc:mysql://" + username + ":" + password + "@" + host + ":" + port + "/" + dbName;
+        } else if (plugin.getConfig().getString("database").equalsIgnoreCase("h2")) {
+            //H2 Embedded Setup
+            connectionURL = "jdbc:h2:file:" + getDataFolder().getAbsolutePath() + "/currency/currency-data";
+        } else {
+            Bukkit.getLogger().severe("[DeliveryBoard] Invalid database type! Please choose either \"mysql\" or \"h2\"");
+            this.getPluginLoader().disablePlugin(this);
+        }
+
+        System.out.println(connectionURL);
+
+        Database.initializeDatabase();
+    }
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
+    public static Economy getEconomy() {
+        return econ;
     }
 }

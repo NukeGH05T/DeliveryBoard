@@ -1,7 +1,7 @@
 package me.nukeghost.listeners;
 
 import me.nukeghost.DeliveryBoard;
-import me.nukeghost.commands.subcommands.BoardCommand;
+import me.nukeghost.commands.subcommands.user.BoardCommand;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.menusystem.menu.ShowDeliveryBoardMenu;
 import org.bukkit.Location;

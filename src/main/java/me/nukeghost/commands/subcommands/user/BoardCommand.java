@@ -1,4 +1,4 @@
-package me.nukeghost.commands.subcommands;
+package me.nukeghost.commands.subcommands.user;
 
 import me.nukeghost.commands.SubCommand;
 import me.nukeghost.language.Message;

@@ -14,13 +14,12 @@ public class AutoTabCompleter implements TabCompleter {
         List<String> commands = new ArrayList<>();
         if (args.length == 1) {
             List<String> completions = new ArrayList<>();
-            completions.add("add");
-            completions.add("board");
-            completions.add("edit");
-            completions.add("refresh");
-            completions.add("reload");
-            completions.add("setboard");
-            completions.add("help");
+
+            for (SubCommand subCommand : new CommandManager().getSubCommands()) {
+                if (subCommand.getPermissionNode() == null || sender.hasPermission(subCommand.getPermissionNode())) {
+                    completions.add(subCommand.getName());
+                }
+            }
 
             for (String s : completions) {
                 if (s.toLowerCase().startsWith(args[0].toLowerCase())) {

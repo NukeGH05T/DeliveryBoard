@@ -120,6 +120,9 @@ public class PlaceholderUtils {
                 case "DELIVERY":
                     input = input.replace(placeholder, ChatColor.stripColor(timeString));
                     break;
+                case "SKIP_COST":
+                    input = input.replace(placeholder, String.valueOf(deliveries.get(deliveryIndex).getSkipCost()));
+                    break;
             }
         }
         return input;

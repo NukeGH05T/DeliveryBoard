@@ -34,6 +34,18 @@ public class Message {
     public static String CMDM_INVALID_COMMAND;
     public static String CMDM_HELP_SUGGEST;
 
+    //Token Manager
+    public static String TOKEN_GIVE_DESCRIPTION;
+    public static String TOKEN_RESET_DESCRIPTION;
+    public static String TOKEN_TAKE_DESCRIPTION;
+    public static String TOKEN_BALANCE_DESCRIPTION;
+    public static String TOKEN_BALANCE_NO_PERM;
+    public static String TOKEN_BALANCE;
+    public static String INSUFFICIENT_TOKENS;
+
+    //Skip
+    public static String SKIP_SUCCESSFUL;
+
     //Reminder
     public static String REFRESH_REMINDER;
 
@@ -53,6 +65,8 @@ public class Message {
     public static List<String> ICON_ITEM_LORE;
     public static String SUBMIT_ITEM_DISPLAY;
     public static List<String> SUBMIT_ITEM_LORE;
+    public static String SKIP_ITEM_DISPLAY;
+    public static List<String> SKIP_ITEM_LORE;
     public static String BACK_ITEM_DISPLAY;
 
     //Delivery Board Menu
@@ -95,6 +109,18 @@ public class Message {
         CMDM_INVALID_COMMAND = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("CMDM_INVALID_COMMAND")));
         CMDM_HELP_SUGGEST = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("CMDM_HELP_SUGGEST")));
 
+        //Token Manager
+        TOKEN_GIVE_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("TOKEN_GIVE_DESCRIPTION")));
+        TOKEN_RESET_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("TOKEN_RESET_DESCRIPTION")));
+        TOKEN_TAKE_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("TOKEN_TAKE_DESCRIPTION")));
+        TOKEN_BALANCE_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("TOKEN_BALANCE_DESCRIPTION")));
+        TOKEN_BALANCE_NO_PERM = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("TOKEN_BALANCE_NO_PERM")));
+        TOKEN_BALANCE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("TOKEN_BALANCE")));
+        INSUFFICIENT_TOKENS = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("INSUFFICIENT_TOKENS")));
+
+        //Skip
+        SKIP_SUCCESSFUL = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("SKIP_SUCCESSFUL")));
+
         //Reminder
         REFRESH_REMINDER = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("REFRESH_REMINDER")));
 
@@ -114,6 +140,8 @@ public class Message {
         ICON_ITEM_LORE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getStringList("ICON_ITEM_LORE")));
         SUBMIT_ITEM_DISPLAY = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("SUBMIT_ITEM_DISPLAY")));
         SUBMIT_ITEM_LORE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getStringList("SUBMIT_ITEM_LORE")));
+        SKIP_ITEM_DISPLAY = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("SKIP_ITEM_DISPLAY")));
+        SKIP_ITEM_LORE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getStringList("SKIP_ITEM_LORE")));
         BACK_ITEM_DISPLAY = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("BACK_ITEM_DISPLAY")));
 
 

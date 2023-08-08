@@ -15,6 +15,7 @@ public abstract class Menu implements InventoryHolder {
     //Use custom item generator XD who wants only vanilla items lol
     protected ItemStack FILLER_GLASS = generateStaticItem("fillerMaterial");
     protected ItemStack ACCEPT = generateStaticItem("acceptMaterial");
+    protected ItemStack SKIP = generateStaticItem("skipMaterial");
     protected ItemStack CANCEL = generateStaticItem("cancelMaterial");
     protected ItemStack INFO = generateStaticItem("infoMaterial");
 

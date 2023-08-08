@@ -1,6 +1,12 @@
 package me.nukeghost.commands;
 
-import me.nukeghost.commands.subcommands.*;
+import me.nukeghost.commands.subcommands.admin.*;
+import me.nukeghost.commands.subcommands.tokens.GiveTokenCommand;
+import me.nukeghost.commands.subcommands.tokens.ResetTokenCommand;
+import me.nukeghost.commands.subcommands.tokens.TakeTokenCommand;
+import me.nukeghost.commands.subcommands.tokens.TokenBalanceCommand;
+import me.nukeghost.commands.subcommands.user.BoardCommand;
+import me.nukeghost.commands.subcommands.user.HelpCommand;
 import me.nukeghost.language.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,8 +27,10 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new AddRequiredItemCommand());
         subcommands.add(new EditRequiredItemCommand());
         subcommands.add(new RefreshDeliveryCommand());
-        //subcommands.add(new SaveItemCommand());
-        //subcommands.add(new GetItemCommand());
+        subcommands.add(new GiveTokenCommand());
+        subcommands.add(new ResetTokenCommand());
+        subcommands.add(new TakeTokenCommand());
+        subcommands.add(new TokenBalanceCommand());
     }
 
     @Override

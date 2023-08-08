@@ -1,4 +1,4 @@
-package me.nukeghost.commands.subcommands;
+package me.nukeghost.commands.subcommands.admin;
 
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.commands.SubCommand;

@@ -2,6 +2,7 @@ package me.nukeghost.menusystem.menu.deliverymenu;
 
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.handlers.RewardHandler;
+import me.nukeghost.handlers.SkipHandler;
 import me.nukeghost.handlers.VerificationHandler;
 import me.nukeghost.language.Message;
 import me.nukeghost.menusystem.Menu;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static me.nukeghost.DeliveryBoard.deliveries;
+import static me.nukeghost.utils.PlaceholderUtils.parsePlaceholders;
 
 public class DeliveryMenu extends Menu {
     public DeliveryMenu(PlayerMenuUtility playerMenuUtility, int index) {
@@ -47,6 +49,29 @@ public class DeliveryMenu extends Menu {
         }
         if (e.getSlot() != inputSlotIndex && e.getInventory() == e.getClickedInventory()) {
             e.setCancelled(true);
+        }
+
+        if (e.getCurrentItem().getType() == super.SKIP.getType() && e.getSlot() == 13) {
+            //Deduct cost if they have skip perm
+            if (!(new SkipHandler().hasDeductedSkipCost(playerMenuUtility, deliveries.get(deliveryIndexInList)))) return;
+
+            //Max submission
+            Delivery delivery = deliveries.get(deliveryIndexInList);
+            if (!p.hasPermission("deliveryboard.delivery.forcesubmit") && delivery.isHasReachedMaxSubmission()) return;
+
+            //Give proper reward
+            RewardHandler rewardHandler = new RewardHandler(DeliveryBoard.plugin);
+            rewardHandler.giveRewards(p, playerMenuUtility.getDeliveryID());
+
+            //Put the player in an hourly tracking hashmap so, player can't redo the same delivery!
+            DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p);
+
+            p.closeInventory();
+
+            if (DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).size() >= delivery.getMaxSubmission()) {
+                deliveries.get(deliveryIndexInList).setHasReachedMaxSubmission(true);
+                System.out.println("Max submissions reached!");
+            }
         }
 
         if (e.getCurrentItem().getType() == super.ACCEPT.getType() && e.getSlot() == 26) {
@@ -87,12 +112,9 @@ public class DeliveryMenu extends Menu {
     public void setMenuItems() {
         ItemStack detailsItem = super.INFO;
         ItemMeta detailsMeta = detailsItem.getItemMeta();
-
-        //List<String> detailsLore = new ArrayList<>(); //instead of creating, get it from lang lol
         List<String> detailsLore = Message.ICON_ITEM_LORE;
         detailsMeta.setLore(detailsLore);
         detailsItem.setItemMeta(detailsMeta);
-
         inventory.setItem(11, detailsItem);
 
         //Dupe fix
@@ -115,17 +137,25 @@ public class DeliveryMenu extends Menu {
 
         ItemStack confirmDeliveryItem = super.ACCEPT;
         ItemMeta confirmDeliveryMeta = confirmDeliveryItem.getItemMeta();
-        confirmDeliveryMeta.setDisplayName(Message.SUBMIT_ITEM_DISPLAY);//
-
+        confirmDeliveryMeta.setDisplayName(Message.SUBMIT_ITEM_DISPLAY);
         List<String> confirmDeliveryLore = Message.SUBMIT_ITEM_LORE;
         confirmDeliveryMeta.setLore(confirmDeliveryLore);
         confirmDeliveryItem.setItemMeta(confirmDeliveryMeta);
 
+        //Cancel Button
         ItemStack backToDeliveryBoardMenu = super.CANCEL;
         ItemMeta backToDeliveryBoardMenuMeta = backToDeliveryBoardMenu.getItemMeta();
         backToDeliveryBoardMenuMeta.setDisplayName(Message.BACK_ITEM_DISPLAY);//
         backToDeliveryBoardMenu.setItemMeta(backToDeliveryBoardMenuMeta);
 
+        //Skip Button
+        ItemStack skipItem = super.SKIP;
+        ItemMeta skipMeta = skipItem.getItemMeta();
+        skipMeta.setDisplayName(Message.SKIP_ITEM_DISPLAY);
+        skipMeta.setLore(parsePlaceholders(Message.SKIP_ITEM_LORE, playerMenuUtility.getOwner(), null, deliveryIndexInList));
+        skipItem.setItemMeta(skipMeta);
+
+        inventory.setItem(13, skipItem);
         inventory.setItem(26, confirmDeliveryItem);
         inventory.setItem(18, backToDeliveryBoardMenu);
     }

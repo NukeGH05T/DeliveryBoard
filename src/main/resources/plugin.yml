@@ -1,5 +1,5 @@
 name: DeliveryBoard
-version: 1.5.3
+version: 1.5.4
 main: me.nukeghost.DeliveryBoard
 api-version: 1.13
 prefix: DB
@@ -22,15 +22,24 @@ permissions:
       default: op
     refresh:
       default: op
+    skip:
+      default: op
+    token:
+      manage:
+        default: op
+      viewself:
+        default: true
+      viewothers:
+        default: op
     delivery:
       forcesubmit:
         default: op
       hourly:
-        default: false
+        default: true
       threehourly:
-        default: false
+        default: true
       sixhourly:
-        default: false
+        default: true
     setboard:
       default: op
     reload:

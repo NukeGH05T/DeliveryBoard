@@ -1,7 +1,7 @@
 package me.nukeghost.listeners;
 
 import me.nukeghost.DeliveryBoard;
-import me.nukeghost.commands.subcommands.EditRequiredItemCommand;
+import me.nukeghost.commands.subcommands.admin.EditRequiredItemCommand;
 import me.nukeghost.language.Message;
 import me.nukeghost.menusystem.PaginatedMenu;
 import me.nukeghost.menusystem.PlayerMenuUtility;

@@ -25,6 +25,18 @@ CMDM_NO_PERM_DEFAULT: '&cYou do not have permission to run that command!'
 CMDM_INVALID_COMMAND: '&cThat is not a valid command.'
 CMDM_HELP_SUGGEST: '&eDo &a/db help&e for more info.'
 
+#Token Manager
+TOKEN_GIVE_DESCRIPTION: 'Give Delivery Tokens to a player'
+TOKEN_RESET_DESCRIPTION: 'Reset Delivery Tokens to default for a player'
+TOKEN_TAKE_DESCRIPTION: 'Take certain amount of Delivery Tokens from a player'
+TOKEN_BALANCE_DESCRIPTION: 'Shows the amount of tokens a player has'
+TOKEN_BALANCE_NO_PERM: '&cYou do not have permission to view balance of another player'
+TOKEN_BALANCE: '&eDelivery Token Balance: &a'
+
+#Skipping
+SKIP_SUCCESSFUL: '&bSuccessfully skipped the delivery.'
+INSUFFICIENT_TOKENS: '&cYou do not have enough items/currency to skip!'
+
 #Refresh Reminder
 REFRESH_REMINDER: '&b{DELIVERY} has been refreshed'
 
@@ -55,6 +67,10 @@ SUBMIT_ITEM_LORE:
   - '&fThe item will be deducted'
   - '&ffrom your inventory.'
   - '&e=========================='
+SKIP_ITEM_DISPLAY: '<#40FB85>&lSkip Delivery'
+SKIP_ITEM_LORE:
+  - '&7Skip this delivery'
+  - '&7for &e{SKIP_COST}&7 tokens.'
 BACK_ITEM_DISPLAY: '&c⇦ Back'
 
 #Delivery Board Menu
