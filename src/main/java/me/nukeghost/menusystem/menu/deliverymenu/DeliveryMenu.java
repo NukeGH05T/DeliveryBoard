@@ -9,6 +9,7 @@ import me.nukeghost.menusystem.Menu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.menusystem.menu.ShowDeliveryBoardMenu;
 import me.nukeghost.template.Delivery;
+import me.nukeghost.utils.PlaceholderUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -112,8 +113,8 @@ public class DeliveryMenu extends Menu {
     public void setMenuItems() {
         ItemStack detailsItem = super.INFO;
         ItemMeta detailsMeta = detailsItem.getItemMeta();
-        List<String> detailsLore = Message.ICON_ITEM_LORE;
-        detailsMeta.setLore(detailsLore);
+        List<String> detailsLore = deliveries.get(deliveryIndexInList).getDeliveryInfoLore();
+        detailsMeta.setLore(PlaceholderUtils.parsePlaceholders(detailsLore, playerMenuUtility.getOwner(), deliveries.get(deliveryIndexInList).getDeliveryName(), deliveryIndexInList));
         detailsItem.setItemMeta(detailsMeta);
         inventory.setItem(11, detailsItem);
 

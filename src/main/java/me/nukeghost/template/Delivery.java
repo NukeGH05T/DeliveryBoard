@@ -34,6 +34,7 @@ public class Delivery {
     private int skipCost;
     private boolean hasReachedMaxSubmission = false;
     private boolean shouldSendAlert = false;
+    private List<String> deliveryInfoLore = new ArrayList<>();
 
     private List<Player> deliveryCompletedPlayersList = new ArrayList<>();
 
@@ -46,6 +47,9 @@ public class Delivery {
         this.maxSubmission = plugin.getConfig().getInt("delivery." + deliveryID + ".max-submissions");
         this.skipCost = plugin.getConfig().getInt("delivery." + deliveryID + ".skip-cost");
         this.shouldSendAlert = plugin.getConfig().getBoolean("delivery." + deliveryID + ".send-alert", true);
+
+        List<String> perDeliveryInfoLore = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(plugin.getConfig().getStringList("delivery." + deliveryID + ".info-lore")));
+        this.deliveryInfoLore = perDeliveryInfoLore != null && !perDeliveryInfoLore.isEmpty() ? perDeliveryInfoLore : Message.ICON_ITEM_LORE;
 
         this.cooldownStart = System.currentTimeMillis();
         this.deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
@@ -138,6 +142,10 @@ public class Delivery {
 
     public void setHasReachedMaxSubmission(boolean hasReachedMaxSubmission) {
         this.hasReachedMaxSubmission = hasReachedMaxSubmission;
+    }
+
+    public List<String> getDeliveryInfoLore() {
+        return deliveryInfoLore;
     }
 
     public boolean isShouldSendAlert() {

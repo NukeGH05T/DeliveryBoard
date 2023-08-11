@@ -76,6 +76,9 @@ delivery:
     cooldown: 3600 #In Seconds
     skip-cost: 1 #Amount of item/currency to deduct when skipping this delivery
     send-alert: true
+    info-lore: #Available placeholders {DELIVERY} , {CURRENT_SUBMISSIONS} , {MAX_SUBMISSIONS} & {SKIP_COST}
+    - '&7Deliver the required item'
+    - '&7to claim your reward.'
     allowed-materials:
       - 'van@NETHERITE_SCRAP@2'
       - 'van@LEATHER@32'
@@ -131,6 +134,9 @@ delivery:
     cooldown: 10800
     skip-cost: 2
     send-alert: true
+    info-lore:
+    - '&7Deliver the required item'
+    - '&7to claim your reward.'
     allowed-materials:
       - 'van@NETHERITE_INGOT@1'
       - 'van@IRON_BLOCK@10'
@@ -162,6 +168,9 @@ delivery:
     cooldown: 21600
     skip-cost: 3
     send-alert: true
+    info-lore:
+    - '&7Deliver the required item'
+    - '&7to claim your reward.'
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
       - 'van@LEATHER@64'
@@ -191,6 +200,9 @@ delivery:
     cooldown: 7200
     skip-cost: 1
     send-alert: true
+    info-lore:
+    - '&7Deliver the required item'
+    - '&7to claim your reward.'
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
       - 'van@BLAZE_ROD@10'
