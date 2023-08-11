@@ -13,7 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static me.nukeghost.DeliveryBoard.plugin;
+import static me.nukeghost.DeliveryBoard.*;
 
 public class Delivery {
     private String deliveryID;
@@ -33,6 +33,7 @@ public class Delivery {
 
     private int skipCost;
     private boolean hasReachedMaxSubmission = false;
+    private boolean shouldSendAlert = false;
 
     private List<Player> deliveryCompletedPlayersList = new ArrayList<>();
 
@@ -44,6 +45,7 @@ public class Delivery {
         this.positionSlot = plugin.getConfig().getInt("delivery." + deliveryID + ".position-slot");
         this.maxSubmission = plugin.getConfig().getInt("delivery." + deliveryID + ".max-submissions");
         this.skipCost = plugin.getConfig().getInt("delivery." + deliveryID + ".skip-cost");
+        this.shouldSendAlert = plugin.getConfig().getBoolean("delivery." + deliveryID + ".send-alert", true);
 
         this.cooldownStart = System.currentTimeMillis();
         this.deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
@@ -60,10 +62,13 @@ public class Delivery {
     public void updateDeliveryItem() {
         cooldownStart = System.currentTimeMillis();
         deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
+        deliveryCompletedPlayerList.get(deliveries.indexOf(this)).clear();
 
         //Expose the generated item/delivery using an API for others to use
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.sendMessage(ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(PlaceholderUtils.parsePlaceholders(Message.REFRESH_REMINDER, player, deliveryName, -1))));
+        if (shouldSendAlert) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.sendMessage(ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(PlaceholderUtils.parsePlaceholders(Message.REFRESH_REMINDER, player, deliveryName, -1))));
+            }
         }
     }
 
@@ -133,5 +138,9 @@ public class Delivery {
 
     public void setHasReachedMaxSubmission(boolean hasReachedMaxSubmission) {
         this.hasReachedMaxSubmission = hasReachedMaxSubmission;
+    }
+
+    public boolean isShouldSendAlert() {
+        return shouldSendAlert;
     }
 }

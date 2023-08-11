@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -20,10 +21,16 @@ public class RewardHandler {
     }
 
     public void giveRewards(Player p, String deliveryID) {
-        System.out.println("REWARDS: " + deliveryID);
         int maxRewardAmount = plugin.getConfig().getInt("delivery." + deliveryID +".reward-setup.mixed.max-reward");
         List<String> confirmedRewardsList = plugin.getConfig().getStringList("delivery." + deliveryID +".reward-setup.mixed.confirmed-rewards");
-        List<String> randomRewardsList = plugin.getConfig().getStringList("delivery." + deliveryID +".reward-setup.mixed.random-rewards-pool");
+        List<String> randomRewardsList = new ArrayList<>();
+
+        for (String rewardStringInList : plugin.getConfig().getStringList("delivery." + deliveryID +".reward-setup.mixed.random-rewards-pool")) {
+            int weight = processRewardWeight(rewardStringInList);
+            for (int i = 0; i < weight; i++) {
+                randomRewardsList.add(rewardStringInList);
+            }
+        }
 
         //Give each confirmed reward
         for (String confirmedRewardString : confirmedRewardsList) {
@@ -113,9 +120,16 @@ public class RewardHandler {
         }
     }
 
-    private static boolean runCommand(String command) {
+    private boolean runCommand(String command) {
         CommandSender console = Bukkit.getServer().getConsoleSender();
         return Bukkit.getServer().dispatchCommand(console, command);
+    }
+
+    private int processRewardWeight(String rewardString) {
+        String parts[] = rewardString.split("@");
+        int weight = Integer.parseInt(parts[parts.length - 1]);
+
+        return weight;
     }
 
 }

@@ -75,6 +75,7 @@ delivery:
     max-submissions: 10
     cooldown: 3600 #In Seconds
     skip-cost: 1 #Amount of item/currency to deduct when skipping this delivery
+    send-alert: true
     allowed-materials:
       - 'van@NETHERITE_SCRAP@2'
       - 'van@LEATHER@32'
@@ -129,6 +130,7 @@ delivery:
     max-submissions: 10
     cooldown: 10800
     skip-cost: 2
+    send-alert: true
     allowed-materials:
       - 'van@NETHERITE_INGOT@1'
       - 'van@IRON_BLOCK@10'
@@ -159,6 +161,7 @@ delivery:
     max-submissions: 10
     cooldown: 21600
     skip-cost: 3
+    send-alert: true
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
       - 'van@LEATHER@64'
@@ -174,11 +177,11 @@ delivery:
           - 'item@EMERALD@10'
           - 'comm@effect give {PLAYER_NAME} minecraft:absorption 60 4'
         random-rewards-pool:
-          - 'item@DIAMOND@15'
-          - 'item@GOLDEN_APPLE@3'
-          - 'item@ENCHANTED_GOLDEN_APPLE@1'
-          - 'item@SHULKER_SHELL@8'
-          - 'comm@xp add {PLAYER_NAME} 25 levels'
+          - 'item@DIAMOND@15@50'
+          - 'item@GOLDEN_APPLE@3@1'
+          - 'item@ENCHANTED_GOLDEN_APPLE@1@1'
+          - 'item@SHULKER_SHELL@8@1'
+          - 'comm@xp add {PLAYER_NAME} 25 levels@5'
   #Six hourly delivery
   demoDelivery:
     icon-item: van@IRON_INGOT@1
@@ -187,6 +190,7 @@ delivery:
     max-submissions: 10
     cooldown: 7200
     skip-cost: 1
+    send-alert: true
     allowed-materials:
       - 'van@NETHERITE_SCRAP@8'
       - 'van@BLAZE_ROD@10'

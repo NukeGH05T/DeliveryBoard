@@ -228,7 +228,7 @@ public class GenerationHandler {
             String itemType = allowedItemString.length > 2 ? allowedItemString[2] : "";
 
             if (allowedItemString[0].equalsIgnoreCase("mmo")) {
-                //MMOItems - 'mmo@CUTLASS@SWORD'
+                //MMOItems - 'mmo@CUTLASS@SWORD@1'
                 if (enabledItemPlugins.contains("MMOItems")) {
                     return new ExtMMOItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[3]));
                 } else {

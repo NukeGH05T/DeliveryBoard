@@ -54,7 +54,6 @@ public class ShowDeliveryBoardMenu extends Menu {
         playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
         playerMenuUtility.setDeliveryID(deliveries.get(deliveryIndex).getDeliveryID());
 
-        System.out.println("INDEX: " + deliveryIndex);
         //Do nothing if they have already completed the delivery
         if (DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndex).contains(e.getWhoClicked())) {
             return;
