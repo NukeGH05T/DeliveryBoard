@@ -1,5 +1,6 @@
 package me.nukeghost.commands.subcommands.admin;
 
+import me.nukeghost.DeliveryBoard;
 import me.nukeghost.commands.SubCommand;
 import me.nukeghost.language.Message;
 import org.bukkit.Location;
@@ -41,6 +42,15 @@ public class SetBoardCommand extends SubCommand {
         String locationString = x + "/" + y + "/" + z;
 
         if (configBoardLocation.isEmpty()) {
+            //Loading the config before saving
+            try {
+                DeliveryBoard.plugin.reloadConfig();
+                DeliveryBoard.plugin.saveConfig();
+            } catch (Exception e) {
+                p.sendMessage(Message.RELOAD_FAILED);
+                e.printStackTrace();
+            }
+
             plugin.getConfig().set("board-location", locationString);
             plugin.saveConfig();
             p.sendMessage(Message.BOARD_SETUP_SUCCESSFULL);//Same as this one
