@@ -120,10 +120,10 @@ delivery:
           - 'comm@effect give {PLAYER_NAME} minecraft:absorption 10 3'
         #Rewards from the 'random-rewards-pool' are given randomly with maximum amount of rewards being defined in 'max-reward'
         random-rewards-pool:
-          - 'item@DIAMOND@5'
-          - 'item@REDSTONE_BLOCK@2'
-          - 'item@BLACK_SHULKER_BOX@1'
-          - 'comm@xp add {PLAYER_NAME} 3 levels'
+          - 'item@DIAMOND@5@1'
+          - 'item@REDSTONE_BLOCK@2@1'
+          - 'item@BLACK_SHULKER_BOX@1@1'
+          - 'comm@xp add {PLAYER_NAME} 3 levels@1'
 
   #Three hourly delivery
   three-hourly:
@@ -152,11 +152,11 @@ delivery:
           - 'item@EMERALD@4'
           - 'comm@effect give {PLAYER_NAME} minecraft:absorption 30 4'
         random-rewards-pool:
-          - 'item@DIAMOND@10'
-          - 'item@APPLE@32'
-          - 'item@GOLDEN_APPLE@2'
-          - 'item@SHULKER_SHELL@4'
-          - 'comm@xp add {PLAYER_NAME} 10 levels'
+          - 'item@DIAMOND@10@1'
+          - 'item@APPLE@32@1'
+          - 'item@GOLDEN_APPLE@2@1'
+          - 'item@SHULKER_SHELL@4@1'
+          - 'comm@xp add {PLAYER_NAME} 10 levels@1'
   #Three hourly delivery
 
   #Six hourly delivery
@@ -212,8 +212,8 @@ delivery:
         confirmed-rewards:
           - 'item@EMERALD@19'
         random-rewards-pool:
-          - 'item@DIAMOND@15'
-          - 'item@GOLDEN_APPLE@3'
-          - 'item@ENCHANTED_GOLDEN_APPLE@1'
-          - 'item@SHULKER_SHELL@8'
-          - 'comm@xp add {PLAYER_NAME} 25 levels'
+          - 'item@DIAMOND@15@1'
+          - 'item@GOLDEN_APPLE@3@1'
+          - 'item@ENCHANTED_GOLDEN_APPLE@1@1'
+          - 'item@SHULKER_SHELL@8@1'
+          - 'comm@xp add {PLAYER_NAME} 25 levels@1'
