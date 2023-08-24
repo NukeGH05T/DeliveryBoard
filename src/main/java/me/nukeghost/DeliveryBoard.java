@@ -76,7 +76,6 @@ public final class DeliveryBoard extends JavaPlugin {
 
         for (String itemPluginName : itemPluginStrings) {
             Plugin iPlugin = Bukkit.getPluginManager().getPlugin(itemPluginName);
-            System.out.println("iPlugin: " + iPlugin);
             if (iPlugin != null && iPlugin.isEnabled()) {
                 Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "[DB] " + itemPluginName + " hooked !");
                 switch (itemPluginName) {
@@ -163,8 +162,6 @@ public final class DeliveryBoard extends JavaPlugin {
             Bukkit.getLogger().severe("[DeliveryBoard] Invalid database type! Please choose either \"mysql\" or \"h2\"");
             this.getPluginLoader().disablePlugin(this);
         }
-
-        System.out.println(connectionURL);
 
         Database.initializeDatabase();
     }
