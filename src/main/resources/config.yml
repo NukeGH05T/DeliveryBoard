@@ -31,7 +31,7 @@ active-deliveries:
   - six-hourly
   - demoDelivery
 
-#Enable/Disable the currency/item requirement for map generation
+#Enable/Disable the currency/item requirement for skipping delivery
 paid-delivery-skip: true
 
 #Item to deduct from their inventory
@@ -89,6 +89,7 @@ delivery:
       - 'van@ENDER_PEARL@16'
       #- 'mmo@CUTLASS@SWORD' #Example using a default MMOItems item   [REMOVE FIRST # IN THIS LINE TO ENABLE]
       #- 'iad@iageneric:coin@1' #Example using an item from the Default pack of ItemsAdder (Isn't provided in the ItemsAdder.jar)
+      #- 'orx@dagger@1' #Example using a default Oraxen item
       #- 'exi@Free_Heal@1' #Example using a default ExecutableItem (Available on both free & premium version of EI)
       #- 'eco@grappling_hook@1' #Example using a default EcoItems item
     #You can setup everything related to rewards here

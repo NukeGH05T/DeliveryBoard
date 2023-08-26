@@ -2,11 +2,9 @@ package me.nukeghost.handlers;
 
 import com.ssomar.score.api.executableitems.config.ExecutableItemsManagerInterface;
 import dev.lone.itemsadder.api.CustomStack;
+import io.th0rgal.oraxen.api.OraxenItems;
 import me.nukeghost.DeliveryBoard;
-import me.nukeghost.external.plugins.ExtEcoItems;
-import me.nukeghost.external.plugins.ExtExecutableItems;
-import me.nukeghost.external.plugins.ExtItemsAdder;
-import me.nukeghost.external.plugins.ExtMMOItems;
+import me.nukeghost.external.plugins.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -81,6 +79,21 @@ public class GenerationHandler {
                         ExtItemsAdder itemsAdder = new ExtItemsAdder();
                         DeliveryBoard.usedItemPluginsHashMap.put(deliveryID, new ExtItemsAdder());
                         return itemsAdder.generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + deliveryID);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in allowed material for " + ChatColor.YELLOW + deliveryID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
+            } else if (allowedItemString[0].equalsIgnoreCase("orx")) {
+                //ItemsAdder - 'orx@dagger@1'
+                if (enabledItemPlugins.contains("Oraxen")) {
+                    if (OraxenItems.exists(itemID)) {
+                        ExtOraxen oraxen = new ExtOraxen();
+                        DeliveryBoard.usedItemPluginsHashMap.put(deliveryID, new ExtOraxen());
+                        return oraxen.generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
                         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + deliveryID);
                     }
@@ -171,6 +184,19 @@ public class GenerationHandler {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
 
+            } else if (allowedItemString[0].equalsIgnoreCase("orx")) {
+                //ItemsAdder - 'orx@dagger@1'
+                if (enabledItemPlugins.contains("Oraxen")) {
+                    if (OraxenItems.exists(itemID)) {
+                        return new ExtOraxen().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + deliveryID);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + deliveryID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
             } else if (allowedItemString[0].equalsIgnoreCase("eco")) {
                 //EcoItems - 'eco@grappling_hook'
                 //Might malfunction at any time
@@ -249,6 +275,19 @@ public class GenerationHandler {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
 
+            } else if (allowedItemString[0].equalsIgnoreCase("orx")) {
+                //ItemsAdder - 'orx@dagger@1'
+                if (enabledItemPlugins.contains("Oraxen")) {
+                    if (OraxenItems.exists(itemID)) {
+                        return new ExtOraxen().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
             } else if (allowedItemString[0].equalsIgnoreCase("eco")) {
                 //EcoItems - 'eco@grappling_hook'
                 //Might malfunction at any time
@@ -303,6 +342,19 @@ public class GenerationHandler {
                 if (enabledItemPlugins.contains("ItemsAdder")) {
                     if (CustomStack.isInRegistry(itemID)) {
                         return new ExtItemsAdder().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
+                    } else {
+                        Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + staticID);
+                    }
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+
+            } else if (allowedItemString[0].equalsIgnoreCase("orx")) {
+                //ItemsAdder - 'orx@dagger@1'
+                if (enabledItemPlugins.contains("Oraxen")) {
+                    if (OraxenItems.exists(itemID)) {
+                        return new ExtOraxen().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                     } else {
                         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Invalid item ID provided: " + itemID + " for " + staticID);
                     }
