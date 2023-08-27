@@ -1,10 +1,10 @@
 package me.nukeghost.menusystem.menu;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.menusystem.Menu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.menusystem.menu.deliverymenu.DeliveryMenu;
-import me.nukeghost.template.Delivery;
 import me.nukeghost.utils.ColorUtils;
 import me.nukeghost.utils.MenuUtils;
 import org.bukkit.Bukkit;
@@ -27,7 +27,7 @@ public class ShowDeliveryBoardMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return ColorUtils.translateHexColorCodes( "<#", ">", ChatColor.translateAlternateColorCodes('&', DeliveryBoard.plugin.getConfig().getString("gui.titles.boardTitle")));
+        return PlaceholderAPI.setPlaceholders(playerMenuUtility.getOwner(), ColorUtils.translateHexColorCodes( "<#", ">", ChatColor.translateAlternateColorCodes('&', DeliveryBoard.plugin.getConfig().getString("gui.titles.boardTitle"))));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package me.nukeghost.utils;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.language.Message;
 import org.bukkit.ChatColor;
@@ -25,9 +26,9 @@ public class MenuUtils {
             if (owner.hasPermission("deliveryboard.delivery." + deliveryID)) {
                 ItemStack hourlyItem = generateIconItem(deliveryID);
                 ItemMeta hourlyMeta = hourlyItem.getItemMeta();
-                hourlyMeta.setDisplayName(ColorUtils.translateHexColorCodes( "<#", ">",
+                hourlyMeta.setDisplayName(PlaceholderAPI.setPlaceholders(owner, ColorUtils.translateHexColorCodes( "<#", ">",
                         ChatColor.translateAlternateColorCodes('&',
-                                plugin.getConfig().getString("delivery." + deliveryID + ".title"))));
+                                plugin.getConfig().getString("delivery." + deliveryID + ".title")))));
 
 
                 long nextStartTime = deliveries.get(i).getCooldownStart() + (deliveries.get(i).getCooldownTime() * 1000);

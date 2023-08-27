@@ -1,5 +1,6 @@
 package me.nukeghost.menusystem.menu.deliverymenu;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.handlers.RewardHandler;
 import me.nukeghost.handlers.SkipHandler;
@@ -31,7 +32,7 @@ public class DeliveryMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return playerMenuUtility.getDeliveryTitle();
+        return PlaceholderAPI.setPlaceholders(playerMenuUtility.getOwner(), playerMenuUtility.getDeliveryTitle());
     }
 
     @Override
