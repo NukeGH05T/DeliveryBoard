@@ -1,8 +1,6 @@
 package me.nukeghost.menusystem.menu.boardconfig;
 
 import me.nukeghost.DeliveryBoard;
-import me.nukeghost.handlers.GenerationHandler;
-import me.nukeghost.handlers.VerificationHandler;
 import me.nukeghost.language.Message;
 import me.nukeghost.menusystem.PaginatedMenu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
@@ -18,11 +16,10 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.io.BukkitObjectOutputStream;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 import static me.nukeghost.DeliveryBoard.plugin;
 

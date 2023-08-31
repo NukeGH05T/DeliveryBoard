@@ -5,7 +5,6 @@ import me.nukeghost.language.Message;
 import me.nukeghost.utils.ColorUtils;
 import me.nukeghost.utils.PlaceholderUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;

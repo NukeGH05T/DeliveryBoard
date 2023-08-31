@@ -1,6 +1,5 @@
 package me.nukeghost.menusystem.menu.boardconfig;
 
-import me.nukeghost.language.Message;
 import me.nukeghost.menusystem.Menu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.utils.ColorUtils;

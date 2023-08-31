@@ -1,6 +1,5 @@
 package me.nukeghost.external.plugins;
 
-import dev.lone.itemsadder.api.CustomStack;
 import io.th0rgal.oraxen.api.OraxenItems;
 import io.th0rgal.oraxen.items.ItemBuilder;
 import me.nukeghost.external.ItemPlugin;

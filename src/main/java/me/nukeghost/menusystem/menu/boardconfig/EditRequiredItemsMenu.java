@@ -1,10 +1,6 @@
 package me.nukeghost.menusystem.menu.boardconfig;
 
 import me.nukeghost.DeliveryBoard;
-import me.nukeghost.external.plugins.ExtEcoItems;
-import me.nukeghost.external.plugins.ExtExecutableItems;
-import me.nukeghost.external.plugins.ExtItemsAdder;
-import me.nukeghost.external.plugins.ExtMMOItems;
 import me.nukeghost.handlers.GenerationHandler;
 import me.nukeghost.handlers.VerificationHandler;
 import me.nukeghost.language.Message;
@@ -12,7 +8,6 @@ import me.nukeghost.menusystem.PaginatedMenu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.utils.ColorUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;

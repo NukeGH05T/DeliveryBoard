@@ -10,10 +10,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class ItemPluginUtils {
     public static ItemPlugin getItemPlugin(ItemStack itemStack) {
-//        String iaString = new ExtItemsAdder().generateItemString(itemStack);
-//        String mmoString = new ExtMMOItems().generateItemString(itemStack);
-//        String ecoString = new ExtEcoItems().generateItemString(itemStack);
-//        String eiString = new ExtExecutableItems().generateItemString(itemStack);
 
         String finalString;
         if (DeliveryBoard.enabledItemPlugins.contains("ItemsAdder") &&
