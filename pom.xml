@@ -177,5 +177,11 @@
             <version>2.11.3</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>customitemsapi</groupId>
+            <artifactId>customitemsapi</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

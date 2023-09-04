@@ -1,5 +1,5 @@
 name: DeliveryBoard
-version: 1.5.9
+version: 1.6.0
 main: me.nukeghost.DeliveryBoard
 api-version: 1.13
 prefix: DB
@@ -13,6 +13,7 @@ softdepend:
   - ExecutableItems
   - SCore
   - PlaceholderAPI
+  - CustomItems
 commands:
   deliveryboard:
     aliases: [db]

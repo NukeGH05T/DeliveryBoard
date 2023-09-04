@@ -113,6 +113,17 @@ public class GenerationHandler {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in allowed material for " + ChatColor.YELLOW + deliveryID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
+            } else if (allowedItemString[0].equalsIgnoreCase("cui")) {
+                //EcoItems - 'cui@cui:myCustomItem@1'
+                //Might malfunction at any time
+                if (enabledItemPlugins.contains("CustomItems")) {
+                    ExtCustomItems customItems = new ExtCustomItems();
+                    DeliveryBoard.usedItemPluginsHashMap.put(deliveryID, new ExtCustomItems());
+                    return customItems.generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in allowed material for " + ChatColor.YELLOW + deliveryID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
             } else if (allowedItemString[0].equalsIgnoreCase("exi")) {
                 //ExecutableItem - 'exi@iageneric:coin@1'
                 if (enabledItemPlugins.contains("ExecutableItems")) {
@@ -202,6 +213,15 @@ public class GenerationHandler {
                 //Might malfunction at any time
                 if (enabledItemPlugins.contains("EcoItems")) {
                     return new ExtEcoItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + deliveryID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+            } else if (allowedItemString[0].equalsIgnoreCase("cui")) {
+                //EcoItems - 'cui@cui:mycustomitem@1'
+                //Might malfunction at any time
+                if (enabledItemPlugins.contains("CustomItems")) {
+                    return new ExtCustomItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + deliveryID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
@@ -297,6 +317,15 @@ public class GenerationHandler {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
                 }
+            } else if (allowedItemString[0].equalsIgnoreCase("cui")) {
+                //EcoItems - 'eco@grappling_hook'
+                //Might malfunction at any time
+                if (enabledItemPlugins.contains("CustomItems")) {
+                    return new ExtCustomItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present!");
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
             } else if (allowedItemString[0].equalsIgnoreCase("exi")) {
                 //ExecutableItem - 'exi@iageneric:coin@1'
                 if (enabledItemPlugins.contains("ExecutableItems")) {
@@ -368,6 +397,15 @@ public class GenerationHandler {
                 //Might malfunction at any time
                 if (enabledItemPlugins.contains("EcoItems")) {
                     return new ExtEcoItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
+                } else {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");
+                }
+            } else if (allowedItemString[0].equalsIgnoreCase("cui")) {
+                //EcoItems - 'eco@grappling_hook'
+                //Might malfunction at any time
+                if (enabledItemPlugins.contains("CustomItems")) {
+                    return new ExtCustomItems().generateItem(itemID, itemType, Integer.valueOf(allowedItemString[2]));
                 } else {
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + allowedItemString[0] + " is not enabled but, present in " + ChatColor.YELLOW + staticID);
                     Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Please enable the plugin or remove any related items");

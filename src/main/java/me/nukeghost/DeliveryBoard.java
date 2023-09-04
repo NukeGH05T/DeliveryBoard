@@ -71,7 +71,7 @@ public final class DeliveryBoard extends JavaPlugin {
 
     //Checking which ItemPlugins are present
     private void initializeItemPlugins() {
-        String[] itemPluginStrings = {"MMOItems", "ItemsAdder", "EcoItems", "ExecutableItems", "Oraxen"};
+        String[] itemPluginStrings = {"MMOItems", "ItemsAdder", "EcoItems", "ExecutableItems", "Oraxen", "CustomItems"};
 
         for (String itemPluginName : itemPluginStrings) {
             Plugin iPlugin = Bukkit.getPluginManager().getPlugin(itemPluginName);
@@ -92,6 +92,9 @@ public final class DeliveryBoard extends JavaPlugin {
                         break;
                     case "Oraxen":
                         enabledItemPlugins.add("Oraxen");
+                        break;
+                    case "CustomItems":
+                        enabledItemPlugins.add("CustomItems");
                         break;
                 }
             }
