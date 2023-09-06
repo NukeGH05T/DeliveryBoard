@@ -92,6 +92,7 @@ delivery:
       #- 'orx@dagger@1' #Example using a default Oraxen item
       #- 'exi@Free_Heal@1' #Example using a default ExecutableItem (Available on both free & premium version of EI)
       #- 'eco@grappling_hook@1' #Example using a default EcoItems item
+      #- 'cui@cui:purple_apple@1' #Example format using Custom Items plugin. Change "cui:" to support any CUI supported items from other plugins
     #You can setup everything related to rewards here
     reward-setup:
       #Random type gives a specific amount of reward randomly selected from the rewards list below
