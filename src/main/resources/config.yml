@@ -67,15 +67,37 @@ gui:
     boardTitle: "<#22ff20>&lDelivery Board"
     editBoardTitle: "&9Edit Delivery"
 
+accumulated-rewards: #Rewards player after they complete/skip a certain number of quests
+  10: #Number of quests to complete before this reward activates
+    max-reward: 1 # Check hourly delivery for details about the reward section
+    confirmed-rewards:
+      - 'item@EMERALD@4'
+      - 'comm@effect give {PLAYER_NAME} minecraft:absorption 30 4'
+    random-rewards-pool:
+      - 'item@DIAMOND@10@1'
+      - 'item@APPLE@32@1'
+      - 'item@GOLDEN_APPLE@2@1'
+      - 'item@SHULKER_SHELL@4@1'
+      - 'comm@xp add {PLAYER_NAME} 10 levels@1'
+  15:
+    max-reward: 2
+    confirmed-rewards:
+      - 'item@NETHERITE@3'
+    random-rewards-pool:
+      - 'item@DIAMOND@10@5'
+      - 'item@APPLE@32@16'
+      - 'comm@xp add {PLAYER_NAME} 20 levels@1'
+
 delivery:
   hourly:
-    icon-item: van@WHITE_WOOL@1
-    title: "&9&lHOURLY Delivery"
-    position-slot: 11
-    max-submissions: 10
-    cooldown: 3600 #In Seconds
-    skip-cost: 1 #Amount of item/currency to deduct when skipping this delivery
-    send-alert: true
+    icon-item: van@WHITE_WOOL@1 # Item used to represent this delivery
+    title: "&9&lHOURLY Delivery" # GUI Item's display name & title of the delivery GUI
+    position-slot: 11 # Position in GUI for this delivery
+    max-submissions: 10 # Maximum number of players allowed to submit this delivery
+    cooldown: 3600 # In Seconds
+    skip-cost: 1 # Amount of item/currency to deduct when skipping this delivery
+    send-alert: true # Should an alert be sent whenever this delivery refreshes
+    add-accumulation: true # Should this delivery contribute towards accumulated rewards count
     info-lore: #Available placeholders {DELIVERY} , {CURRENT_SUBMISSIONS} , {MAX_SUBMISSIONS} & {SKIP_COST}
     - '&7Deliver the required item'
     - '&7to claim your reward.'
@@ -136,6 +158,7 @@ delivery:
     cooldown: 10800
     skip-cost: 2
     send-alert: true
+    add-accumulation: true
     info-lore:
     - '&7Deliver the required item'
     - '&7to claim your reward.'
@@ -170,6 +193,7 @@ delivery:
     cooldown: 21600
     skip-cost: 3
     send-alert: true
+    add-accumulation: true
     info-lore:
     - '&7Deliver the required item'
     - '&7to claim your reward.'
@@ -202,6 +226,7 @@ delivery:
     cooldown: 7200
     skip-cost: 1
     send-alert: true
+    add-accumulation: true
     info-lore:
     - '&7Deliver the required item'
     - '&7to claim your reward.'

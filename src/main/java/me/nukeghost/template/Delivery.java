@@ -1,6 +1,7 @@
 package me.nukeghost.template;
 
 import me.nukeghost.handlers.GenerationHandler;
+import me.nukeghost.handlers.RewardHandler;
 import me.nukeghost.language.Message;
 import me.nukeghost.utils.ColorUtils;
 import me.nukeghost.utils.PlaceholderUtils;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static me.nukeghost.DeliveryBoard.*;
+import static me.nukeghost.handlers.AccumulatedRewardHandler.sections;
 
 public class Delivery {
     private String deliveryID;
@@ -37,11 +39,14 @@ public class Delivery {
 
     private List<Player> deliveryCompletedPlayersList = new ArrayList<>();
 
+    private boolean accummulate = false;
+
     public Delivery(String deliveryID, String deliveryName, long cooldown) {
         this.deliveryID = deliveryID;
         this.deliveryName = deliveryName;
         this.cooldownTime = cooldown;
 
+        this.accummulate = plugin.getConfig().getBoolean("delivery." + deliveryID + ".add-accumulation");
         this.positionSlot = plugin.getConfig().getInt("delivery." + deliveryID + ".position-slot");
         this.maxSubmission = plugin.getConfig().getInt("delivery." + deliveryID + ".max-submissions");
         this.skipCost = plugin.getConfig().getInt("delivery." + deliveryID + ".skip-cost");
@@ -72,6 +77,14 @@ public class Delivery {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.sendMessage(ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(PlaceholderUtils.parsePlaceholders(Message.REFRESH_REMINDER, player, deliveryName, -1))));
             }
+        }
+    }
+
+    public void addAccumulation(Player p) {
+        rewardAccumulation++;
+
+        if (sections.contains(String.valueOf(rewardAccumulation))) {
+            new RewardHandler(plugin).giveRewardsAccumulated(p, "accumulated-rewards." + rewardAccumulation);
         }
     }
 
@@ -149,5 +162,9 @@ public class Delivery {
 
     public boolean isShouldSendAlert() {
         return shouldSendAlert;
+    }
+
+    public boolean isAccummulate() {
+        return accummulate;
     }
 }

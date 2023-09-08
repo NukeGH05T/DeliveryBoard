@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class RewardHandler {
@@ -20,12 +21,48 @@ public class RewardHandler {
         this.plugin = plugin;
     }
 
+
+    /**
+     * @param p
+     * @param deliveryID
+     * Default reward handler for deliveries
+     */
     public void giveRewards(Player p, String deliveryID) {
         int maxRewardAmount = plugin.getConfig().getInt("delivery." + deliveryID +".reward-setup.mixed.max-reward");
         List<String> confirmedRewardsList = plugin.getConfig().getStringList("delivery." + deliveryID +".reward-setup.mixed.confirmed-rewards");
         List<String> randomRewardsList = new ArrayList<>();
 
         for (String rewardStringInList : plugin.getConfig().getStringList("delivery." + deliveryID +".reward-setup.mixed.random-rewards-pool")) {
+            int weight = processRewardWeight(rewardStringInList);
+            for (int i = 0; i < weight; i++) {
+                randomRewardsList.add(rewardStringInList);
+            }
+        }
+
+        //Give each confirmed reward
+        for (String confirmedRewardString : confirmedRewardsList) {
+            if (confirmedRewardString.startsWith("item")) {
+                giveItemRewardFromString(confirmedRewardString, p);
+            } else if (confirmedRewardString.startsWith("comm")) {
+                giveCommandRewardFromString(confirmedRewardString, p);
+            }
+        }
+
+        //Pick random rewards and execute until it reaches max amount
+        giveRandomRewards(randomRewardsList, maxRewardAmount, p);
+    }
+
+    /**
+     * @param p
+     * @param prefix
+     * Modified prefix reward handler for accumulated rewards
+     */
+    public void giveRewardsAccumulated(Player p, String prefix) {
+        int maxRewardAmount = plugin.getConfig().getInt(prefix +".max-reward");
+        List<String> confirmedRewardsList = plugin.getConfig().getStringList(prefix +".confirmed-rewards");
+        List<String> randomRewardsList = new ArrayList<>();
+
+        for (String rewardStringInList : plugin.getConfig().getStringList(prefix +".random-rewards-pool")) {
             int weight = processRewardWeight(rewardStringInList);
             for (int i = 0; i < weight; i++) {
                 randomRewardsList.add(rewardStringInList);
@@ -90,7 +127,6 @@ public class RewardHandler {
         if (!success) {
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to run reward command: " + ChatColor.YELLOW + parts[1] + ChatColor.RED + " for " + ChatColor.YELLOW + p.getDisplayName());
         }
-
 
         return parts[1]; // "eco give {PLAYER_NAME} 500"
     }

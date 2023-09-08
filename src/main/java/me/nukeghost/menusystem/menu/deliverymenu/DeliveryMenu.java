@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static me.nukeghost.DeliveryBoard.deliveries;
+import static me.nukeghost.DeliveryBoard.rewardAccumulation;
 import static me.nukeghost.utils.PlaceholderUtils.parsePlaceholders;
 
 public class DeliveryMenu extends Menu {
@@ -65,6 +66,9 @@ public class DeliveryMenu extends Menu {
             RewardHandler rewardHandler = new RewardHandler(DeliveryBoard.plugin);
             rewardHandler.giveRewards(p, playerMenuUtility.getDeliveryID());
 
+            //Add accumulation
+            if (deliveries.get(deliveryIndexInList).isAccummulate()) deliveries.get(deliveryIndexInList).addAccumulation(playerMenuUtility.getOwner());
+
             //Put the player in an hourly tracking hashmap so, player can't redo the same delivery!
             DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p);
 
@@ -92,6 +96,9 @@ public class DeliveryMenu extends Menu {
                 //Give proper reward
                 RewardHandler rewardHandler = new RewardHandler(DeliveryBoard.plugin);
                 rewardHandler.giveRewards(p, playerMenuUtility.getDeliveryID());
+
+                //Add accumulation
+                if (deliveries.get(deliveryIndexInList).isAccummulate()) deliveries.get(deliveryIndexInList).addAccumulation(playerMenuUtility.getOwner());
 
                 //Put the player in an hourly tracking hashmap so, player can't redo the same delivery!
                 DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p);

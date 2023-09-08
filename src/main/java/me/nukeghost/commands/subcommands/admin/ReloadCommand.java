@@ -2,7 +2,9 @@ package me.nukeghost.commands.subcommands.admin;
 
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.commands.SubCommand;
+import me.nukeghost.handlers.AccumulatedRewardHandler;
 import me.nukeghost.language.Message;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class ReloadCommand extends SubCommand {
@@ -34,12 +36,14 @@ public class ReloadCommand extends SubCommand {
             try {
                 DeliveryBoard.plugin.reloadConfig();
                 DeliveryBoard.plugin.saveConfig();
+
+                new AccumulatedRewardHandler().reloadAccumulatedRewardData();
             } catch (Exception e) {
                 p.sendMessage(Message.RELOAD_FAILED);
                 e.printStackTrace();
             }
 
-            p.sendMessage(Message.RELOAD_SUCCESSFULL);//
+            p.sendMessage(ChatColor.DARK_AQUA + "[DB]" + Message.RELOAD_SUCCESSFULL);//
         }else{
             p.sendMessage(Message.RELOAD_NO_PERM);//
         }

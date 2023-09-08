@@ -4,6 +4,7 @@ import me.nukeghost.commands.AutoTabCompleter;
 import me.nukeghost.commands.CommandManager;
 import me.nukeghost.database.Database;
 import me.nukeghost.external.ItemPlugin;
+import me.nukeghost.handlers.AccumulatedRewardHandler;
 import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
 import me.nukeghost.listeners.*;
@@ -38,6 +39,8 @@ public final class DeliveryBoard extends JavaPlugin {
     public static String connectionURL;
     public static int defaultTokenAmount;
 
+    public static int rewardAccumulation = 0;
+
 
     private static Economy econ = null;
 
@@ -65,6 +68,8 @@ public final class DeliveryBoard extends JavaPlugin {
         }
 
         setupDatabase();
+
+        new AccumulatedRewardHandler().loadAccumulatedRewardData();
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "This plugin is licensed to " + ChatColor.GREEN + "%%__USERNAME__%%");
     }
