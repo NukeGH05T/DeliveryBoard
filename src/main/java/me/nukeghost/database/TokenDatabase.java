@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 import static me.nukeghost.DeliveryBoard.plugin;
 
-public class Database {
+public class TokenDatabase {
     public static Connection getSQLConnection() {
         try {
             Class.forName ("org.h2.Driver");
@@ -43,7 +43,7 @@ public class Database {
     }
 
     public static void saveCurrency(int amount, String uuid) {
-        Connection connection = Database.getSQLConnection();
+        Connection connection = TokenDatabase.getSQLConnection();
         try {
             assert connection != null;
             PreparedStatement statement = connection.prepareStatement("INSERT INTO DB_DeliveryToken(playerUUID, currencyAmount, lastUpdated) VALUES (?, ?, ?)");
@@ -59,7 +59,7 @@ public class Database {
     }
 
     public static void updateCurrency(int amount, String uuid) {
-        Connection connection = Database.getSQLConnection();
+        Connection connection = TokenDatabase.getSQLConnection();
 
         if (amount < 0) amount = 0;
 
@@ -79,7 +79,7 @@ public class Database {
     }
 
     public static String getCurrencyAmount(String uuid) {
-        Connection connection = Database.getSQLConnection();
+        Connection connection = TokenDatabase.getSQLConnection();
         try {
             assert connection != null;
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM DB_DeliveryToken WHERE playerUUID = ?");
@@ -101,7 +101,7 @@ public class Database {
     }
 
     public static boolean doesPlayerEntryExist(String uuid) {
-        Connection connection = Database.getSQLConnection();
+        Connection connection = TokenDatabase.getSQLConnection();
         try {
             assert connection != null;
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM DB_DeliveryToken WHERE playerUUID = ?");

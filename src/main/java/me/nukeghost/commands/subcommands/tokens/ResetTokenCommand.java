@@ -2,7 +2,7 @@ package me.nukeghost.commands.subcommands.tokens;
 
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.commands.SubCommand;
-import me.nukeghost.database.Database;
+import me.nukeghost.database.TokenDatabase;
 import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
 import org.bukkit.Bukkit;
@@ -47,7 +47,7 @@ public class ResetTokenCommand extends SubCommand {
 
         UUID uuid = target.getUniqueId();
 
-        Database.updateCurrency(DeliveryBoard.defaultTokenAmount, uuid.toString());
+        TokenDatabase.updateCurrency(DeliveryBoard.defaultTokenAmount, uuid.toString());
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[DB] &9Reset tokens for player &e" + args[1]));
     }
 }

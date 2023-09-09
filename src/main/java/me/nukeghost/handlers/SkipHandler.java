@@ -1,7 +1,7 @@
 package me.nukeghost.handlers;
 
 import me.nukeghost.DeliveryBoard;
-import me.nukeghost.database.Database;
+import me.nukeghost.database.TokenDatabase;
 import me.nukeghost.language.Message;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.template.Delivery;
@@ -61,13 +61,13 @@ public class SkipHandler {
 
                 //Token
             } else if (plugin.getConfig().getBoolean("delivery-tokens.enabled")) {
-                if (Integer.parseInt(Database.getCurrencyAmount(p.getUniqueId().toString())) >= delivery.getSkipCost()) {
+                if (Integer.parseInt(TokenDatabase.getCurrencyAmount(p.getUniqueId().toString())) >= delivery.getSkipCost()) {
                     UUID uuid = p.getUniqueId();
 
                     int takeAmount = delivery.getSkipCost();
-                    int prevAmount = Integer.parseInt(Database.getCurrencyAmount(uuid.toString()));
+                    int prevAmount = Integer.parseInt(TokenDatabase.getCurrencyAmount(uuid.toString()));
 
-                    Database.updateCurrency(prevAmount - takeAmount, uuid.toString());
+                    TokenDatabase.updateCurrency(prevAmount - takeAmount, uuid.toString());
                     p.sendMessage(Message.SKIP_SUCCESSFUL);
                 } else {
                     p.sendMessage(Message.INSUFFICIENT_TOKENS);

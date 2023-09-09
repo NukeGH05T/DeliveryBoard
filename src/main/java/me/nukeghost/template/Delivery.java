@@ -1,5 +1,6 @@
 package me.nukeghost.template;
 
+import me.nukeghost.data.PlayerData;
 import me.nukeghost.handlers.GenerationHandler;
 import me.nukeghost.handlers.RewardHandler;
 import me.nukeghost.language.Message;
@@ -81,12 +82,22 @@ public class Delivery {
     }
 
     public void addAccumulation(Player p) {
-        rewardAccumulation++;
+        int temp = PlayerData.get().getInt(p.getUniqueId().toString() + ".completed", 0) + 1;
+        PlayerData.get().set(p.getUniqueId().toString() + ".completed", temp);
+        PlayerData.save();
 
-        if (sections.contains(String.valueOf(rewardAccumulation))) {
-            new RewardHandler(plugin).giveRewardsAccumulated(p, "accumulated-rewards." + rewardAccumulation);
+        if (sections.contains(String.valueOf(temp))) {
+            new RewardHandler(plugin).giveRewardsAccumulated(p, "accumulated-rewards." + temp);
         }
     }
+
+//    public void addAccumulationOld(Player p) {
+//        rewardAccumulation++;
+//
+//        if (sections.contains(String.valueOf(rewardAccumulation))) {
+//            new RewardHandler(plugin).giveRewardsAccumulated(p, "accumulated-rewards." + rewardAccumulation);
+//        }
+//    }
 
     public String getDeliveryID() {
         return deliveryID;

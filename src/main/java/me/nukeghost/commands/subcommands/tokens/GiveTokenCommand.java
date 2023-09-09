@@ -1,7 +1,7 @@
 package me.nukeghost.commands.subcommands.tokens;
 
 import me.nukeghost.commands.SubCommand;
-import me.nukeghost.database.Database;
+import me.nukeghost.database.TokenDatabase;
 import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
 import org.bukkit.Bukkit;
@@ -48,11 +48,11 @@ public class GiveTokenCommand extends SubCommand {
         UUID uuid = target.getUniqueId();
 
         int giveAmount = Integer.parseInt(args[2]);
-        int prevAmount = Integer.parseInt(Database.getCurrencyAmount(uuid.toString()));
+        int prevAmount = Integer.parseInt(TokenDatabase.getCurrencyAmount(uuid.toString()));
 
         System.out.println("Prev: " + prevAmount + " | Give: " + giveAmount);
 
-        Database.updateCurrency(prevAmount + giveAmount, uuid.toString());
-        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[DB] &9Gave&a " + giveAmount + " &9tokens to &e" + args[1] + "&9. The player now has &a" + Integer.parseInt(Database.getCurrencyAmount(uuid.toString())) + " &9tokens"));
+        TokenDatabase.updateCurrency(prevAmount + giveAmount, uuid.toString());
+        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[DB] &9Gave&a " + giveAmount + " &9tokens to &e" + args[1] + "&9. The player now has &a" + Integer.parseInt(TokenDatabase.getCurrencyAmount(uuid.toString())) + " &9tokens"));
     }
 }

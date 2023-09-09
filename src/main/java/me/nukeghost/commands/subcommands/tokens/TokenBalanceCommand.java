@@ -1,7 +1,7 @@
 package me.nukeghost.commands.subcommands.tokens;
 
 import me.nukeghost.commands.SubCommand;
-import me.nukeghost.database.Database;
+import me.nukeghost.database.TokenDatabase;
 import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
 import org.bukkit.Bukkit;
@@ -49,12 +49,12 @@ public class TokenBalanceCommand extends SubCommand {
             }
 
             UUID uuid = target.getUniqueId();
-            int otherBalance = Integer.parseInt(Database.getCurrencyAmount(uuid.toString()));
+            int otherBalance = Integer.parseInt(TokenDatabase.getCurrencyAmount(uuid.toString()));
 
             p.sendMessage(Message.TOKEN_BALANCE + otherBalance);
         } else {
             UUID uuid = p.getUniqueId();
-            int otherBalance = Integer.parseInt(Database.getCurrencyAmount(uuid.toString()));
+            int otherBalance = Integer.parseInt(TokenDatabase.getCurrencyAmount(uuid.toString()));
 
             p.sendMessage(Message.TOKEN_BALANCE + otherBalance);
         }

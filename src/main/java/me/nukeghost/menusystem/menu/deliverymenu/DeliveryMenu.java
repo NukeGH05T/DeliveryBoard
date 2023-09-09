@@ -11,6 +11,7 @@ import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.menusystem.menu.ShowDeliveryBoardMenu;
 import me.nukeghost.template.Delivery;
 import me.nukeghost.utils.PlaceholderUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static me.nukeghost.DeliveryBoard.deliveries;
-import static me.nukeghost.DeliveryBoard.rewardAccumulation;
 import static me.nukeghost.utils.PlaceholderUtils.parsePlaceholders;
 
 public class DeliveryMenu extends Menu {
@@ -33,7 +33,11 @@ public class DeliveryMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return PlaceholderAPI.setPlaceholders(playerMenuUtility.getOwner(), playerMenuUtility.getDeliveryTitle());
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            return PlaceholderAPI.setPlaceholders(playerMenuUtility.getOwner(), playerMenuUtility.getDeliveryTitle());
+        }
+
+        return playerMenuUtility.getDeliveryTitle();
     }
 
     @Override
@@ -158,13 +162,15 @@ public class DeliveryMenu extends Menu {
         backToDeliveryBoardMenu.setItemMeta(backToDeliveryBoardMenuMeta);
 
         //Skip Button
-        ItemStack skipItem = super.SKIP;
-        ItemMeta skipMeta = skipItem.getItemMeta();
-        skipMeta.setDisplayName(Message.SKIP_ITEM_DISPLAY);
-        skipMeta.setLore(parsePlaceholders(Message.SKIP_ITEM_LORE, playerMenuUtility.getOwner(), null, deliveryIndexInList));
-        skipItem.setItemMeta(skipMeta);
+        if (deliveries.get(deliveryIndexInList).getSkipCost() < 0) { //Don't create skip if skipping is disabled
+            ItemStack skipItem = super.SKIP;
+            ItemMeta skipMeta = skipItem.getItemMeta();
+            skipMeta.setDisplayName(Message.SKIP_ITEM_DISPLAY);
+            skipMeta.setLore(parsePlaceholders(Message.SKIP_ITEM_LORE, playerMenuUtility.getOwner(), null, deliveryIndexInList));
+            skipItem.setItemMeta(skipMeta);
+            inventory.setItem(13, skipItem);
+        }
 
-        inventory.setItem(13, skipItem);
         inventory.setItem(26, confirmDeliveryItem);
         inventory.setItem(18, backToDeliveryBoardMenu);
     }

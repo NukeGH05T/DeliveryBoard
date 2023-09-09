@@ -2,7 +2,8 @@ package me.nukeghost;
 
 import me.nukeghost.commands.AutoTabCompleter;
 import me.nukeghost.commands.CommandManager;
-import me.nukeghost.database.Database;
+import me.nukeghost.data.PlayerData;
+import me.nukeghost.database.TokenDatabase;
 import me.nukeghost.external.ItemPlugin;
 import me.nukeghost.handlers.AccumulatedRewardHandler;
 import me.nukeghost.language.LanguageConfig;
@@ -19,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +41,7 @@ public final class DeliveryBoard extends JavaPlugin {
     public static String connectionURL;
     public static int defaultTokenAmount;
 
-    public static int rewardAccumulation = 0;
+    //public static int rewardAccumulation = 0;
 
 
     private static Economy econ = null;
@@ -70,6 +72,17 @@ public final class DeliveryBoard extends JavaPlugin {
         setupDatabase();
 
         new AccumulatedRewardHandler().loadAccumulatedRewardData();
+
+        PlayerData.setup();
+        PlayerData.get().options().copyDefaults(true);
+        PlayerData.save();
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                PlayerData.reload();
+            }
+        }.runTaskLater(plugin, 20);
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "This plugin is licensed to " + ChatColor.GREEN + "%%__USERNAME__%%");
     }
@@ -173,7 +186,7 @@ public final class DeliveryBoard extends JavaPlugin {
             this.getPluginLoader().disablePlugin(this);
         }
 
-        Database.initializeDatabase();
+        TokenDatabase.initializeDatabase();
     }
 
     private boolean setupEconomy() {
