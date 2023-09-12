@@ -2,10 +2,12 @@ package me.nukeghost;
 
 import me.nukeghost.commands.AutoTabCompleter;
 import me.nukeghost.commands.CommandManager;
+import me.nukeghost.data.DataVerifier;
 import me.nukeghost.data.PlayerData;
 import me.nukeghost.database.TokenDatabase;
 import me.nukeghost.external.ItemPlugin;
 import me.nukeghost.handlers.AccumulatedRewardHandler;
+import me.nukeghost.handlers.PlayerRankHandler;
 import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
 import me.nukeghost.listeners.*;
@@ -13,6 +15,7 @@ import me.nukeghost.menusystem.PaginatedMenu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.template.Delivery;
 import me.nukeghost.utils.Metrics;
+import me.nukeghost.utils.PAPIExpansion;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,6 +28,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class DeliveryBoard extends JavaPlugin {
     private static final HashMap<Player, PlayerMenuUtility> PLAYER_MENU_UTILITY_MAP = new HashMap<>();
@@ -41,10 +45,12 @@ public final class DeliveryBoard extends JavaPlugin {
     public static String connectionURL;
     public static int defaultTokenAmount;
 
-    //public static int rewardAccumulation = 0;
+    public static List<String[]> rankerNameList = new ArrayList<>();
 
 
     private static Economy econ = null;
+
+    private static Map<String, Integer> uuidPointMap = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -83,6 +89,27 @@ public final class DeliveryBoard extends JavaPlugin {
                 PlayerData.reload();
             }
         }.runTaskLater(plugin, 20);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                uuidPointMap = new PlayerRankHandler().sortByValue();
+
+                int index = 1;
+                rankerNameList.clear();
+                for (Map.Entry<String, Integer> entry : uuidPointMap.entrySet()) {
+                    rankerNameList.add(new String[]{entry.getKey(), String.valueOf(entry.getValue()), String.valueOf(index)});
+                    index++;
+                }
+            }
+        }.runTaskTimer(plugin, 20, 20);
+
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[DB] PlaceholderAPI detected. Hooking into it.");
+            new PAPIExpansion().register();
+        }
+
+        new DataVerifier().verifyData();
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "This plugin is licensed to " + ChatColor.GREEN + "%%__USERNAME__%%");
     }
@@ -146,7 +173,11 @@ public final class DeliveryBoard extends JavaPlugin {
         }
     }
 
-    public void startTasks() {
+    public static void startTasks() {
+        //Clearing these for reloading them at runtime
+        deliveries = new ArrayList<>();
+        deliveryCompletedPlayerList = new ArrayList<>();
+
         for (String deliveryID : plugin.getConfig().getStringList("active-deliveries")) {
             Delivery delivery = new Delivery(deliveryID, plugin.getConfig().getString("delivery." + deliveryID + ".title"),
                     plugin.getConfig().getLong("delivery." + deliveryID + ".cooldown"));

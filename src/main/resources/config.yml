@@ -9,6 +9,10 @@
 ##                                  |___/                                  ##
 #############################################################################
 
+#-------Do not change this-------#
+api: 'user'
+#-------Do not change this-------#
+
 board-location: ''
 lang-file: en_US.yml
 

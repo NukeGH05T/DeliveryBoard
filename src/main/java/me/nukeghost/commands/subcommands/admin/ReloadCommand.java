@@ -7,6 +7,8 @@ import me.nukeghost.language.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import static me.nukeghost.DeliveryBoard.startTasks;
+
 public class ReloadCommand extends SubCommand {
     @Override
     public String getName(){
@@ -38,6 +40,8 @@ public class ReloadCommand extends SubCommand {
                 DeliveryBoard.plugin.saveConfig();
 
                 new AccumulatedRewardHandler().reloadAccumulatedRewardData();
+
+                startTasks();
             } catch (Exception e) {
                 p.sendMessage(Message.RELOAD_FAILED);
                 e.printStackTrace();
