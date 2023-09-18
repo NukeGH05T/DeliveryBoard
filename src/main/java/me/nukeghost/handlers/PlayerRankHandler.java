@@ -16,7 +16,6 @@ public class PlayerRankHandler {
 
         for (String playerUUID : data.getConfigurationSection("data").getKeys(false)) {
             int points = data.getInt("data." + playerUUID + ".completed");
-            System.out.println(playerUUID + " | " + points);
             this.localUUIDPointMap.put(playerUUID, points);
         }
     }
@@ -40,7 +39,6 @@ public class PlayerRankHandler {
         Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> entry : list) {
             sortedMap.put(entry.getKey(), entry.getValue());
-            System.out.println("Key: " + entry.getKey() + " | Val: " + entry.getValue());
         }
 
 
