@@ -39,8 +39,10 @@ public class ReloadCommand extends SubCommand {
                 DeliveryBoard.plugin.reloadConfig();
                 DeliveryBoard.plugin.saveConfig();
 
+                //Loading accumulated reward data
                 new AccumulatedRewardHandler().reloadAccumulatedRewardData();
 
+                //Loading active deliveries from config
                 startTasks();
             } catch (Exception e) {
                 p.sendMessage(Message.RELOAD_FAILED);

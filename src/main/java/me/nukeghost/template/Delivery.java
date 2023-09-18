@@ -82,8 +82,8 @@ public class Delivery {
     }
 
     public void addAccumulation(Player p) {
-        int temp = PlayerData.get().getInt(p.getUniqueId().toString() + ".completed", 0) + 1;
-        PlayerData.get().set(p.getUniqueId().toString() + ".completed", temp);
+        int temp = PlayerData.get().getInt("data." + p.getUniqueId().toString() + ".completed", 0) + 1;
+        PlayerData.get().set("data." + p.getUniqueId().toString() + ".completed", temp);
         PlayerData.save();
 
         if (sections.contains(String.valueOf(temp))) {

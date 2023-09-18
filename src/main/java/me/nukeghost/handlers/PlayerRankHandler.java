@@ -14,8 +14,10 @@ public class PlayerRankHandler {
     public PlayerRankHandler() {
         this.data = PlayerData.get();
 
-        for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
-            this.localUUIDPointMap.put(offlinePlayer.getUniqueId().toString(), data.getInt(offlinePlayer.getUniqueId().toString() + ".completed"));
+        for (String playerUUID : data.getConfigurationSection("data").getKeys(false)) {
+            int points = data.getInt("data." + playerUUID + ".completed");
+            System.out.println(playerUUID + " | " + points);
+            this.localUUIDPointMap.put(playerUUID, points);
         }
     }
 
@@ -27,7 +29,7 @@ public class PlayerRankHandler {
 
         // Sorting list with Collections.sort(), provide a custom Comparator
         //    switch the o1 o2 position for a different order
-        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+        list.sort(new Comparator<Map.Entry<String, Integer>>() {
             public int compare(Map.Entry<String, Integer> o1,
                                Map.Entry<String, Integer> o2) {
                 return (o1.getValue()).compareTo(o2.getValue());
@@ -38,7 +40,9 @@ public class PlayerRankHandler {
         Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
         for (Map.Entry<String, Integer> entry : list) {
             sortedMap.put(entry.getKey(), entry.getValue());
+            System.out.println("Key: " + entry.getKey() + " | Val: " + entry.getValue());
         }
+
 
         return sortedMap;
     }
