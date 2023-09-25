@@ -14,6 +14,7 @@ public class PlayerRankHandler {
     public PlayerRankHandler() {
         this.data = PlayerData.get();
 
+        if (data.getConfigurationSection("data") == null) return; //There is no player data yet!
         for (String playerUUID : data.getConfigurationSection("data").getKeys(false)) {
             int points = data.getInt("data." + playerUUID + ".completed");
             this.localUUIDPointMap.put(playerUUID, points);
@@ -31,7 +32,7 @@ public class PlayerRankHandler {
         list.sort(new Comparator<Map.Entry<String, Integer>>() {
             public int compare(Map.Entry<String, Integer> o1,
                                Map.Entry<String, Integer> o2) {
-                return (o1.getValue()).compareTo(o2.getValue());
+                return (o2.getValue()).compareTo(o1.getValue());
             }
         });
 

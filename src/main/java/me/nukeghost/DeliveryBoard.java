@@ -101,6 +101,7 @@ public final class DeliveryBoard extends JavaPlugin {
                     rankerNameList.add(new String[]{entry.getKey(), String.valueOf(entry.getValue()), String.valueOf(index)});
                     index++;
                 }
+
             }
         }.runTaskTimer(plugin, 20, 20);
 

@@ -1,6 +1,7 @@
 package me.nukeghost.utils;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import me.nukeghost.template.Delivery;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
+import static me.nukeghost.DeliveryBoard.deliveries;
 import static me.nukeghost.DeliveryBoard.rankerNameList;
 
 public class PAPIExpansion extends PlaceholderExpansion {
@@ -107,6 +109,13 @@ public class PAPIExpansion extends PlaceholderExpansion {
             return getPoints(9);
         }
 
+        for (int i = 0; i < 54; i++){
+            if (params.equals("cooldown_" + i)) { // %deliveryboard_cooldown_0%
+                return getRemainingTime(i);
+            }
+        }
+
+
         return ChatColor.RED + "[invalid_placeholder]";
     }
 
@@ -130,6 +139,14 @@ public class PAPIExpansion extends PlaceholderExpansion {
         try {
             return rankerNameList.get(id)[1];
         } catch (IndexOutOfBoundsException ex) {
+            return "???";
+        }
+    }
+
+    private String getRemainingTime(int index) {
+        try{
+            return deliveries.get(index).remainingTime();
+        }catch (IndexOutOfBoundsException ex) {
             return "???";
         }
     }

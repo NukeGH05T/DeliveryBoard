@@ -96,6 +96,7 @@ delivery:
   hourly:
     icon-item: van@WHITE_WOOL@1 # Item used to represent this delivery
     title: "&9&lHOURLY Delivery" # GUI Item's display name & title of the delivery GUI
+    gui-title: '&9&lHourly Delivery'
     position-slot: 11 # Position in GUI for this delivery
     max-submissions: 10 # Maximum number of players allowed to submit this delivery
     cooldown: 3600 # In Seconds
@@ -157,6 +158,7 @@ delivery:
   three-hourly:
     icon-item: van@GRASS_BLOCK@1
     title: "&2&lTH Delivery"
+    gui-title: '&2&lTH Delivery Title'
     position-slot: 13
     max-submissions: 10
     cooldown: 10800
@@ -192,6 +194,7 @@ delivery:
   six-hourly:
     icon-item: van@BIRCH_WOOD@1
     title: "&2&lSHDelivery"
+    gui-title: '&2&lSHD Delivery Title'
     position-slot: 15
     max-submissions: 10
     cooldown: 21600

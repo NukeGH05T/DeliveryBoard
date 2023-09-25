@@ -1,12 +1,15 @@
 package me.nukeghost.template;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.nukeghost.data.PlayerData;
 import me.nukeghost.handlers.GenerationHandler;
 import me.nukeghost.handlers.RewardHandler;
 import me.nukeghost.language.Message;
 import me.nukeghost.utils.ColorUtils;
 import me.nukeghost.utils.PlaceholderUtils;
+import me.nukeghost.utils.TimeUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,6 +23,7 @@ import static me.nukeghost.handlers.AccumulatedRewardHandler.sections;
 public class Delivery {
     private String deliveryID;
     private String deliveryName;
+    private String deliveryGUITitle;
     private long cooldownStart;
     private long cooldownTime;
 
@@ -52,6 +56,7 @@ public class Delivery {
         this.maxSubmission = plugin.getConfig().getInt("delivery." + deliveryID + ".max-submissions");
         this.skipCost = plugin.getConfig().getInt("delivery." + deliveryID + ".skip-cost");
         this.shouldSendAlert = plugin.getConfig().getBoolean("delivery." + deliveryID + ".send-alert", true);
+        this.deliveryGUITitle = PlaceholderAPI.setPlaceholders(null, ColorUtils.translateHexColorCodes("<#", ">", ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("delivery." + deliveryID + ".gui-title", deliveryName))));
 
         List<String> perDeliveryInfoLore = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(plugin.getConfig().getStringList("delivery." + deliveryID + ".info-lore")));
         this.deliveryInfoLore = perDeliveryInfoLore != null && !perDeliveryInfoLore.isEmpty() ? perDeliveryInfoLore : Message.ICON_ITEM_LORE;
@@ -71,7 +76,11 @@ public class Delivery {
     public void updateDeliveryItem() {
         cooldownStart = System.currentTimeMillis();
         deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
-        deliveryCompletedPlayerList.get(deliveries.indexOf(this)).clear();
+        try{
+            deliveryCompletedPlayerList.get(deliveries.indexOf(this)).clear();
+        }catch (IndexOutOfBoundsException ex) {
+            //Ignore since the list is empty
+        }
 
         //Expose the generated item/delivery using an API for others to use
         if (shouldSendAlert) {
@@ -79,6 +88,11 @@ public class Delivery {
                 player.sendMessage(ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(PlaceholderUtils.parsePlaceholders(Message.REFRESH_REMINDER, player, deliveryName, -1))));
             }
         }
+    }
+
+    public String remainingTime() { //Works
+        long remainingTime = (cooldownStart + (cooldownTime*1000)) - System.currentTimeMillis();
+        return TimeUtils.formatEpochTime(remainingTime);
     }
 
     public void addAccumulation(Player p) {
@@ -109,6 +123,14 @@ public class Delivery {
 
     public void setDeliveryName(String deliveryName) {
         this.deliveryName = deliveryName;
+    }
+
+    public String getDeliveryGUITitle() {
+        return deliveryGUITitle;
+    }
+
+    public void setDeliveryGUITitle(String deliveryGUITitle) {
+        this.deliveryGUITitle = deliveryGUITitle;
     }
 
     public long getCooldownStart() {

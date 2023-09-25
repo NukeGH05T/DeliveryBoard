@@ -6,6 +6,7 @@ public class PlayerMenuUtility {
     private Player owner;
 
     private String deliveryTitle;
+    private String deliveryGUITitle;
     private String deliveryID;
 
 
@@ -31,6 +32,14 @@ public class PlayerMenuUtility {
 
     public void setDeliveryTitle(String deliveryTitle) {
         this.deliveryTitle = deliveryTitle;
+    }
+
+    public String getDeliveryGUITitle() {
+        return deliveryGUITitle;
+    }
+
+    public void setDeliveryGUITitle(String deliveryGUITitle) {
+        this.deliveryGUITitle = deliveryGUITitle;
     }
 
     public void setOwner(Player owner) {

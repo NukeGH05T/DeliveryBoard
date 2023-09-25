@@ -34,7 +34,7 @@ public class DeliveryMenu extends Menu {
     @Override
     public String getMenuName() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            return PlaceholderAPI.setPlaceholders(playerMenuUtility.getOwner(), playerMenuUtility.getDeliveryTitle());
+            return PlaceholderAPI.setPlaceholders(playerMenuUtility.getOwner(), playerMenuUtility.getDeliveryGUITitle());
         }
 
         return playerMenuUtility.getDeliveryTitle();

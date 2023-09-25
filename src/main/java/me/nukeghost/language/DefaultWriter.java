@@ -41,6 +41,9 @@ public class DefaultWriter {
                     "EDIT_COMMAND_DESCRIPTION: 'Edit requirements of an active board'\n" +
                     "#>Board\n" +
                     "BOARD_COMMAND_DESCRIPTION: 'Shows the delivery board GUI'\n" +
+                    "#>DeliveryTop\n" +
+                    "DELIVER_TOP_COMMAND_DESCREPTION: 'Shows the leaderboard for Delivery Board'\n" +
+                    "DELIVER_TOP_COMMAND_TITLE: '------------DeliveryTop------------'\n" +
                     "#>Help\n" +
                     "HELP_COMMAND_DESCRIPTION: 'Lists all available commands.'\n" +
                     "#>Reload\n" +

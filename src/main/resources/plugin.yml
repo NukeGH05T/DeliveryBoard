@@ -1,5 +1,5 @@
 name: DeliveryBoard
-version: 1.6.5
+version: 1.6.7
 main: me.nukeghost.DeliveryBoard
 api-version: 1.13
 prefix: DB
@@ -35,6 +35,8 @@ permissions:
       viewothers:
         default: op
     delivery:
+      top:
+        default: true
       forcesubmit:
         default: op
       hourly:

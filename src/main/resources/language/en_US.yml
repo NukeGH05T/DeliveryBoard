@@ -6,6 +6,9 @@ ADD_INVALID_ITEM: 'Invalid Item or Plugin!'
 EDIT_COMMAND_DESCRIPTION: 'Edit requirements of an active board'
 #>Board
 BOARD_COMMAND_DESCRIPTION: 'Shows the delivery board GUI'
+#>DeliveryTop
+DELIVER_TOP_COMMAND_DESCREPTION: 'Shows the leaderboard for Delivery Board'
+DELIVER_TOP_COMMAND_TITLE: '------------DeliveryTop------------'
 #>Help
 HELP_COMMAND_DESCRIPTION: 'Lists all available commands.'
 #>Reload

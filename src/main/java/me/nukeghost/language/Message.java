@@ -15,6 +15,9 @@ public class Message {
     public static String EDIT_COMMAND_DESCRIPTION;
     //Board
     public static String BOARD_COMMAND_DESCRIPTION;
+    //Delivery Top
+    public static String DELIVER_TOP_COMMAND_DESCREPTION;
+    public static String DELIVER_TOP_COMMAND_TITLE;
     //Help
     public static String HELP_COMMAND_DESCRIPTION;
     //Reload
@@ -90,6 +93,9 @@ public class Message {
         EDIT_COMMAND_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("EDIT_COMMAND_DESCRIPTION")));
         //Board
         BOARD_COMMAND_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("BOARD_COMMAND_DESCRIPTION")));
+        //BoardTOP
+        DELIVER_TOP_COMMAND_DESCREPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("DELIVER_TOP_COMMAND_DESCREPTION")));
+        DELIVER_TOP_COMMAND_TITLE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("DELIVER_TOP_COMMAND_TITLE")));
         //Help
         HELP_COMMAND_DESCRIPTION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("HELP_COMMAND_DESCRIPTION")));
         //Reload
