@@ -56,7 +56,7 @@ economy:
 #GUI items and titles
 #The static items can be custom items too
 gui:
-  slot: #Do NOT use slot 22. It is still used for
+  slot:     # Cannot exceed slot 26.
     accept: 26
     cancel: 18
     info: 11
