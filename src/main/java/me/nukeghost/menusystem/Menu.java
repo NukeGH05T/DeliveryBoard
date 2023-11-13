@@ -1,5 +1,6 @@
 package me.nukeghost.menusystem;
 
+import me.nukeghost.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -18,6 +19,13 @@ public abstract class Menu implements InventoryHolder {
     protected ItemStack SKIP = generateStaticItem("skipMaterial");
     protected ItemStack CANCEL = generateStaticItem("cancelMaterial");
     protected ItemStack INFO = generateStaticItem("infoMaterial");
+
+    protected int ACCEPT_SLOT = MenuUtils.loadDeliveryMenuSlots("accept");
+    protected int CANCEL_SLOT = MenuUtils.loadDeliveryMenuSlots("cancel");
+    protected int INFO_SLOT = MenuUtils.loadDeliveryMenuSlots("info");
+    protected int SKIP_SLOT = MenuUtils.loadDeliveryMenuSlots("skip");
+    protected int ICON_SLOT = MenuUtils.loadDeliveryMenuSlots("icon");
+    protected int INPUT_SLOT = MenuUtils.loadDeliveryMenuSlots("input");
 
     protected PlayerMenuUtility playerMenuUtility;
 

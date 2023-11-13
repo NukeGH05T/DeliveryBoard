@@ -45,7 +45,7 @@ public class DeliveryMenu extends Menu {
         return 27;
     }
 
-    int inputSlotIndex = 22;
+    int inputSlotIndex = super.INPUT_SLOT;
     int deliveryIndexInList = 0;
 
     @Override
@@ -128,7 +128,7 @@ public class DeliveryMenu extends Menu {
         List<String> detailsLore = deliveries.get(deliveryIndexInList).getDeliveryInfoLore();
         detailsMeta.setLore(PlaceholderUtils.parsePlaceholders(detailsLore, playerMenuUtility.getOwner(), deliveries.get(deliveryIndexInList).getDeliveryName(), deliveryIndexInList));
         detailsItem.setItemMeta(detailsMeta);
-        inventory.setItem(11, detailsItem);
+        inventory.setItem(super.INFO_SLOT, detailsItem);
 
         //Dupe fix
         ItemStack iconItem = deliveries.get(deliveryIndexInList).getDeliveryItem().clone();
@@ -138,12 +138,12 @@ public class DeliveryMenu extends Menu {
         lore.add(ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + "ID: " + System.currentTimeMillis());
         meta.setLore(lore);
         iconItem.setItemMeta(meta);
-        inventory.setItem(15, iconItem);
+        inventory.setItem(super.ICON_SLOT, iconItem);
 
         //Item delivery slot 22
         //Decorating around it
         for (int i = 0; i < 27; i++) {
-            if (inventory.getItem(i) == null && i != 22) {
+            if (inventory.getItem(i) == null && i != inputSlotIndex) {
                 inventory.setItem(i, super.FILLER_GLASS);
             }
         }
@@ -168,11 +168,11 @@ public class DeliveryMenu extends Menu {
             skipMeta.setDisplayName(Message.SKIP_ITEM_DISPLAY);
             skipMeta.setLore(parsePlaceholders(Message.SKIP_ITEM_LORE, playerMenuUtility.getOwner(), null, deliveryIndexInList));
             skipItem.setItemMeta(skipMeta);
-            inventory.setItem(13, skipItem);
+            inventory.setItem(super.SKIP_SLOT, skipItem);
         }
 
-        inventory.setItem(26, confirmDeliveryItem);
-        inventory.setItem(18, backToDeliveryBoardMenu);
+        inventory.setItem(super.ACCEPT_SLOT, confirmDeliveryItem);
+        inventory.setItem(super.CANCEL_SLOT, backToDeliveryBoardMenu);
     }
 
     @Override

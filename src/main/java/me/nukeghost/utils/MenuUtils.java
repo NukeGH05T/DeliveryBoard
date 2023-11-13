@@ -3,6 +3,7 @@ package me.nukeghost.utils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.language.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.Objects;
 
 import static me.nukeghost.DeliveryBoard.deliveries;
 import static me.nukeghost.DeliveryBoard.plugin;
@@ -62,6 +64,17 @@ public class MenuUtils {
 
             }
         }
+    }
+
+    public static int loadDeliveryMenuSlots(String path) {
+        int slot = plugin.getConfig().getInt("gui.slot." + path);
+
+        if (slot < 0 && !path.equalsIgnoreCase("skip")) {
+            Bukkit.getLogger().severe("[DB] Could not load slot data for " + path + ". Please ensure that slot info is correct.");
+            return slot;
+        }
+
+        return slot;
     }
 
 }

@@ -56,6 +56,13 @@ economy:
 #GUI items and titles
 #The static items can be custom items too
 gui:
+  slot: #Do NOT use slot 22. It is still used for
+    accept: 26
+    cancel: 18
+    info: 11
+    skip: 13
+    icon: 15
+    input: 22
   static:
     fillerMaterial: van@BLACK_STAINED_GLASS_PANE@1
     acceptMaterial: van@LIGHT_BLUE_STAINED_GLASS_PANE@1
