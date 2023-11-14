@@ -58,7 +58,7 @@ public class DeliveryMenu extends Menu {
             e.setCancelled(true);
         }
 
-        if (e.getCurrentItem().getType() == super.SKIP.getType() && e.getSlot() == 13) {
+        if (e.getCurrentItem().getType() == super.SKIP.getType() && e.getSlot() == super.SKIP_SLOT) {
             //Deduct cost if they have skip perm
             if (!(new SkipHandler().hasDeductedSkipCost(playerMenuUtility, deliveries.get(deliveryIndexInList)))) return;
 
@@ -84,7 +84,7 @@ public class DeliveryMenu extends Menu {
             }
         }
 
-        if (e.getCurrentItem().getType() == super.ACCEPT.getType() && e.getSlot() == 26) {
+        if (e.getCurrentItem().getType() == super.ACCEPT.getType() && e.getSlot() == super.ACCEPT_SLOT) {
             if (e.getInventory().getItem(inputSlotIndex) == null) {
                 p.sendMessage(Message.EMPTY_SUBMISSION);//
                 return;
@@ -108,7 +108,21 @@ public class DeliveryMenu extends Menu {
                 DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p);
 
                 p.sendMessage(Message.SUCCESSFUL_SUBMISSION);//
-                inventory.setItem(22, null);
+                //TODO: Use it to drop the extra items once the specific type of item is no longer required.
+                int amountNeeded = inventory.getItem(super.ICON_SLOT).getAmount();
+
+                ItemStack inputtedItems = inventory.getItem(super.INPUT_SLOT);
+                int amountSubmitted = inputtedItems.getAmount();
+
+                if (amountNeeded == amountSubmitted) {
+                    inventory.setItem(super.INPUT_SLOT, null);
+                } else if (amountNeeded < amountSubmitted) {
+                    inputtedItems.setAmount(inputtedItems.getAmount() - amountNeeded);
+                    inventory.setItem(super.INPUT_SLOT, null);
+
+                    //Drop the extra items
+                    playerMenuUtility.getOwner().getWorld().dropItem(playerMenuUtility.getOwner().getLocation(), inputtedItems);
+                }
                 p.closeInventory();
 
                 if (DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).size() >= delivery.getMaxSubmission()) {
@@ -116,7 +130,7 @@ public class DeliveryMenu extends Menu {
                     System.out.println("Max submissions reached!");
                 }
             }
-        } else if (e.getCurrentItem().getType() == super.CANCEL.getType() && e.getSlot() == 18) {
+        } else if (e.getCurrentItem().getType() == super.CANCEL.getType() && e.getSlot() == super.CANCEL_SLOT) {
             new ShowDeliveryBoardMenu(playerMenuUtility).open();
         }
     }
