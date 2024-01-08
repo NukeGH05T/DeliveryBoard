@@ -61,8 +61,8 @@ gui:
     cancel: 18
     info: 11
     skip: 13
-    icon: 15
-    input: 22
+    icon: 15  # Can only be a single slot
+    input: 22 # Can only be a single slot
   static:
     fillerMaterial: van@BLACK_STAINED_GLASS_PANE@1
     acceptMaterial: van@LIGHT_BLUE_STAINED_GLASS_PANE@1
@@ -105,6 +105,7 @@ delivery:
     title: "&9&lHOURLY Delivery" # GUI Item's display name & title of the delivery GUI
     gui-title: '&9&lHourly Delivery'
     position-slot: 11 # Position in GUI for this delivery
+    additional-slot: [] # Additional slots that this delivery will occupy. Useful when having a custom GUI texture that uses multiple slots for buttons
     max-submissions: 10 # Maximum number of players allowed to submit this delivery
     cooldown: 3600 # In Seconds
     skip-cost: 1 # Amount of item/currency to deduct when skipping this delivery
@@ -167,6 +168,7 @@ delivery:
     title: "&2&lTH Delivery"
     gui-title: '&2&lTH Delivery Title'
     position-slot: 13
+    additional-slot: []
     max-submissions: 10
     cooldown: 10800
     skip-cost: 2
@@ -203,6 +205,7 @@ delivery:
     title: "&2&lSHDelivery"
     gui-title: '&2&lSHD Delivery Title'
     position-slot: 15
+    additional-slot: []
     max-submissions: 10
     cooldown: 21600
     skip-cost: 3
@@ -236,6 +239,7 @@ delivery:
     icon-item: van@IRON_INGOT@1
     title: "&2&lDemo Delivery"
     position-slot: 22
+    additional-slot: []
     max-submissions: 10
     cooldown: 7200
     skip-cost: 1

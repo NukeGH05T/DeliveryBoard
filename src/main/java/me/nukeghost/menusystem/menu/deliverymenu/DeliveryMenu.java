@@ -74,7 +74,7 @@ public class DeliveryMenu extends Menu {
             if (deliveries.get(deliveryIndexInList).isAccummulate()) deliveries.get(deliveryIndexInList).addAccumulation(playerMenuUtility.getOwner());
 
             //Put the player in an hourly tracking hashmap so, player can't redo the same delivery!
-            DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p);
+            DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p.getUniqueId());
 
             p.closeInventory();
 
@@ -105,7 +105,7 @@ public class DeliveryMenu extends Menu {
                 if (deliveries.get(deliveryIndexInList).isAccummulate()) deliveries.get(deliveryIndexInList).addAccumulation(playerMenuUtility.getOwner());
 
                 //Put the player in an hourly tracking hashmap so, player can't redo the same delivery!
-                DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p);
+                DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).add(p.getUniqueId());
 
                 p.sendMessage(Message.SUCCESSFUL_SUBMISSION);//
                 //TODO: Use it to drop the extra items once the specific type of item is no longer required.

@@ -19,16 +19,14 @@ import me.nukeghost.utils.PAPIExpansion;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class DeliveryBoard extends JavaPlugin {
     private static final HashMap<Player, PlayerMenuUtility> PLAYER_MENU_UTILITY_MAP = new HashMap<>();
@@ -40,7 +38,7 @@ public final class DeliveryBoard extends JavaPlugin {
     public static List<String> enabledItemPlugins = new ArrayList<>();
 
     public static List<Delivery> deliveries = new ArrayList<>();
-    public static List<List<Player>> deliveryCompletedPlayerList = new ArrayList<>();
+    public static List<List<UUID>> deliveryCompletedPlayerList = new ArrayList<>(); //TODO: Test if changing to Offline Player fixes the bug
 
     public static String connectionURL;
     public static int defaultTokenAmount;
@@ -108,6 +106,9 @@ public final class DeliveryBoard extends JavaPlugin {
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[DB] PlaceholderAPI detected. Hooking into it.");
             new PAPIExpansion().register();
+        } else {
+            Bukkit.getLogger().severe("[DB] Placeholder API not found. Please add PlaceholderAPI and then restart the server to enable DeliveryBoard.");
+            getServer().getPluginManager().disablePlugin(this);
         }
 
         new DataVerifier().verifyData();

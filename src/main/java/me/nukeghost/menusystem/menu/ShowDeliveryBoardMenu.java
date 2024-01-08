@@ -46,7 +46,8 @@ public class ShowDeliveryBoardMenu extends Menu {
 
         int deliveryIndex = -1;
         for (int i = 0; i < deliveries.size(); i++) {
-            if (deliveries.get(i).getPositionSlot() == e.getSlot()) {
+            if (deliveries.get(i).getPositionSlot() == e.getSlot()
+                    || deliveries.get(i).getAddionatlSlotsList().contains(e.getSlot())) { //If it matches either positionSlot or additionalSlots then do it
                 deliveryIndex = i;
             }
         }
@@ -56,7 +57,7 @@ public class ShowDeliveryBoardMenu extends Menu {
         playerMenuUtility.setDeliveryGUITitle(deliveries.get(deliveryIndex).getDeliveryGUITitle());
 
         //Do nothing if they have already completed the delivery
-        if (DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndex).contains(e.getWhoClicked())) {
+        if (DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndex).contains(e.getWhoClicked().getUniqueId())) {
             return;
         }
         DeliveryMenu deliveryMenu = new DeliveryMenu(playerMenuUtility, deliveryIndex);

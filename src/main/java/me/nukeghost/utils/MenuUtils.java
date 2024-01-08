@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
-import java.util.Objects;
 
 import static me.nukeghost.DeliveryBoard.deliveries;
 import static me.nukeghost.DeliveryBoard.plugin;
@@ -38,7 +37,7 @@ public class MenuUtils {
 
                 List<String> lore = PlaceholderUtils.parsePlaceholders(Message.DB_ITEM_LORE, owner, time, i);
 
-                if (DeliveryBoard.deliveryCompletedPlayerList.get(i).contains(owner)) {
+                if (DeliveryBoard.deliveryCompletedPlayerList.get(i).contains(owner.getUniqueId())) {
                     //Already completed delivery
                     for (String footer : Message.DB_ITEM_LORE_FOOTER_COMPLETE) {
                         lore.add(PlaceholderUtils.parsePlaceholders(footer, owner, time, i));
@@ -62,11 +61,15 @@ public class MenuUtils {
                 hourlyItem.setItemMeta(hourlyMeta);
                 inventory.setItem(deliveries.get(i).getPositionSlot(), hourlyItem);
 
+                for (int slot : deliveries.get(i).getAddionatlSlotsList()) {
+                    inventory.setItem(slot, hourlyItem);
+                }
+
             }
         }
     }
 
-    public static int loadDeliveryMenuSlots(String path) {
+    public static int loadDeliveryMenuSlot(String path) {
         int slot = plugin.getConfig().getInt("gui.slot." + path);
 
         if (slot < 0 && !path.equalsIgnoreCase("skip")) {

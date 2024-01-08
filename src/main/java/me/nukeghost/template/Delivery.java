@@ -10,6 +10,7 @@ import me.nukeghost.utils.PlaceholderUtils;
 import me.nukeghost.utils.TimeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -32,6 +33,7 @@ public class Delivery {
     private int slotAmount;
 
     private int positionSlot; //The slot in which to place the delivery icon
+    private List<Integer> addionatlSlotsList = new ArrayList<>();
 
     private ItemStack iconItem;
 
@@ -42,7 +44,7 @@ public class Delivery {
     private boolean shouldSendAlert = false;
     private List<String> deliveryInfoLore = new ArrayList<>();
 
-    private List<Player> deliveryCompletedPlayersList = new ArrayList<>();
+    private List<OfflinePlayer> deliveryCompletedPlayersList = new ArrayList<>();
 
     private boolean accummulate = false;
 
@@ -57,6 +59,14 @@ public class Delivery {
         this.skipCost = plugin.getConfig().getInt("delivery." + deliveryID + ".skip-cost");
         this.shouldSendAlert = plugin.getConfig().getBoolean("delivery." + deliveryID + ".send-alert", true);
         this.deliveryGUITitle = PlaceholderAPI.setPlaceholders(null, ColorUtils.translateHexColorCodes("<#", ">", ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("delivery." + deliveryID + ".gui-title", deliveryName))));
+
+        //Adding additional slots
+        List<String> _slots = plugin.getConfig().getStringList("delivery." + deliveryID + ".additional-slot");
+        if (_slots != null && !_slots.isEmpty()){
+            for (String slot : _slots) {
+                this.addionatlSlotsList.add(Integer.parseInt(slot));
+            }
+        }
 
         List<String> perDeliveryInfoLore = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(plugin.getConfig().getStringList("delivery." + deliveryID + ".info-lore")));
         this.deliveryInfoLore = perDeliveryInfoLore != null && !perDeliveryInfoLore.isEmpty() ? perDeliveryInfoLore : Message.ICON_ITEM_LORE;
@@ -171,6 +181,10 @@ public class Delivery {
 
     public int getPositionSlot() {
         return positionSlot;
+    }
+
+    public List<Integer> getAddionatlSlotsList() {
+        return addionatlSlotsList;
     }
 
     public int getMaxSubmission() {
