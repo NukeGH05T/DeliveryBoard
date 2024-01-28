@@ -65,6 +65,7 @@ public class Message {
     public static String EMPTY_SUBMISSION;
     public static String WRONG_SUBMISSION;
     public static String SUCCESSFUL_SUBMISSION;
+    public static String ICON_ITEM_TITLE;
     public static List<String> ICON_ITEM_LORE;
     public static String SUBMIT_ITEM_DISPLAY;
     public static List<String> SUBMIT_ITEM_LORE;
@@ -143,6 +144,7 @@ public class Message {
         EMPTY_SUBMISSION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("EMPTY_SUBMISSION")));
         WRONG_SUBMISSION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("WRONG_SUBMISSION")));
         SUCCESSFUL_SUBMISSION = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("SUCCESSFUL_SUBMISSION")));
+        ICON_ITEM_TITLE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("ICON_ITEM_TITLE")));
         ICON_ITEM_LORE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getStringList("ICON_ITEM_LORE")));
         SUBMIT_ITEM_DISPLAY = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getString("SUBMIT_ITEM_DISPLAY")));
         SUBMIT_ITEM_LORE = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(lang.getStringList("SUBMIT_ITEM_LORE")));

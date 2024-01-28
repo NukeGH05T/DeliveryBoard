@@ -56,6 +56,7 @@ economy:
 #GUI items and titles
 #The static items can be custom items too
 gui:
+  fill-db-gui: true # Should the main board be filled with filler materials
   slot:     # Cannot exceed slot 26.
     accept: 26
     cancel: 18
@@ -111,6 +112,7 @@ delivery:
     skip-cost: 1 # Amount of item/currency to deduct when skipping this delivery
     send-alert: true # Should an alert be sent whenever this delivery refreshes
     add-accumulation: true # Should this delivery contribute towards accumulated rewards count
+    info-title: '&eInfo' # Title for the info item
     info-lore: #Available placeholders {DELIVERY} , {CURRENT_SUBMISSIONS} , {MAX_SUBMISSIONS} & {SKIP_COST}
     - '&7Deliver the required item'
     - '&7to claim your reward.'
@@ -174,6 +176,7 @@ delivery:
     skip-cost: 2
     send-alert: true
     add-accumulation: true
+    info-title: '&eInfo'
     info-lore:
     - '&7Deliver the required item'
     - '&7to claim your reward.'
@@ -211,6 +214,7 @@ delivery:
     skip-cost: 3
     send-alert: true
     add-accumulation: true
+    info-title: '&eInfo'
     info-lore:
     - '&7Deliver the required item'
     - '&7to claim your reward.'
@@ -245,6 +249,7 @@ delivery:
     skip-cost: 1
     send-alert: true
     add-accumulation: true
+    info-title: '&eInfo'
     info-lore:
     - '&7Deliver the required item'
     - '&7to claim your reward.'

@@ -96,6 +96,7 @@ public class DefaultWriter {
                     "EMPTY_SUBMISSION: '&cCannot submit with empty delivery!'\n" +
                     "WRONG_SUBMISSION: '&cThe item is the not the one that needs to be delivered!'\n" +
                     "SUCCESSFUL_SUBMISSION: '<#40FB85>Delivery Successful!'\n" +
+                    "ICON_ITEM_TITLE: '&eInfo'\n" +
                     "ICON_ITEM_LORE:\n" +
                     "  - '&7Deliver the required item'\n" +
                     "  - '&7to claim your reward.'\n" +

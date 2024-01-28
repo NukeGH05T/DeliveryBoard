@@ -53,6 +53,9 @@ public class ShowDeliveryBoardMenu extends Menu {
         }
 
         playerMenuUtility.setDeliveryTitle(e.getCurrentItem().getItemMeta().getDisplayName());
+
+        if (deliveries.size() <= deliveryIndex) return;
+
         playerMenuUtility.setDeliveryID(deliveries.get(deliveryIndex).getDeliveryID());
         playerMenuUtility.setDeliveryGUITitle(deliveries.get(deliveryIndex).getDeliveryGUITitle());
 

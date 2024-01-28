@@ -61,6 +61,7 @@ PGN_INFO_DETAILS: #Players will not see this
 EMPTY_SUBMISSION: '&cCannot submit with empty delivery!'
 WRONG_SUBMISSION: '&cThe item is the not the one that needs to be delivered!'
 SUCCESSFUL_SUBMISSION: '<#40FB85>Delivery Successful!'
+ICON_ITEM_TITLE: '&eInfo'
 ICON_ITEM_LORE:
   - '&7Deliver the required item'
   - '&7to claim your reward.'

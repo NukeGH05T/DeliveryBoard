@@ -43,6 +43,7 @@ public class Delivery {
     private boolean hasReachedMaxSubmission = false;
     private boolean shouldSendAlert = false;
     private List<String> deliveryInfoLore = new ArrayList<>();
+    private String deliveryInfoTitle;
 
     private List<OfflinePlayer> deliveryCompletedPlayersList = new ArrayList<>();
 
@@ -70,6 +71,9 @@ public class Delivery {
 
         List<String> perDeliveryInfoLore = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(plugin.getConfig().getStringList("delivery." + deliveryID + ".info-lore")));
         this.deliveryInfoLore = perDeliveryInfoLore != null && !perDeliveryInfoLore.isEmpty() ? perDeliveryInfoLore : Message.ICON_ITEM_LORE;
+
+        String perDeliveryInfoTitle = ColorUtils.translateHexColorCodes("<#", ">", ColorUtils.translateColorCodes(plugin.getConfig().getString("delivery." + deliveryID + ".info-title")));
+        this.deliveryInfoTitle = perDeliveryInfoTitle != null && !perDeliveryInfoTitle.isEmpty() ? perDeliveryInfoTitle : Message.ICON_ITEM_TITLE;
 
         this.cooldownStart = System.currentTimeMillis();
         this.deliveryItem = GenerationHandler.generateDeliveryItem(deliveryID);
@@ -205,6 +209,10 @@ public class Delivery {
 
     public List<String> getDeliveryInfoLore() {
         return deliveryInfoLore;
+    }
+
+    public String getDeliveryInfoTitle() {
+        return deliveryInfoTitle;
     }
 
     public boolean isShouldSendAlert() {

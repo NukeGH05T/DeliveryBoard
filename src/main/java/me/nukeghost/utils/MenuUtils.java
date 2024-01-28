@@ -3,8 +3,10 @@ package me.nukeghost.utils;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.language.Message;
+import me.nukeghost.menusystem.Menu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -15,6 +17,7 @@ import java.util.List;
 import static me.nukeghost.DeliveryBoard.deliveries;
 import static me.nukeghost.DeliveryBoard.plugin;
 import static me.nukeghost.handlers.GenerationHandler.generateIconItem;
+import static me.nukeghost.handlers.GenerationHandler.generateStaticItem;
 
 public class MenuUtils {
     public static void updateLoreTime(Inventory inventory, Player owner) {
@@ -65,6 +68,14 @@ public class MenuUtils {
                     inventory.setItem(slot, hourlyItem);
                 }
 
+            }
+        }
+
+        if (plugin.getConfig().getBoolean("gui.fill-db-gui")) {
+            for (int i = 0; i < inventory.getSize(); i++) {
+                if (inventory.getItem(i) == null || inventory.getItem(i).getType() == Material.AIR) {
+                    inventory.setItem(i, generateStaticItem("fillerMaterial"));
+                }
             }
         }
     }

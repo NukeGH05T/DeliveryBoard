@@ -139,6 +139,7 @@ public class DeliveryMenu extends Menu {
     public void setMenuItems() {
         ItemStack detailsItem = super.INFO;
         ItemMeta detailsMeta = detailsItem.getItemMeta();
+        detailsMeta.setDisplayName(deliveries.get(deliveryIndexInList).getDeliveryInfoTitle());
         List<String> detailsLore = deliveries.get(deliveryIndexInList).getDeliveryInfoLore();
         detailsMeta.setLore(PlaceholderUtils.parsePlaceholders(detailsLore, playerMenuUtility.getOwner(), deliveries.get(deliveryIndexInList).getDeliveryName(), deliveryIndexInList));
         detailsItem.setItemMeta(detailsMeta);
