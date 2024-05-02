@@ -80,7 +80,7 @@ public class DeliveryMenu extends Menu {
 
             if (DeliveryBoard.deliveryCompletedPlayerList.get(deliveryIndexInList).size() >= delivery.getMaxSubmission()) {
                 deliveries.get(deliveryIndexInList).setHasReachedMaxSubmission(true);
-                System.out.println("Max submissions reached!");
+                //System.out.println("Max submissions reached!");
             }
         }
 

@@ -3,6 +3,7 @@ package me.nukeghost.commands.subcommands.admin;
 import me.nukeghost.DeliveryBoard;
 import me.nukeghost.commands.SubCommand;
 import me.nukeghost.handlers.AccumulatedRewardHandler;
+import me.nukeghost.language.LanguageConfig;
 import me.nukeghost.language.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -38,6 +39,9 @@ public class ReloadCommand extends SubCommand {
             try {
                 DeliveryBoard.plugin.reloadConfig();
                 DeliveryBoard.plugin.saveConfig();
+
+                LanguageConfig.setupLang();
+                Message.loadMessages();
 
                 //Loading accumulated reward data
                 new AccumulatedRewardHandler().reloadAccumulatedRewardData();

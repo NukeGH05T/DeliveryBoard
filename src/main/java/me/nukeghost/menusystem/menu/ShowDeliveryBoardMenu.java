@@ -5,6 +5,7 @@ import me.nukeghost.DeliveryBoard;
 import me.nukeghost.menusystem.Menu;
 import me.nukeghost.menusystem.PlayerMenuUtility;
 import me.nukeghost.menusystem.menu.deliverymenu.DeliveryMenu;
+import me.nukeghost.template.Delivery;
 import me.nukeghost.utils.ColorUtils;
 import me.nukeghost.utils.MenuUtils;
 import org.bukkit.Bukkit;
@@ -38,8 +39,20 @@ public class ShowDeliveryBoardMenu extends Menu {
     @Override
     public void handleMenu(InventoryClickEvent e) {
         e.setCancelled(true);
-        if (e.getCurrentItem() == super.FILLER_GLASS) return;
+        if (e.getCurrentItem().equals(super.FILLER_GLASS)) return;
         if (e.getCurrentItem() == null) return;
+
+        //Filtering through the clickable delivery icons
+        boolean hasClickedValidSlot = false;
+        for (Delivery delivery : deliveries) {
+            if (e.getSlot() == delivery.getPositionSlot()) {
+                hasClickedValidSlot = true;
+                break;
+            }
+        }
+        if (!hasClickedValidSlot) {
+            return;
+        }
 
         List<String> activeDeliveries = plugin.getConfig().getStringList("active-deliveries");
 

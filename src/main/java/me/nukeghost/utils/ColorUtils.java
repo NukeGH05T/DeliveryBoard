@@ -1,6 +1,7 @@
 package me.nukeghost.utils;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class ColorUtils {
      */
     public static String translateColorCodes(String text) {
 
+        if (text == null) Bukkit.getLogger().warning("[DB] " + "Missing text input for: " + ChatColor.YELLOW + text);
         String[] texts = text.split(String.format(WITH_DELIMITER, "&"));
 
         StringBuilder finalText = new StringBuilder();
