@@ -73,7 +73,10 @@ public final class DeliveryBoard extends JavaPlugin {
             getLogger().severe(String.format("[%s] - No Vault dependency found!", getDescription().getName()));
         }
 
-        setupDatabase();
+        System.out.println("DB Type: " + getConfig().getString("database"));
+        if (!getConfig().getString("database").equalsIgnoreCase("off")) {
+            setupDatabase();
+        }
 
         new AccumulatedRewardHandler().loadAccumulatedRewardData();
 

@@ -19,6 +19,7 @@ lang-file: en_US.yml
 #Available Database type: mysql, h2
 #   mysql - external server for storage
 #   h2 - local file storage DeliveryBoard/data/currency-data.mv.db
+#   'off' - turn database feature off
 database: h2
 #This section is used ONLY if you are using mysql database
 mysql-settings:
