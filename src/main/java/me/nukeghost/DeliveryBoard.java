@@ -51,6 +51,11 @@ public final class DeliveryBoard extends JavaPlugin {
     private static Map<String, Integer> uuidPointMap = new HashMap<>();
 
     @Override
+    public void onDisable() {
+        TokenDatabase.closeConnection();
+    }
+
+    @Override
     public void onEnable() {
         plugin = this;
         defaultTokenAmount = getConfig().getInt("delivery-tokens.default");
